@@ -8,9 +8,10 @@ const contactCards = [
     icon: 'MapPinIcon',
     title: 'Visit Our Office',
     lines: [
-      'Intellisys IT Solutions Private Limited',
-      'Pune, Maharashtra',
-      'India',
+      'Gera Imperim Rise, 328-B, Wipro Circle,',
+      'Opp. to Wipro Company, Hinjawadi Phase II,',
+      'Hinjawadi Rajiv Gandhi Infotech Park,',
+      'Pune, Maharashtra 411057',
     ],
     action: { label: 'Get Directions', href: 'https://maps.app.goo.gl/eFdceVnpjysspftaA' },
     color: 'text-blue-500',
@@ -21,11 +22,10 @@ const contactCards = [
     icon: 'PhoneIcon',
     title: 'Call Us',
     lines: [
-      '+91 22 6789 0123 (Main)',
-      '+91 98765 43210 (Sales)',
-      '+91 98765 43211 (Support)',
+      '+91 91128 17771',
+      '+91 84211 74213',
     ],
-    action: { label: 'Call Now', href: 'tel:+912267890123' },
+    action: { label: 'Call Now', href: 'tel:+919112817771' },
     color: 'text-emerald-500',
     bg: 'bg-emerald-50',
     border: 'border-emerald-100',
@@ -34,11 +34,9 @@ const contactCards = [
     icon: 'EnvelopeIcon',
     title: 'Email Us',
     lines: [
-      'hello@intellisysit.in',
-      'sales@intellisysit.in',
-      'support@intellisysit.in',
+      'info@intellisysitsolutions.com',
     ],
-    action: { label: 'Send Email', href: 'mailto:hello@intellisysit.in' },
+    action: { label: 'Send Email', href: 'mailto:info@intellisysitsolutions.com' },
     color: 'text-violet-500',
     bg: 'bg-violet-50',
     border: 'border-violet-100',
@@ -62,7 +60,7 @@ export default function ContactInfo() {
   const [copiedEmail, setCopiedEmail] = useState(false);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText('hello@intellisysit.in');
+    navigator.clipboard.writeText('info@intellisysitsolutions.com');
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2000);
   };
@@ -130,7 +128,7 @@ export default function ContactInfo() {
       <div className="bg-background-elevated rounded-2xl border border-border p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Icon name="EnvelopeIcon" size={16} className="text-primary" />
-          <span className="font-mono text-body-sm text-foreground-secondary">hello@intellisysit.in</span>
+          <span className="font-mono text-body-sm text-foreground-secondary">info@intellisysitsolutions.com</span>
         </div>
         <button
           onClick={handleCopyEmail}

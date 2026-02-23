@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
@@ -6,7 +6,7 @@ import Icon from '@/components/ui/AppIcon';
 const faqs = [
   {
     q: 'How quickly can you start on my project?',
-    a: 'For most projects, we can assemble a dedicated team and begin within 1–2 weeks of signing the contract. Urgent projects can sometimes be started within 3–5 business days depending on team availability.',
+    a: 'For most projects, we can assemble a dedicated team and begin within 1â€“2 weeks of signing the contract. Urgent projects can sometimes be started within 3â€“5 business days depending on team availability.',
   },
   {
     q: 'Do you sign NDAs before discussing project details?',
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: 'Can I see examples of your previous work?',
-    a: 'Yes — we\'ll share a curated portfolio relevant to your industry during our consultation call. Some projects are under NDA, but we can discuss architecture and outcomes in detail.',
+    a: 'Yes â€” we\'ll share a curated portfolio relevant to your industry during our consultation call. Some projects are under NDA, but we can discuss architecture and outcomes in detail.',
   },
 ];
 
@@ -72,11 +72,11 @@ export default function ContactFAQ() {
                 </div>
               </div>
               <a
-                href="tel:+912267890123"
+                href="tel:+919112817771"
                 className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-primary text-white font-heading font-600 text-body-sm rounded-xl shadow-blue-sm hover:shadow-blue transition-all duration-300"
               >
                 <Icon name="PhoneIcon" size={16} />
-                Call +91 22 6789 0123
+                Call +91 91128 17771 / 84211 74213
               </a>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import Link from 'next/link';
 import AppLogo from '@/components/ui/AppLogo';
 import Icon from '@/components/ui/AppIcon';
@@ -34,9 +34,9 @@ const socialLinks = [
 ];
 
 const contactInfo = [
-  { icon: 'MapPinIcon', text: 'Bandra Kurla Complex, Mumbai, Maharashtra 400051' },
-  { icon: 'PhoneIcon', text: '+91 22 6789 0123' },
-  { icon: 'EnvelopeIcon', text: 'hello@intellisysit.in' },
+  { icon: 'MapPinIcon', text: 'Gera Imperim Rise, 328-B, Wipro Circle, Hinjawadi Phase II, Pune 411057' },
+  { icon: 'PhoneIcon', text: '+91 91128 17771 / 84211 74213' },
+  { icon: 'EnvelopeIcon', text: 'info@intellisysitsolutions.com' },
 ];
 
 export default function Footer() {
@@ -196,10 +196,10 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-body text-caption text-white/30">
-            © {currentYear} Intellisys IT Solutions Pvt. Ltd. All rights reserved. CIN: U72200MH2015PTC123456
+            Â© {currentYear} Intellisys IT Solutions Pvt. Ltd. All rights reserved. CIN: U72200MH2015PTC123456
           </p>
           <div className="flex items-center gap-6">
-            <span className="font-body text-caption text-white/30">Made with ♥ in Mumbai, India</span>
+            <span className="font-body text-caption text-white/30">Made with care in Pune, India</span>
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
               <span className="font-body text-caption text-white/30">All systems operational</span>

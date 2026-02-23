@@ -36,13 +36,19 @@ export default function MapSection() {
             referrerPolicy="no-referrer-when-downgrade"
           />
 
-          <div className="absolute top-4 right-4 z-10 bg-white/95 backdrop-blur-sm rounded-2xl border border-border shadow-xl-card px-6 py-4 text-left max-w-xs">
+          <div className="absolute top-4 right-4 z-10 bg-white/95 backdrop-blur-sm rounded-2xl border border-border shadow-xl-card px-6 py-4 text-left max-w-sm">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-2 h-2 bg-success rounded-full animate-pulse" />
               <span className="font-body text-caption text-success font-600">Open Now</span>
             </div>
-            <p className="font-heading font-800 text-heading-xl text-foreground">Intellisys IT Solutions Private Limited</p>
+            <p className="font-heading font-800 text-heading-xl text-foreground">Intellisys IT Solutions</p>
             <p className="font-body text-body-sm text-foreground-secondary mt-1">Pune, Maharashtra</p>
+            <p className="font-body text-body-sm text-foreground-secondary mt-2">
+              Gera Imperim Rise, 328-B, Wipro Circle,<br />
+              Opp. to Wipro Company, Hinjawadi Phase II,<br />
+              Hinjawadi Rajiv Gandhi Infotech Park,<br />
+              Pune, Maharashtra 411057
+            </p>
             <a
               href={mapLink}
               target="_blank"

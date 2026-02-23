@@ -10,7 +10,7 @@ import MapSection from './components/MapSection';
 export const metadata: Metadata = {
   title: 'Contact Us | Intellisys IT Solutions Pvt. Ltd.',
   description:
-    'Get in touch with Intellisys IT Solutions. Request a free consultation, project proposal, or technical advice. Mumbai office: +91 22 6789 0123. hello@intellisysit.in',
+    'Get in touch with Intellisys IT Solutions. Request a free consultation, project proposal, or technical advice. Pune office: +91 91128 17771 / +91 84211 74213. info@intellisysitsolutions.com',
   keywords: [
     'contact Intellisys IT',
     'IT company Mumbai contact',

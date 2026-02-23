@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
@@ -26,15 +26,15 @@ const serviceOptions = [
   'UI/UX Design',
   'Software Testing',
   'Multiple Services',
-  'Not Sure — Need Consultation',
+  'Not Sure â€” Need Consultation',
 ];
 
 const budgetOptions = [
-  'Under ₹5 Lakhs',
-  '₹5–15 Lakhs',
-  '₹15–50 Lakhs',
-  '₹50 Lakhs – ₹1 Crore',
-  'Above ₹1 Crore',
+  'Under â‚¹5 Lakhs',
+  'â‚¹5â€“15 Lakhs',
+  'â‚¹15â€“50 Lakhs',
+  'â‚¹50 Lakhs â€“ â‚¹1 Crore',
+  'Above â‚¹1 Crore',
   'Let\'s Discuss',
 ];
 
@@ -79,7 +79,7 @@ export default function ContactForm() {
     if (!validate()) return;
     setStatus('submitting');
 
-    // Mock submission — connect to backend API here
+    // Mock submission â€” connect to backend API here
     // Example: await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) })
     await new Promise((resolve) => setTimeout(resolve, 1800));
     setStatus('success');
@@ -195,7 +195,7 @@ export default function ContactForm() {
                 name="phone"
                 type="tel"
                 autoComplete="tel"
-                placeholder="98765 43210"
+                placeholder="91128 17771"
                 value={formData.phone}
                 onChange={handleChange}
                 className={`${inputClass('phone')} pl-14`}
