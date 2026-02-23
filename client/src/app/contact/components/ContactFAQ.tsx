@@ -6,7 +6,7 @@ import Icon from '@/components/ui/AppIcon';
 const faqs = [
   {
     q: 'How quickly can you start on my project?',
-    a: 'For most projects, we can assemble a dedicated team and begin within 1â€“2 weeks of signing the contract. Urgent projects can sometimes be started within 3â€“5 business days depending on team availability.',
+    a: 'For most projects, we can assemble a dedicated team and begin within 1-2 weeks of signing the contract. Urgent projects can sometimes be started within 3-5 business days depending on team availability.',
   },
   {
     q: 'Do you sign NDAs before discussing project details?',
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: 'Can I see examples of your previous work?',
-    a: 'Yes â€” we\'ll share a curated portfolio relevant to your industry during our consultation call. Some projects are under NDA, but we can discuss architecture and outcomes in detail.',
+    a: 'Yes - we\'ll share a curated portfolio relevant to your industry during our consultation call. Some projects are under NDA, but we can discuss architecture and outcomes in detail.',
   },
 ];
 
@@ -36,12 +36,6 @@ export default function ContactFAQ() {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left */}
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-full mb-6 shadow-sm-card">
-              <Icon name="QuestionMarkCircleIcon" size={14} className="text-primary" />
-              <span className="font-body text-caption text-primary font-600 uppercase tracking-wider">
-                Common Questions
-              </span>
-            </div>
             <h2 className="font-heading font-800 text-display-md text-foreground mb-6">
               Before You{' '}
               <span
@@ -126,3 +120,4 @@ export default function ContactFAQ() {
     </section>
   );
 }
+

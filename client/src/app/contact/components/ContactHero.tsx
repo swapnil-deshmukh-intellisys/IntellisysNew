@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import Link from 'next/link';
 import Icon from '@/components/ui/AppIcon';
 
@@ -21,14 +21,6 @@ export default function ContactHero() {
           <Icon name="ChevronRightIcon" size={12} className="text-white/30" />
           <span className="font-body text-body-sm text-white/70">Contact</span>
         </nav>
-
-        <div className="inline-flex items-center gap-2 px-4 py-2 glass border border-white/15 rounded-full mb-6">
-          <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-          <span className="font-body text-caption text-white/70 uppercase tracking-wider">
-            Response within 24 hours · No obligation
-          </span>
-        </div>
-
         <h1
           className="font-heading font-900 text-white mb-6 leading-tight"
           style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}

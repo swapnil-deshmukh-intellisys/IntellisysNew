@@ -3,6 +3,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
 import AppImage from '@/components/ui/AppImage';
+import BrandIcon from '@/components/ui/BrandIcon';
+import type { BrandName } from '@/components/ui/BrandIcon';
 
 const reasons = [
 {
@@ -43,13 +45,13 @@ const reasons = [
 }];
 
 
-const techPartners = [
-{ name: 'AWS', icon: 'CloudIcon' },
-{ name: 'Google Cloud', icon: 'ServerStackIcon' },
-{ name: 'Microsoft Azure', icon: 'CircleStackIcon' },
-{ name: 'Kubernetes', icon: 'CubeIcon' },
-{ name: 'Docker', icon: 'ArchiveBoxIcon' },
-{ name: 'Terraform', icon: 'WrenchScrewdriverIcon' }];
+const techPartners: Array<{ name: string; icon: BrandName }> = [
+{ name: 'AWS', icon: 'aws' },
+{ name: 'Google Cloud', icon: 'google-cloud' },
+{ name: 'Microsoft Azure', icon: 'microsoft-azure' },
+{ name: 'Kubernetes', icon: 'kubernetes' },
+{ name: 'Docker', icon: 'docker' },
+{ name: 'Terraform', icon: 'terraform' }];
 
 
 export default function WhyChooseUs() {
@@ -83,39 +85,10 @@ export default function WhyChooseUs() {
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent" />
             </div>
 
-            {/* Floating Card 1 */}
-            <div className="absolute -bottom-6 -right-6 bg-background-card rounded-2xl p-5 shadow-lg-card border border-border animate-float">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center">
-                  <Icon name="CheckBadgeIcon" size={22} className="text-emerald-500" />
-                </div>
-                <div>
-                  <div className="font-heading font-800 text-display-sm text-foreground">98%</div>
-                  <div className="font-body text-caption text-foreground-muted">On-time Delivery</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating Card 2 */}
-            <div className="absolute -top-6 -left-6 bg-background-dark rounded-2xl p-4 shadow-dark-card border border-white/10 animate-float" style={{ animationDelay: '2s' }}>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 bg-success rounded-full animate-pulse" />
-                <span className="font-body text-caption text-white/60">Currently Active</span>
-              </div>
-              <div className="font-heading font-700 text-heading-xl text-white">47 Projects</div>
-              <div className="font-body text-caption text-white/40">across 12 industries</div>
-            </div>
           </div>
 
           {/* Right: Content */}
           <div className={isVisible ? 'animate-slide-in-right' : 'opacity-0'}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-100 rounded-full mb-6">
-              <Icon name="StarIcon" size={14} className="text-primary" />
-              <span className="font-body text-caption text-primary font-600 uppercase tracking-wider">
-                Why Intellisys IT
-              </span>
-            </div>
-
             <h2 className="font-heading font-800 text-display-md text-foreground mb-6">
               We Don't Just Build Software.{' '}
               <span
@@ -175,7 +148,7 @@ export default function WhyChooseUs() {
                   key={partner.name}
                   className="flex items-center gap-2 px-3 py-2 bg-background-muted border border-border rounded-xl hover:border-primary/30 hover:bg-primary-50 transition-all duration-200">
                   
-                    <Icon name={partner.icon as any} size={14} className="text-foreground-secondary" />
+                    <BrandIcon name={partner.icon} size={16} />
                     <span className="font-body text-body-sm text-foreground-secondary">{partner.name}</span>
                   </div>
                 )}

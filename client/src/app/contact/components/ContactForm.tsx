@@ -26,15 +26,15 @@ const serviceOptions = [
   'UI/UX Design',
   'Software Testing',
   'Multiple Services',
-  'Not Sure â€” Need Consultation',
+  'Not Sure - Need Consultation',
 ];
 
 const budgetOptions = [
-  'Under â‚¹5 Lakhs',
-  'â‚¹5â€“15 Lakhs',
-  'â‚¹15â€“50 Lakhs',
-  'â‚¹50 Lakhs â€“ â‚¹1 Crore',
-  'Above â‚¹1 Crore',
+  'Under Rs 5 Lakhs',
+  'Rs 5-15 Lakhs',
+  'Rs 15-50 Lakhs',
+  'Rs 50 Lakhs - Rs 1 Crore',
+  'Above Rs 1 Crore',
   'Let\'s Discuss',
 ];
 
@@ -79,7 +79,7 @@ export default function ContactForm() {
     if (!validate()) return;
     setStatus('submitting');
 
-    // Mock submission â€” connect to backend API here
+    // Mock submission - connect to backend API here
     // Example: await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) })
     await new Promise((resolve) => setTimeout(resolve, 1800));
     setStatus('success');

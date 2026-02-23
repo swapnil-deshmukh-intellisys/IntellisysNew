@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import Link from 'next/link';
 import Icon from '@/components/ui/AppIcon';
 
@@ -22,14 +22,6 @@ export default function ServicesHero() {
           <Icon name="ChevronRightIcon" size={12} className="text-white/30" />
           <span className="font-body text-body-sm text-white/70">Services</span>
         </nav>
-
-        <div className="inline-flex items-center gap-2 px-4 py-2 glass border border-white/15 rounded-full mb-6">
-          <Icon name="CpuChipIcon" size={14} className="text-primary-light" />
-          <span className="font-body text-caption text-white/70 uppercase tracking-wider">
-            7 Service Domains · 50+ Expert Engineers
-          </span>
-        </div>
-
         <h1
           className="font-heading font-900 text-white mb-6 leading-tight"
           style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}
@@ -48,7 +40,7 @@ export default function ServicesHero() {
         </h1>
 
         <p className="font-body text-body-lg text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed">
-          From greenfield startups to enterprise transformations — our end-to-end IT services 
+          From greenfield startups to enterprise transformations - our end-to-end IT services 
           cover every phase of your digital journey.
         </p>
 
@@ -70,7 +62,10 @@ export default function ServicesHero() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-10 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background" />
+        <div className="absolute inset-x-0 bottom-0 h-2 bg-background/70 blur-sm" />
+      </div>
     </section>
   );
 }

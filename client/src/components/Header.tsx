@@ -62,7 +62,8 @@ export default function Header() {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  const isActive = (href: string) => pathname === href || (href !== '/homepage' && pathname.startsWith(href));
+  const currentPath = pathname ?? '';
+  const isActive = (href: string) => currentPath === href || (href !== '/homepage' && currentPath.startsWith(href));
 
   return (
     <>

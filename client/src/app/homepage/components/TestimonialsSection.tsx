@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import Icon from '@/components/ui/AppIcon';
@@ -7,7 +7,7 @@ import AppImage from '@/components/ui/AppImage';
 const testimonials = [
 {
   id: 1,
-  quote: "Intellisys IT delivered our entire e-commerce platform in 8 weeks — ahead of schedule and under budget. The code quality was exceptional and their team felt like an extension of our own.",
+  quote: "Intellisys IT delivered our entire e-commerce platform in 8 weeks - ahead of schedule and under budget. The code quality was exceptional and their team felt like an extension of our own.",
   author: "Priya Mehta",
   role: "CTO",
   company: "ShopKart India Pvt. Ltd.",
@@ -38,7 +38,7 @@ const testimonials = [
   location: "Chennai",
   avatar: "https://img.rocket.new/generatedImages/rocket_gen_img_102b90abe-1770960125698.png",
   rating: 5,
-  metric: "4.8 ★",
+  metric: "4.8 *",
   metricLabel: "app store rating"
 }];
 
@@ -76,14 +76,7 @@ export default function TestimonialsSection() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-radial-blue opacity-30 pointer-events-none" />
       <div className="container-custom relative">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 glass border border-white/15 rounded-full mb-4">
-            <Icon name="ChatBubbleBottomCenterTextIcon" size={14} className="text-primary-light" />
-            <span className="font-body text-caption text-white/70 font-600 uppercase tracking-wider">
-              Client Stories
-            </span>
-          </div>
-          <h2 className="font-heading font-800 text-display-md text-white">
+        <div className="text-center mb-16"><h2 className="font-heading font-800 text-display-md text-white">
             Trusted by{' '}
             <span
               style={{

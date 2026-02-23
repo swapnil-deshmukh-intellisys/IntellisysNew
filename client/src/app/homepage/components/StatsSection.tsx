@@ -94,12 +94,6 @@ export default function StatsSection() {
       <div className="container-custom relative">
         {/* Section Label */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-100 rounded-full mb-4">
-            <Icon name="ChartBarIcon" size={14} className="text-primary" />
-            <span className="font-body text-caption text-primary font-600 uppercase tracking-wider">
-              By the Numbers
-            </span>
-          </div>
           <h2 className="font-heading font-800 text-display-md text-foreground">
             Proven Track Record of{' '}
             <span

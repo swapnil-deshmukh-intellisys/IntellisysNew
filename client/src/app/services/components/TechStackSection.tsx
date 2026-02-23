@@ -1,7 +1,8 @@
-'use client';
+﻿'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
+import BrandIcon, { resolveBrandName } from '@/components/ui/BrandIcon';
 
 const techCategories = [
   {
@@ -66,14 +67,7 @@ export default function TechStackSection() {
     <section className="section-padding bg-background relative" ref={sectionRef}>
       <div className="container-custom">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-100 rounded-full mb-4">
-            <Icon name="WrenchScrewdriverIcon" size={14} className="text-primary" />
-            <span className="font-body text-caption text-primary font-600 uppercase tracking-wider">
-              Technology Stack
-            </span>
-          </div>
-          <h2 className="font-heading font-800 text-display-md text-foreground mb-4">
+        <div className="text-center max-w-2xl mx-auto mb-16"><h2 className="font-heading font-800 text-display-md text-foreground mb-4">
             Modern Tech.{' '}
             <span
               style={{
@@ -124,8 +118,9 @@ export default function TechStackSection() {
                 {cat.techs.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1.5 bg-background-muted border border-border rounded-xl font-mono text-caption text-foreground-secondary hover:bg-primary-50 hover:border-primary/20 hover:text-primary transition-colors duration-200"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-background-muted border border-border rounded-xl font-mono text-caption text-foreground-secondary hover:bg-primary-50 hover:border-primary/20 hover:text-primary transition-colors duration-200"
                   >
+                    {resolveBrandName(tech) ? <BrandIcon name={resolveBrandName(tech)!} size={13} /> : null}
                     {tech}
                   </span>
                 ))}
@@ -141,7 +136,7 @@ export default function TechStackSection() {
             <span className="font-heading font-600 text-primary">
               We adapt to your existing stack.
             </span>{' '}
-            Our engineers are polyglots — we evaluate the best tool for each problem.
+            Our engineers are polyglots - we evaluate the best tool for each problem.
           </p>
         </div>
       </div>

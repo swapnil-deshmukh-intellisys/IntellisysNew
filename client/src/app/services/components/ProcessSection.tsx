@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
@@ -10,7 +10,7 @@ const steps = [
     description:
       'We begin with a deep-dive workshop to understand your business goals, technical requirements, and success metrics. You receive a detailed project brief and effort estimate within 48 hours.',
     icon: 'MagnifyingGlassIcon',
-    duration: '1–3 days',
+    duration: '1-3 days',
     output: 'Project Brief + Estimate',
     color: 'text-blue-500',
     bg: 'bg-blue-50',
@@ -22,7 +22,7 @@ const steps = [
     description:
       'Our architects design the technical blueprint while our UX team creates wireframes and prototypes. Every decision is documented and reviewed with you before a single line of code is written.',
     icon: 'PencilSquareIcon',
-    duration: '1–2 weeks',
+    duration: '1-2 weeks',
     output: 'Tech Spec + Figma Prototype',
     color: 'text-violet-500',
     bg: 'bg-violet-50',
@@ -34,7 +34,7 @@ const steps = [
     description:
       'Two-week sprints with daily standups, weekly demos, and complete transparency. You have access to a live staging environment at all times and can provide feedback in real-time.',
     icon: 'CodeBracketSquareIcon',
-    duration: '4–16 weeks',
+    duration: '4-16 weeks',
     output: 'Working Software + Sprint Reports',
     color: 'text-emerald-500',
     bg: 'bg-emerald-50',
@@ -46,7 +46,7 @@ const steps = [
     description:
       'Comprehensive QA testing, security audits, performance benchmarking, and a staged rollout to production. We stay on-call for 30 days post-launch to ensure everything runs smoothly.',
     icon: 'RocketLaunchIcon',
-    duration: '1–2 weeks',
+    duration: '1-2 weeks',
     output: 'Production Deployment + 30-day Support',
     color: 'text-amber-500',
     bg: 'bg-amber-50',
@@ -73,14 +73,7 @@ export default function ProcessSection() {
 
       <div className="container-custom relative">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-full mb-4 shadow-sm-card">
-            <Icon name="ArrowPathIcon" size={14} className="text-primary" />
-            <span className="font-body text-caption text-primary font-600 uppercase tracking-wider">
-              How We Work
-            </span>
-          </div>
-          <h2 className="font-heading font-800 text-display-md text-foreground mb-4">
+        <div className="text-center max-w-2xl mx-auto mb-16"><h2 className="font-heading font-800 text-display-md text-foreground mb-4">
             Our{' '}
             <span
               style={{

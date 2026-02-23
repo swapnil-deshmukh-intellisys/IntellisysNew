@@ -17,12 +17,6 @@ export default function ServicesCTA() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left */}
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-full mb-6 shadow-sm-card">
-              <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-              <span className="font-body text-caption text-foreground-secondary font-600 uppercase tracking-wider">
-                Free Consultation Available
-              </span>
-            </div>
             <h2 className="font-heading font-800 text-display-md text-foreground mb-6">
               Let's Discuss Your{' '}
               <span
@@ -38,7 +32,7 @@ export default function ServicesCTA() {
             </h2>
             <p className="font-body text-body-lg text-foreground-secondary mb-8 leading-relaxed">
               Book a free 45-minute consultation with one of our senior engineers. 
-              No sales pitch â€” just honest technical advice for your specific challenge.
+              No sales pitch - just honest technical advice for your specific challenge.
             </p>
             <ul className="space-y-3 mb-10">
               {consultationPoints.map((point) => (
@@ -72,7 +66,7 @@ export default function ServicesCTA() {
           <div className="grid grid-cols-2 gap-4">
             {[
               { icon: 'ClockIcon', title: '24-hour', subtitle: 'Proposal turnaround', color: 'text-blue-500', bg: 'bg-blue-50' },
-              { icon: 'CurrencyRupeeIcon', title: 'â‚¹0', subtitle: 'Consultation cost', color: 'text-emerald-500', bg: 'bg-emerald-50' },
+              { icon: 'CurrencyRupeeIcon', title: 'Rs 0', subtitle: 'Consultation cost', color: 'text-emerald-500', bg: 'bg-emerald-50' },
               { icon: 'UserGroupIcon', title: 'Dedicated', subtitle: 'Project manager', color: 'text-violet-500', bg: 'bg-violet-50' },
               { icon: 'ShieldCheckIcon', title: 'NDA', subtitle: 'Signed upfront', color: 'text-amber-500', bg: 'bg-amber-50' },
             ].map((item) => (
@@ -93,3 +87,4 @@ export default function ServicesCTA() {
     </section>
   );
 }
+

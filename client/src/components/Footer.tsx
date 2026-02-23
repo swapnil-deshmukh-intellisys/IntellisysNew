@@ -196,7 +196,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-body text-caption text-white/30">
-            Â© {currentYear} Intellisys IT Solutions Pvt. Ltd. All rights reserved. CIN: U72200MH2015PTC123456
+            (c) {currentYear} Intellisys IT Solutions Pvt. Ltd. All rights reserved. CIN: U72200MH2015PTC123456
           </p>
           <div className="flex items-center gap-6">
             <span className="font-body text-caption text-white/30">Made with care in Pune, India</span>

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
@@ -6,165 +6,211 @@ import Icon from '@/components/ui/AppIcon';
 
 const allServices = [
   {
-    id: 'web-dev',
-    title: 'Website Development',
-    shortDesc: 'Custom, high-performance websites and web applications.',
+    id: 'custom-software-development',
+    title: 'Custom Software Development',
+    shortDesc: 'Scalable, secure, and high-performance web and enterprise applications.',
     longDesc:
-      'We build everything from marketing sites to complex SaaS platforms. Our web development team specializes in React, Next.js, and modern JAMstack architectures that load fast, rank well on Google, and scale to millions of users.',
+      'Design and development of scalable, secure, and high-performance web and enterprise applications tailored to your business needs.',
     icon: 'GlobeAltIcon',
     gradient: 'from-blue-500 to-cyan-500',
     bg: 'bg-blue-50',
     iconColor: 'text-blue-600',
     borderHover: 'hover:border-blue-200',
     features: [
-      'React & Next.js Development',
-      'Progressive Web Apps (PWA)',
-      'E-commerce Platforms',
-      'CMS Integration (Headless)',
-      'API Development & Integration',
+      'Custom Web Application Development',
+      'Enterprise Software Solutions',
+      'Secure Architecture and Development',
+      'API Development and Integration',
       'Performance Optimization',
+      'Scalable Deployment Design',
     ],
-    deliverables: ['Responsive Design', 'SEO Optimized', 'Core Web Vitals A+', 'Security Hardened'],
-    timeline: '4–10 weeks',
-    teamSize: '3–6 engineers',
+    deliverables: ['Solution Architecture', 'Production Code', 'Technical Documentation', 'Deployment Plan'],
+    timeline: '4-12 weeks',
+    teamSize: '3-8 engineers',
   },
   {
-    id: 'mobile',
-    title: 'Mobile App Development',
-    shortDesc: 'Native and cross-platform iOS & Android applications.',
-    longDesc:
-      'Our mobile team delivers beautiful, performant apps using Flutter and React Native. From consumer apps to enterprise mobility solutions, we\'ve shipped 60+ apps with an average App Store rating of 4.7 stars.',
-    icon: 'DevicePhoneMobileIcon',
-    gradient: 'from-purple-500 to-pink-500',
-    bg: 'bg-purple-50',
-    iconColor: 'text-purple-600',
-    borderHover: 'hover:border-purple-200',
-    features: [
-      'Flutter Cross-Platform Apps',
-      'React Native Development',
-      'Native iOS (Swift)',
-      'Native Android (Kotlin)',
-      'Push Notifications & Analytics',
-      'App Store Optimization',
-    ],
-    deliverables: ['iOS & Android', 'Offline Support', 'Biometric Auth', 'CI/CD Pipeline'],
-    timeline: '6–14 weeks',
-    teamSize: '4–8 engineers',
-  },
-  {
-    id: 'fullstack',
-    title: 'Full Stack Development',
-    shortDesc: 'End-to-end product development from database to UI.',
-    longDesc:
-      'We take your idea from a blank canvas to a production-ready product. Our full-stack teams handle everything — architecture, database design, backend APIs, frontend interfaces, and DevOps pipelines.',
-    icon: 'CodeBracketIcon',
-    gradient: 'from-emerald-500 to-teal-500',
-    bg: 'bg-emerald-50',
-    iconColor: 'text-emerald-600',
-    borderHover: 'hover:border-emerald-200',
-    features: [
-      'MERN / MEAN Stack',
-      'Microservices Architecture',
-      'REST & GraphQL APIs',
-      'Database Design (SQL/NoSQL)',
-      'Authentication & Authorization',
-      'Real-time Features (WebSockets)',
-    ],
-    deliverables: ['Full Source Code', 'API Documentation', 'Admin Dashboard', 'Monitoring Setup'],
-    timeline: '8–20 weeks',
-    teamSize: '5–10 engineers',
-  },
-  {
-    id: 'cloud',
+    id: 'cloud-solutions',
     title: 'Cloud Solutions',
-    shortDesc: 'Scalable cloud infrastructure on AWS, GCP & Azure.',
+    shortDesc: 'Cloud migration, deployment, optimization, and infrastructure management.',
     longDesc:
-      'We design, migrate, and optimize cloud infrastructure for performance and cost. Our certified cloud architects have executed 80+ zero-downtime migrations and consistently deliver 30–50% infrastructure cost reductions.',
+      'Cloud migration, deployment, optimization, and infrastructure management for enhanced scalability and performance.',
     icon: 'CloudIcon',
     gradient: 'from-sky-500 to-blue-500',
     bg: 'bg-sky-50',
     iconColor: 'text-sky-600',
     borderHover: 'hover:border-sky-200',
     features: [
-      'Cloud Migration (Lift & Shift)',
-      'Kubernetes & Docker Orchestration',
-      'Infrastructure as Code (Terraform)',
-      'CI/CD Pipeline Setup',
-      'Cost Optimization Audits',
-      'Multi-cloud Strategy',
+      'Cloud Readiness Assessment',
+      'Cloud Migration and Deployment',
+      'Infrastructure Optimization',
+      'Cost Optimization',
+      'Monitoring and Alerting',
+      'Managed Infrastructure Support',
     ],
-    deliverables: ['Architecture Diagram', 'IaC Templates', 'Runbooks', '99.99% SLA'],
-    timeline: '3–12 weeks',
-    teamSize: '2–5 architects',
+    deliverables: ['Cloud Architecture', 'Migration Plan', 'Optimized Infrastructure', 'Runbook'],
+    timeline: '3-10 weeks',
+    teamSize: '2-5 engineers',
   },
   {
-    id: 'cybersecurity',
-    title: 'Cybersecurity',
-    shortDesc: 'Enterprise-grade security for your digital assets.',
+    id: 'mobile-app-development',
+    title: 'Mobile App Development',
+    shortDesc: 'Android and iOS apps with intuitive UX and robust backend integration.',
     longDesc:
-      'Our security team conducts thorough vulnerability assessments, penetration testing, and implements compliance frameworks. We\'ve secured 100+ applications and helped companies achieve SOC 2, ISO 27001, and GDPR compliance.',
-    icon: 'ShieldCheckIcon',
-    gradient: 'from-red-500 to-rose-500',
-    bg: 'bg-red-50',
-    iconColor: 'text-red-600',
-    borderHover: 'hover:border-red-200',
+      'Development of Android and iOS applications with intuitive user experiences and robust backend integration.',
+    icon: 'DevicePhoneMobileIcon',
+    gradient: 'from-purple-500 to-pink-500',
+    bg: 'bg-purple-50',
+    iconColor: 'text-purple-600',
+    borderHover: 'hover:border-purple-200',
     features: [
-      'VAPT (Vulnerability Assessment)',
-      'Penetration Testing',
-      'SOC 2 & ISO 27001 Compliance',
-      'Security Code Review',
-      'Incident Response Planning',
-      'Zero Trust Architecture',
+      'Android App Development',
+      'iOS App Development',
+      'Cross-platform Apps',
+      'Backend API Integration',
+      'Push Notifications and Analytics',
+      'Store Release Support',
     ],
-    deliverables: ['Security Audit Report', 'Remediation Plan', 'Compliance Docs', 'Security Training'],
-    timeline: '2–6 weeks',
-    teamSize: '2–4 specialists',
+    deliverables: ['iOS and Android Builds', 'Backend Integration', 'App Assets', 'Release Checklist'],
+    timeline: '6-14 weeks',
+    teamSize: '4-8 engineers',
   },
   {
-    id: 'uiux',
-    title: 'UI/UX Design',
-    shortDesc: 'User-centered design that converts visitors into customers.',
+    id: 'web-application-maintenance',
+    title: 'Web Application Maintenance',
+    shortDesc: 'Monitoring, optimization, bug fixing, and security updates.',
     longDesc:
-      'Our design team creates intuitive, beautiful interfaces backed by user research and A/B testing data. We\'ve designed products used by 5M+ users and consistently improve conversion rates by 25–40% post-redesign.',
+      'Continuous monitoring, performance optimization, bug fixing, and security updates for existing web applications.',
+    icon: 'WrenchScrewdriverIcon',
+    gradient: 'from-emerald-500 to-green-500',
+    bg: 'bg-emerald-50',
+    iconColor: 'text-emerald-600',
+    borderHover: 'hover:border-emerald-200',
+    features: [
+      'Continuous Monitoring',
+      'Performance Optimization',
+      'Bug Fixing',
+      'Security Updates',
+      'Dependency Upgrades',
+      'Stability Improvements',
+    ],
+    deliverables: ['Maintenance Reports', 'Patch Logs', 'Uptime Improvements', 'Security Update Summary'],
+    timeline: 'Ongoing',
+    teamSize: '2-4 engineers',
+  },
+  {
+    id: 'ui-ux-design',
+    title: 'UI/UX Design',
+    shortDesc: 'User-centered interface design for seamless digital experiences.',
+    longDesc:
+      'User-centered interface design focused on usability, accessibility, and seamless digital experiences.',
     icon: 'PaintBrushIcon',
     gradient: 'from-violet-500 to-purple-500',
     bg: 'bg-violet-50',
     iconColor: 'text-violet-600',
     borderHover: 'hover:border-violet-200',
     features: [
-      'User Research & Personas',
+      'User Research',
       'Information Architecture',
-      'Wireframing & Prototyping',
-      'Design System Creation',
-      'Usability Testing',
-      'Motion Design',
+      'Wireframes and Prototypes',
+      'Accessibility-first Design',
+      'Design System Setup',
+      'Developer Handoff',
     ],
-    deliverables: ['Figma Design Files', 'Design System', 'Prototype', 'Handoff Documentation'],
-    timeline: '3–8 weeks',
-    teamSize: '2–4 designers',
+    deliverables: ['UI Kit', 'Interactive Prototype', 'Design System', 'UX Recommendations'],
+    timeline: '2-8 weeks',
+    teamSize: '2-4 designers',
   },
   {
-    id: 'testing',
-    title: 'Software Testing & QA',
-    shortDesc: 'Comprehensive QA and automation for bulletproof software.',
+    id: 'e-publishing-solutions',
+    title: 'E-Publishing Solutions',
+    shortDesc: 'Digital publishing platforms and content management capabilities.',
     longDesc:
-      'Our QA engineers embed into your development process to catch bugs before they reach production. We build automated test suites that run on every commit, reducing post-release defects by up to 80%.',
-    icon: 'BeakerIcon',
+      'Digital publishing platforms and content management systems with accessibility and distribution capabilities.',
+    icon: 'BookOpenIcon',
     gradient: 'from-orange-500 to-amber-500',
     bg: 'bg-orange-50',
     iconColor: 'text-orange-600',
     borderHover: 'hover:border-orange-200',
     features: [
-      'Automated Test Suites',
-      'API Testing (Postman/Newman)',
-      'Performance Testing (JMeter)',
-      'Security Testing',
-      'Cross-browser Testing',
-      'CI/CD Quality Gates',
+      'Publishing Platform Development',
+      'CMS Workflows',
+      'Accessibility Compliance',
+      'Multi-format Distribution',
+      'Editorial Dashboard',
+      'Role-based Access',
     ],
-    deliverables: ['Test Strategy Doc', 'Automated Suite', 'Bug Reports', 'Coverage Reports'],
-    timeline: '2–8 weeks',
-    teamSize: '2–5 QA engineers',
+    deliverables: ['Publishing Portal', 'CMS Configuration', 'Distribution Tools', 'Editorial Controls'],
+    timeline: '4-10 weeks',
+    teamSize: '3-6 engineers',
+  },
+  {
+    id: 'it-staffing',
+    title: 'IT Staffing',
+    shortDesc: 'Skilled IT professionals for short-term and long-term requirements.',
+    longDesc:
+      'Providing skilled IT professionals for short-term and long-term project requirements.',
+    icon: 'UserGroupIcon',
+    gradient: 'from-cyan-500 to-blue-500',
+    bg: 'bg-cyan-50',
+    iconColor: 'text-cyan-600',
+    borderHover: 'hover:border-cyan-200',
+    features: [
+      'Contract Staffing',
+      'Dedicated Resource Allocation',
+      'Rapid Candidate Onboarding',
+      'Project-based Hiring Support',
+      'Technical Screening',
+      'Role-specific Talent Matching',
+    ],
+    deliverables: ['Qualified Profiles', 'Staffing Plan', 'Onboarding Support', 'Performance Tracking'],
+    timeline: '1-4 weeks',
+    teamSize: 'As required',
+  },
+  {
+    id: 'it-consulting-and-sourcing',
+    title: 'IT Consulting and Sourcing',
+    shortDesc: 'Technology consulting and talent sourcing for digital teams.',
+    longDesc:
+      'Technology consulting and talent sourcing to help organizations build strong digital teams.',
+    icon: 'LightBulbIcon',
+    gradient: 'from-indigo-500 to-sky-500',
+    bg: 'bg-indigo-50',
+    iconColor: 'text-indigo-600',
+    borderHover: 'hover:border-indigo-200',
+    features: [
+      'Technology Strategy Consulting',
+      'Architecture Advisory',
+      'Delivery Process Consulting',
+      'Talent Sourcing',
+      'Team Scaling Support',
+      'Vendor Evaluation',
+    ],
+    deliverables: ['Consulting Roadmap', 'Technology Recommendations', 'Talent Pipeline', 'Execution Plan'],
+    timeline: '2-6 weeks',
+    teamSize: '2-5 consultants',
+  },
+  {
+    id: 'internship-programs',
+    title: 'Internship Programs',
+    shortDesc: 'Practical training for students and fresh graduates.',
+    longDesc:
+      'Practical training programs for students and fresh graduates to gain industry exposure and technical expertise.',
+    icon: 'AcademicCapIcon',
+    gradient: 'from-teal-500 to-emerald-500',
+    bg: 'bg-teal-50',
+    iconColor: 'text-teal-600',
+    borderHover: 'hover:border-teal-200',
+    features: [
+      'Hands-on Project Training',
+      'Mentor-led Learning',
+      'Industry Best Practices',
+      'Code Reviews and Feedback',
+      'Career Guidance',
+      'Portfolio Development',
+    ],
+    deliverables: ['Training Curriculum', 'Project Experience', 'Mentor Feedback', 'Completion Certificate'],
+    timeline: '4-12 weeks',
+    teamSize: 'Mentor-led cohorts',
   },
 ];
 
@@ -191,7 +237,6 @@ export default function ServiceCardsGrid() {
   return (
     <section id="services-grid" className="section-padding bg-background relative">
       <div className="container-custom">
-        {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="font-heading font-800 text-display-md text-foreground mb-4">
             Our{' '}
@@ -207,11 +252,10 @@ export default function ServiceCardsGrid() {
             </span>
           </h2>
           <p className="font-body text-body-lg text-foreground-secondary">
-            Click any service to see detailed capabilities, deliverables, and timelines.
+            Explore all 9 services to see capabilities, deliverables, and timelines.
           </p>
         </div>
 
-        {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {allServices.map((service, index) => {
             const isExpanded = expandedId === service.id;
@@ -219,13 +263,14 @@ export default function ServiceCardsGrid() {
               <div
                 key={service.id}
                 id={service.id}
-                ref={(el) => { if (el) refs.current.set(service.id, el); }}
+                ref={(el) => {
+                  if (el) refs.current.set(service.id, el);
+                }}
                 className={`bg-background-card rounded-3xl border transition-all duration-400 overflow-hidden ${
                   isExpanded ? 'border-primary/30 shadow-blue' : `border-border shadow-md-card ${service.borderHover}`
                 } ${visibleItems.has(service.id) ? 'animate-fade-up' : 'opacity-0'}`}
                 style={{ animationDelay: `${(index % 2) * 0.1}s` }}
               >
-                {/* Card Header */}
                 <button
                   onClick={() => setExpandedId(isExpanded ? null : service.id)}
                   className="w-full text-left p-7 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
@@ -237,12 +282,8 @@ export default function ServiceCardsGrid() {
                         <Icon name={service.icon as any} size={26} className={service.iconColor} />
                       </div>
                       <div>
-                        <h3 className="font-heading font-700 text-display-sm text-foreground mb-2">
-                          {service.title}
-                        </h3>
-                        <p className="font-body text-body-sm text-foreground-secondary">
-                          {service.shortDesc}
-                        </p>
+                        <h3 className="font-heading font-700 text-display-sm text-foreground mb-2">{service.title}</h3>
+                        <p className="font-body text-body-sm text-foreground-secondary">{service.shortDesc}</p>
                         <div className="flex items-center gap-4 mt-3">
                           <div className="flex items-center gap-1.5">
                             <Icon name="ClockIcon" size={12} className="text-foreground-muted" />
@@ -255,28 +296,25 @@ export default function ServiceCardsGrid() {
                         </div>
                       </div>
                     </div>
-                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-                      isExpanded ? 'bg-primary text-white rotate-180' : 'bg-background-muted text-foreground-muted'
-                    }`}>
+                    <div
+                      className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                        isExpanded ? 'bg-primary text-white rotate-180' : 'bg-background-muted text-foreground-muted'
+                      }`}
+                    >
                       <Icon name="ChevronDownIcon" size={16} />
                     </div>
                   </div>
                 </button>
 
-                {/* Expanded Content */}
                 <div
                   className={`overflow-hidden transition-all duration-500 ${
                     isExpanded ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >
                   <div className="px-7 pb-7 border-t border-border pt-6">
-                    {/* Description */}
-                    <p className="font-body text-body-base text-foreground-secondary leading-relaxed mb-6">
-                      {service.longDesc}
-                    </p>
+                    <p className="font-body text-body-base text-foreground-secondary leading-relaxed mb-6">{service.longDesc}</p>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                      {/* Features */}
                       <div>
                         <h4 className="font-heading font-700 text-heading-lg text-foreground mb-3 flex items-center gap-2">
                           <Icon name="ListBulletIcon" size={16} className="text-primary" />
@@ -292,7 +330,6 @@ export default function ServiceCardsGrid() {
                         </ul>
                       </div>
 
-                      {/* Deliverables */}
                       <div>
                         <h4 className="font-heading font-700 text-heading-lg text-foreground mb-3 flex items-center gap-2">
                           <Icon name="DocumentCheckIcon" size={16} className="text-primary" />
@@ -300,10 +337,7 @@ export default function ServiceCardsGrid() {
                         </h4>
                         <div className="flex flex-wrap gap-2">
                           {service.deliverables.map((d) => (
-                            <span
-                              key={d}
-                              className={`px-3 py-1.5 bg-gradient-to-r ${service.gradient} text-white font-body text-caption rounded-xl`}
-                            >
+                            <span key={d} className={`px-3 py-1.5 bg-gradient-to-r ${service.gradient} text-white font-body text-caption rounded-xl`}>
                               {d}
                             </span>
                           ))}

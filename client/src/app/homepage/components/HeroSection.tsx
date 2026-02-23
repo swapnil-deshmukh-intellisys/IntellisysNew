@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
@@ -22,13 +22,6 @@ const particles = Array.from({ length: 20 }, (_, i) => ({
   duration: `${3 + Math.random() * 4}s`,
   size: Math.random() > 0.5 ? 3 : 2,
 }));
-
-const techBadges = [
-  { icon: 'CloudIcon', label: 'AWS Certified', color: '#FF9900' },
-  { icon: 'ShieldCheckIcon', label: 'ISO 27001', color: '#10B981' },
-  { icon: 'CpuChipIcon', label: 'AI-Powered', color: '#8B5CF6' },
-  { icon: 'GlobeAltIcon', label: '50+ Countries', color: '#0EA5E9' },
-];
 
 export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
@@ -103,7 +96,6 @@ export default function HeroSection() {
     }
     return (
       <div
-        style={baseStyle}
         className="animate-float border-2 border-secondary/60 rounded-lg"
         style={{ ...baseStyle, transform: 'rotate(45deg)' }}
       />
@@ -116,10 +108,23 @@ export default function HeroSection() {
       className="relative min-h-screen flex items-center overflow-hidden bg-gradient-hero"
       aria-label="Hero section"
     >
-      {/* ── Layer 1: Animated Grid Pattern ── */}
-      <div className="absolute inset-0 hero-grid-pattern opacity-40" />
+      {/* Layer 1: Perspective Grid Plane */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-[1]">
+        <div
+          className="absolute -left-[20%] -right-[20%] top-[34%] h-[130%] opacity-75"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(125,211,252,0.45) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(125,211,252,0.45) 1.5px, transparent 1.5px)',
+            backgroundSize: '64px 64px',
+            transform: 'perspective(900px) rotateX(72deg)',
+            transformOrigin: 'top center',
+            maskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 16%, rgba(0,0,0,1) 30%, rgba(0,0,0,1) 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 16%, rgba(0,0,0,1) 30%, rgba(0,0,0,1) 100%)',
+          }}
+        />
+      </div>
 
-      {/* ── Layer 2: Radial Glow ── */}
+      {/* Layer 2: Radial Glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full"
@@ -139,14 +144,14 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* ── Layer 3: Floating Geometric Shapes ── */}
+      {/* Layer 3: Floating Geometric Shapes */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {floatingShapes.map((shape) => (
           <ShapeComponent key={shape.id} shape={shape} />
         ))}
       </div>
 
-      {/* ── Layer 4: Particle System ── */}
+      {/* Layer 4: Particle System */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {mounted && particles.map((p) => (
           <div
@@ -164,7 +169,7 @@ export default function HeroSection() {
         ))}
       </div>
 
-      {/* ── Layer 5: Orbiting Ring ── */}
+      {/* Layer 5: Orbiting Ring */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
         <div
           className="w-[700px] h-[700px] rounded-full border border-primary/10 animate-spin-slow"
@@ -175,22 +180,9 @@ export default function HeroSection() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-secondary/8 animate-spin-reverse" />
       </div>
 
-      {/* ── Main Content ── */}
+      {/* Main Content */}
       <div className="relative z-10 container-custom w-full pt-32 pb-20">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/15 mb-8"
-            style={{
-              animation: 'fade-up 0.6s ease-out 0.2s both',
-            }}
-          >
-            <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-            <span className="font-body text-caption text-white/80 tracking-wider uppercase">
-              Trusted by 200+ Companies Across India
-            </span>
-          </div>
-
           {/* Main Headline */}
           <h1
             className="font-heading font-900 text-white mb-6 leading-tight"
@@ -219,7 +211,7 @@ export default function HeroSection() {
             className="font-body text-body-lg text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed"
             style={{ animation: 'fade-up 0.7s ease-out 0.4s both' }}
           >
-            From custom web and mobile applications to cloud infrastructure and cybersecurity — 
+            From custom web and mobile applications to cloud infrastructure and cybersecurity -
             Intellisys IT Solutions delivers full-spectrum technology services that scale with your ambitions.
           </p>
 
@@ -244,76 +236,10 @@ export default function HeroSection() {
             </Link>
           </div>
 
-          {/* Tech Badges */}
-          <div
-            className="flex flex-wrap items-center justify-center gap-3 mb-20"
-            style={{ animation: 'fade-up 0.7s ease-out 0.6s both' }}
-          >
-            {techBadges.map((badge) => (
-              <div
-                key={badge.label}
-                className="flex items-center gap-2 px-4 py-2 glass border border-white/10 rounded-full"
-              >
-                <Icon name={badge.icon as any} size={14} style={{ color: badge.color }} />
-                <span className="font-body text-caption text-white/70">{badge.label}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Floating UI Cards */}
-          <div className="relative h-64 hidden md:block" style={{ animation: 'fade-up 0.8s ease-out 0.7s both' }}>
-            {/* Card 1: Active Projects */}
-            <div
-              className="absolute left-0 top-0 glass-dark rounded-2xl p-4 border border-primary/20 shadow-dark-card animate-float w-48"
-              style={{ animationDelay: '0s' }}
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <div className="w-2 h-2 rounded-full bg-success animate-pulse" />
-                <span className="font-body text-caption text-white/60">Active Projects</span>
-              </div>
-              <div className="font-heading font-800 text-display-md text-white">47</div>
-              <div className="flex items-center gap-1 mt-1">
-                <Icon name="ArrowTrendingUpIcon" size={12} className="text-success" />
-                <span className="font-body text-caption text-success">+12 this month</span>
-              </div>
-            </div>
-
-            {/* Card 2: Tech Stack */}
-            <div
-              className="absolute left-1/2 -translate-x-1/2 -top-8 glass-dark rounded-2xl p-4 border border-secondary/20 shadow-dark-card animate-float w-56"
-              style={{ animationDelay: '1.5s' }}
-            >
-              <p className="font-body text-caption text-white/50 mb-3">Technologies We Use</p>
-              <div className="flex flex-wrap gap-1.5">
-                {['React', 'Node.js', 'AWS', 'Python', 'Flutter'].map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2 py-0.5 bg-primary/20 border border-primary/30 rounded-md font-mono text-caption text-primary-light"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Card 3: Client Satisfaction */}
-            <div
-              className="absolute right-0 top-4 glass-dark rounded-2xl p-4 border border-accent/20 shadow-dark-card animate-float w-44"
-              style={{ animationDelay: '0.8s' }}
-            >
-              <div className="flex items-center gap-1 mb-2">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <Icon key={s} name="StarIcon" size={12} className="text-accent" variant="solid" />
-                ))}
-              </div>
-              <div className="font-heading font-800 text-display-sm text-white">4.9/5</div>
-              <p className="font-body text-caption text-white/50 mt-1">Client Satisfaction</p>
-            </div>
-          </div>
         </div>
       </div>
 
-      {/* ── Scroll Indicator ── */}
+      {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
         <span className="font-body text-caption text-white/40 uppercase tracking-widest">Scroll</span>
         <div className="w-5 h-8 border border-white/20 rounded-full flex items-start justify-center pt-1.5">
@@ -321,8 +247,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ── Bottom Fade ── */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
     </section>
   );
 }
+

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import Link from 'next/link';
 import Icon from '@/components/ui/AppIcon';
 
@@ -24,14 +24,6 @@ export default function CTASection() {
           </div>
 
           <div className="relative z-10 max-w-3xl mx-auto">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 glass border border-white/15 rounded-full mb-8">
-              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <span className="font-body text-caption text-white/70 uppercase tracking-wider">
-                Free Consultation — No Commitment
-              </span>
-            </div>
-
             <h2 className="font-heading font-900 text-white mb-6 leading-tight" style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}>
               Ready to Build Something{' '}
               <span
