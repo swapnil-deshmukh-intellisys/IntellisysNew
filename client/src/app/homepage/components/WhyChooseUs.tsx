@@ -13,8 +13,8 @@ const reasons = [
   description: 'Agile sprints with 2-week delivery cycles. MVP to production in 6–8 weeks.',
   metric: '6–8 weeks',
   metricLabel: 'avg. MVP delivery',
-  color: 'text-amber-500',
-  bg: 'bg-amber-50'
+  color: 'text-accent',
+  bg: 'bg-accent/10'
 },
 {
   icon: 'ShieldCheckIcon',
@@ -22,8 +22,8 @@ const reasons = [
   description: 'ISO 27001 certified processes. Every project ships with security audits built in.',
   metric: 'ISO 27001',
   metricLabel: 'certified',
-  color: 'text-emerald-500',
-  bg: 'bg-emerald-50'
+  color: 'text-secondary',
+  bg: 'bg-secondary/10'
 },
 {
   icon: 'UserGroupIcon',
@@ -31,8 +31,8 @@ const reasons = [
   description: 'Your own pod of engineers, designers, and a project manager — no shared resources.',
   metric: '100%',
   metricLabel: 'dedicated team',
-  color: 'text-blue-500',
-  bg: 'bg-blue-50'
+  color: 'text-primary',
+  bg: 'bg-primary/10'
 },
 {
   icon: 'ChartBarIcon',
@@ -40,8 +40,8 @@ const reasons = [
   description: 'Real-time dashboards, weekly sprint reviews, and complete code ownership.',
   metric: 'Weekly',
   metricLabel: 'progress reports',
-  color: 'text-violet-500',
-  bg: 'bg-violet-50'
+  color: 'text-accent',
+  bg: 'bg-accent/10'
 }];
 
 
@@ -146,10 +146,10 @@ export default function WhyChooseUs() {
                 {techPartners.map((partner) =>
                 <div
                   key={partner.name}
-                  className="flex items-center gap-2 px-3 py-2 bg-background-muted border border-border rounded-xl hover:border-primary/30 hover:bg-primary-50 transition-all duration-200">
+                  className="flex items-center gap-2.5 px-3.5 py-2.5 bg-background-muted border border-border rounded-xl hover:border-primary/30 hover:bg-primary-50 transition-all duration-200">
                   
-                    <BrandIcon name={partner.icon} size={16} />
-                    <span className="font-body text-body-sm text-foreground-secondary">{partner.name}</span>
+                    <BrandIcon name={partner.icon} size={18} />
+                    <span className="font-body text-body-base text-foreground-secondary">{partner.name}</span>
                   </div>
                 )}
               </div>

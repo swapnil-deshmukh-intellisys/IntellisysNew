@@ -4,7 +4,6 @@ import Footer from '@/components/Footer';
 import ServicesHero from './components/ServicesHero';
 import ServiceCardsGrid from './components/ServiceCardsGrid';
 import ProcessSection from './components/ProcessSection';
-import TechStackSection from './components/TechStackSection';
 import ServicesCTA from './components/ServicesCTA';
 
 export const metadata: Metadata = {
@@ -35,7 +34,6 @@ export default function ServicesPage() {
         <ServicesHero />
         <ServiceCardsGrid />
         <ProcessSection />
-        <TechStackSection />
         <ServicesCTA />
       </main>
       <Footer />

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
@@ -14,9 +14,9 @@ const contactCards = [
       'Pune, Maharashtra 411057',
     ],
     action: { label: 'Get Directions', href: 'https://maps.app.goo.gl/eFdceVnpjysspftaA' },
-    color: 'text-blue-500',
-    bg: 'bg-blue-50',
-    border: 'border-blue-100',
+    color: 'text-primary',
+    bg: 'bg-primary/10',
+    border: 'border-primary/20',
   },
   {
     icon: 'PhoneIcon',
@@ -26,8 +26,8 @@ const contactCards = [
       '+91 84211 74213',
     ],
     action: { label: 'Call Now', href: 'tel:+919112817771' },
-    color: 'text-emerald-500',
-    bg: 'bg-emerald-50',
+    color: 'text-secondary',
+    bg: 'bg-secondary/10',
     border: 'border-emerald-100',
   },
   {
@@ -37,8 +37,8 @@ const contactCards = [
       'info@intellisysitsolutions.com',
     ],
     action: { label: 'Send Email', href: 'mailto:info@intellisysitsolutions.com' },
-    color: 'text-violet-500',
-    bg: 'bg-violet-50',
+    color: 'text-accent',
+    bg: 'bg-accent/10',
     border: 'border-violet-100',
   },
 ];
@@ -50,8 +50,8 @@ const businessHours = [
 ];
 
 const socialLinks = [
-  { label: 'LinkedIn', icon: 'GlobeAltIcon', href: 'https://linkedin.com', color: 'hover:bg-blue-600' },
-  { label: 'Twitter / X', icon: 'ChatBubbleLeftRightIcon', href: 'https://twitter.com', color: 'hover:bg-sky-500' },
+  { label: 'LinkedIn', icon: 'GlobeAltIcon', href: 'https://linkedin.com', color: 'hover:bg-primary' },
+  { label: 'Twitter / X', icon: 'ChatBubbleLeftRightIcon', href: 'https://twitter.com', color: 'hover:bg-secondary' },
   { label: 'GitHub', icon: 'CodeBracketIcon', href: 'https://github.com', color: 'hover:bg-gray-800' },
   { label: 'YouTube', icon: 'PlayCircleIcon', href: 'https://youtube.com', color: 'hover:bg-red-600' },
 ];

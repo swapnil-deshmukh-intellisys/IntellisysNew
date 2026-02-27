@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
@@ -12,10 +12,10 @@ const allServices = [
     longDesc:
       'Design and development of scalable, secure, and high-performance web and enterprise applications tailored to your business needs.',
     icon: 'GlobeAltIcon',
-    gradient: 'from-blue-500 to-cyan-500',
-    bg: 'bg-blue-50',
-    iconColor: 'text-blue-600',
-    borderHover: 'hover:border-blue-200',
+    gradient: 'from-primary to-secondary',
+    bg: 'bg-primary/10',
+    iconColor: 'text-primary',
+    borderHover: 'hover:border-primary/30',
     features: [
       'Custom Web Application Development',
       'Enterprise Software Solutions',
@@ -35,10 +35,10 @@ const allServices = [
     longDesc:
       'Cloud migration, deployment, optimization, and infrastructure management for enhanced scalability and performance.',
     icon: 'CloudIcon',
-    gradient: 'from-sky-500 to-blue-500',
-    bg: 'bg-sky-50',
-    iconColor: 'text-sky-600',
-    borderHover: 'hover:border-sky-200',
+    gradient: 'from-secondary to-primary',
+    bg: 'bg-secondary/10',
+    iconColor: 'text-secondary',
+    borderHover: 'hover:border-secondary/30',
     features: [
       'Cloud Readiness Assessment',
       'Cloud Migration and Deployment',
@@ -58,10 +58,10 @@ const allServices = [
     longDesc:
       'Development of Android and iOS applications with intuitive user experiences and robust backend integration.',
     icon: 'DevicePhoneMobileIcon',
-    gradient: 'from-purple-500 to-pink-500',
-    bg: 'bg-purple-50',
-    iconColor: 'text-purple-600',
-    borderHover: 'hover:border-purple-200',
+    gradient: 'from-accent to-primary',
+    bg: 'bg-accent/10',
+    iconColor: 'text-accent',
+    borderHover: 'hover:border-accent/30',
     features: [
       'Android App Development',
       'iOS App Development',
@@ -81,9 +81,9 @@ const allServices = [
     longDesc:
       'Continuous monitoring, performance optimization, bug fixing, and security updates for existing web applications.',
     icon: 'WrenchScrewdriverIcon',
-    gradient: 'from-emerald-500 to-green-500',
-    bg: 'bg-emerald-50',
-    iconColor: 'text-emerald-600',
+    gradient: 'from-secondary to-accent',
+    bg: 'bg-secondary/10',
+    iconColor: 'text-secondary',
     borderHover: 'hover:border-emerald-200',
     features: [
       'Continuous Monitoring',
@@ -104,10 +104,10 @@ const allServices = [
     longDesc:
       'User-centered interface design focused on usability, accessibility, and seamless digital experiences.',
     icon: 'PaintBrushIcon',
-    gradient: 'from-violet-500 to-purple-500',
-    bg: 'bg-violet-50',
-    iconColor: 'text-violet-600',
-    borderHover: 'hover:border-violet-200',
+    gradient: 'from-primary to-accent',
+    bg: 'bg-accent/10',
+    iconColor: 'text-accent',
+    borderHover: 'hover:border-accent/30',
     features: [
       'User Research',
       'Information Architecture',
@@ -127,9 +127,9 @@ const allServices = [
     longDesc:
       'Digital publishing platforms and content management systems with accessibility and distribution capabilities.',
     icon: 'BookOpenIcon',
-    gradient: 'from-orange-500 to-amber-500',
-    bg: 'bg-orange-50',
-    iconColor: 'text-orange-600',
+    gradient: 'from-primary to-secondary',
+    bg: 'bg-primary/10',
+    iconColor: 'text-primary',
     borderHover: 'hover:border-orange-200',
     features: [
       'Publishing Platform Development',
@@ -150,10 +150,10 @@ const allServices = [
     longDesc:
       'Providing skilled IT professionals for short-term and long-term project requirements.',
     icon: 'UserGroupIcon',
-    gradient: 'from-cyan-500 to-blue-500',
-    bg: 'bg-cyan-50',
-    iconColor: 'text-cyan-600',
-    borderHover: 'hover:border-cyan-200',
+    gradient: 'from-secondary to-primary',
+    bg: 'bg-secondary/10',
+    iconColor: 'text-secondary',
+    borderHover: 'hover:border-secondary/30',
     features: [
       'Contract Staffing',
       'Dedicated Resource Allocation',
@@ -173,10 +173,10 @@ const allServices = [
     longDesc:
       'Technology consulting and talent sourcing to help organizations build strong digital teams.',
     icon: 'LightBulbIcon',
-    gradient: 'from-indigo-500 to-sky-500',
-    bg: 'bg-indigo-50',
-    iconColor: 'text-indigo-600',
-    borderHover: 'hover:border-indigo-200',
+    gradient: 'from-accent to-secondary',
+    bg: 'bg-accent/10',
+    iconColor: 'text-accent',
+    borderHover: 'hover:border-accent/30',
     features: [
       'Technology Strategy Consulting',
       'Architecture Advisory',
@@ -196,10 +196,10 @@ const allServices = [
     longDesc:
       'Practical training programs for students and fresh graduates to gain industry exposure and technical expertise.',
     icon: 'AcademicCapIcon',
-    gradient: 'from-teal-500 to-emerald-500',
-    bg: 'bg-teal-50',
-    iconColor: 'text-teal-600',
-    borderHover: 'hover:border-teal-200',
+    gradient: 'from-secondary to-accent',
+    bg: 'bg-accent/10',
+    iconColor: 'text-accent',
+    borderHover: 'hover:border-accent/30',
     features: [
       'Hands-on Project Training',
       'Mentor-led Learning',
@@ -277,22 +277,20 @@ export default function ServiceCardsGrid() {
                   aria-expanded={isExpanded}
                 >
                   <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-start gap-4 flex-1">
-                      <div className={`w-14 h-14 ${service.bg} rounded-2xl flex items-center justify-center flex-shrink-0`}>
+                    <div className="flex-1">
+                      <div className={`w-14 h-14 ${service.bg} rounded-2xl flex items-center justify-center mb-4`}>
                         <Icon name={service.icon as any} size={26} className={service.iconColor} />
                       </div>
-                      <div>
-                        <h3 className="font-heading font-700 text-display-sm text-foreground mb-2">{service.title}</h3>
-                        <p className="font-body text-body-sm text-foreground-secondary">{service.shortDesc}</p>
-                        <div className="flex items-center gap-4 mt-3">
-                          <div className="flex items-center gap-1.5">
-                            <Icon name="ClockIcon" size={12} className="text-foreground-muted" />
-                            <span className="font-body text-caption text-foreground-muted">{service.timeline}</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <Icon name="UsersIcon" size={12} className="text-foreground-muted" />
-                            <span className="font-body text-caption text-foreground-muted">{service.teamSize}</span>
-                          </div>
+                      <h3 className="font-heading font-700 text-display-sm text-foreground mb-2">{service.title}</h3>
+                      <p className="font-body text-body-sm text-foreground-secondary">{service.shortDesc}</p>
+                      <div className="flex items-center gap-4 mt-3">
+                        <div className="flex items-center gap-1.5">
+                          <Icon name="ClockIcon" size={12} className="text-foreground-muted" />
+                          <span className="font-body text-caption text-foreground-muted">{service.timeline}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5">
+                          <Icon name="UsersIcon" size={12} className="text-foreground-muted" />
+                          <span className="font-body text-caption text-foreground-muted">{service.teamSize}</span>
                         </div>
                       </div>
                     </div>

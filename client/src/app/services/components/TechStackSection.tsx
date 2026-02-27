@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
@@ -8,50 +8,49 @@ const techCategories = [
   {
     category: 'Frontend',
     icon: 'WindowIcon',
-    color: 'text-blue-500',
-    bg: 'bg-blue-50',
+    color: 'text-primary',
+    bg: 'bg-primary/10',
     techs: ['React.js', 'Next.js', 'Vue.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
   },
   {
     category: 'Backend',
     icon: 'ServerStackIcon',
-    color: 'text-emerald-500',
-    bg: 'bg-emerald-50',
+    color: 'text-secondary',
+    bg: 'bg-secondary/10',
     techs: ['Node.js', 'Express.js', 'Python', 'Django', 'FastAPI', 'Go'],
   },
   {
     category: 'Mobile',
     icon: 'DevicePhoneMobileIcon',
-    color: 'text-violet-500',
-    bg: 'bg-violet-50',
+    color: 'text-accent',
+    bg: 'bg-accent/10',
     techs: ['Flutter', 'React Native', 'Swift', 'Kotlin', 'Expo', 'Firebase'],
   },
   {
     category: 'Database',
     icon: 'CircleStackIcon',
-    color: 'text-orange-500',
-    bg: 'bg-orange-50',
+    color: 'text-primary',
+    bg: 'bg-primary/10',
     techs: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'Elasticsearch', 'Supabase'],
   },
   {
     category: 'Cloud & DevOps',
     icon: 'CloudIcon',
-    color: 'text-sky-500',
-    bg: 'bg-sky-50',
+    color: 'text-secondary',
+    bg: 'bg-secondary/10',
     techs: ['AWS', 'Google Cloud', 'Azure', 'Docker', 'Kubernetes', 'Terraform'],
   },
   {
     category: 'AI & Data',
     icon: 'CpuChipIcon',
-    color: 'text-pink-500',
-    bg: 'bg-pink-50',
+    color: 'text-accent',
+    bg: 'bg-accent/10',
     techs: ['OpenAI API', 'LangChain', 'TensorFlow', 'PyTorch', 'Pandas', 'Apache Spark'],
   },
 ];
 
 export default function TechStackSection() {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -64,7 +63,7 @@ export default function TechStackSection() {
   }, []);
 
   return (
-    <section className="section-padding bg-background relative" ref={sectionRef}>
+    <section className="section-padding bg-white relative" ref={sectionRef}>
       <div className="container-custom">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16"><h2 className="font-heading font-800 text-display-md text-foreground mb-4">
@@ -85,48 +84,48 @@ export default function TechStackSection() {
           </p>
         </div>
 
-        {/* Tech Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {techCategories.map((cat, index) => (
-            <div
-              key={cat.category}
-              className={`bg-background-card rounded-3xl border transition-all duration-300 p-6 cursor-pointer ${
-                activeCategory === cat.category
-                  ? 'border-primary/30 shadow-blue'
-                  : 'border-border shadow-md-card hover:shadow-lg-card hover:border-primary/20'
-              } ${isVisible ? 'animate-fade-up' : 'opacity-0'}`}
-              style={{ animationDelay: `${index * 0.08}s` }}
-              onClick={() => setActiveCategory(activeCategory === cat.category ? null : cat.category)}
-            >
-              <div className="flex items-center gap-3 mb-5">
-                <div className={`w-10 h-10 ${cat.bg} rounded-xl flex items-center justify-center`}>
-                  <Icon name={cat.icon as any} size={20} className={cat.color} />
-                </div>
-                <h3 className="font-heading font-700 text-heading-xl text-foreground">{cat.category}</h3>
-                <div className="ml-auto">
-                  <Icon
-                    name="ChevronDownIcon"
-                    size={16}
-                    className={`text-foreground-muted transition-transform duration-300 ${
-                      activeCategory === cat.category ? 'rotate-180' : ''
-                    }`}
-                  />
-                </div>
-              </div>
+        {/* Tech Categories Grid - dark panel behind cards to match Services section */}
+        <div className="relative mt-8 rounded-3xl bg-background-dark overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.05),transparent_45%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.04),transparent_22%,transparent_78%,rgba(255,255,255,0.04))] pointer-events-none" />
 
-              <div className="flex flex-wrap gap-2">
-                {cat.techs.map((tech) => (
-                  <span
-                    key={tech}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-background-muted border border-border rounded-xl font-mono text-caption text-foreground-secondary hover:bg-primary-50 hover:border-primary/20 hover:text-primary transition-colors duration-200"
-                  >
-                    {resolveBrandName(tech) ? <BrandIcon name={resolveBrandName(tech)!} size={13} /> : null}
-                    {tech}
-                  </span>
-                ))}
-              </div>
+          <div className="relative px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {techCategories.map((cat, index) => (
+                <div
+                  key={cat.category}
+                  className={`group relative border border-[#ff8a3d]/70 bg-[linear-gradient(155deg,rgba(255,255,255,0.16),rgba(255,255,255,0.03)_42%,rgba(255,255,255,0.01))] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_18px_40px_rgba(0,0,0,0.45),0_0_22px_rgba(255,138,61,0.2)] transition-all duration-400 hover:-translate-y-1 hover:border-[#ffb074] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_24px_52px_rgba(0,0,0,0.6),0_0_30px_rgba(255,138,61,0.35)] p-6 [clip-path:polygon(0_0,58%_0,64%_8%,100%_8%,100%_100%,0_100%)] ${
+                    isVisible ? 'animate-fade-up' : 'opacity-0'
+                  }`}
+                  style={{ animationDelay: `${index * 0.07}s` }}
+                >
+                  <div className="pointer-events-none absolute inset-0 opacity-50 bg-[linear-gradient(130deg,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0.05)_34%,transparent_58%)]" />
+                  <div className="pointer-events-none absolute inset-0 opacity-25 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.14),transparent_28%,transparent_78%,rgba(255,255,255,0.08))]" />
+                  <div className="pointer-events-none absolute top-[8%] right-0 h-[1px] w-24 bg-[#ffb074]/90" />
+                  <div className="pointer-events-none absolute bottom-0 left-0 h-[1px] w-20 bg-[#ff8a3d]/70" />
+
+                  <div className={`relative z-10 w-12 h-12 ${cat.bg} border border-sky-300/35 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_18px_rgba(56,189,248,0.3)]`}>
+                    <Icon name={cat.icon as any} size={22} className="text-sky-300 drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
+                  </div>
+                  <h3 className="relative z-10 font-heading font-700 text-xl sm:text-heading-xl text-white mb-2">{cat.category}</h3>
+                  <p className="relative z-10 font-body text-sm sm:text-body-sm text-white/70 mb-4 leading-relaxed">
+                    Our {cat.category.toLowerCase()} stack combines proven tools and modern frameworks.
+                  </p>
+                  <div className="relative z-10 flex flex-wrap gap-1.5 mb-0">
+                    {cat.techs.map((tech) => (
+                      <span
+                        key={tech}
+                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/15 rounded-lg font-mono text-xs sm:text-sm text-white/75"
+                      >
+                        {resolveBrandName(tech) ? <BrandIcon name={resolveBrandName(tech)!} size={16} /> : null}
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
 
         {/* Bottom Note */}

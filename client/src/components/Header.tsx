@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import AppLogo from '@/components/ui/AppLogo';
 import Icon from '@/components/ui/AppIcon';
 
 interface ServiceDropdownItem {
@@ -26,21 +25,47 @@ const serviceItems: ServiceDropdownItem[] = [
 const navLinks = [
   { label: 'Home', href: '/homepage' },
   { label: 'Services', href: '/services', hasDropdown: true },
+  { label: 'Technologies', href: '/technologies' },
+  { label: 'Careers', href: '/careers' },
   { label: 'Contact', href: '/contact' },
 ];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          setScrolled(currentScrollY > 20);
+          setShowHeader((prev) => {
+            if (currentScrollY < 10) return true;
+            if (currentScrollY > lastScrollY && currentScrollY > 60) {
+              // scrolling down
+              return false;
+            } else if (currentScrollY < lastScrollY) {
+              // scrolling up
+              return true;
+            }
+            return prev;
+          });
+          setLastScrollY(currentScrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -72,38 +97,27 @@ export default function Header() {
           scrolled
             ? 'bg-white/95 backdrop-blur-xl shadow-md-card border-b border-border'
             : 'bg-transparent'
-        }`}
+        } ${showHeader ? 'translate-y-0' : '-translate-y-full'}${scrolled ? '' : ' border-b-0 border-none shadow-none'}`}
+        style={{ willChange: 'transform' }}
       >
         <div className="container-custom">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link href="/homepage" className="flex items-center gap-3 group" aria-label="Intellisys IT Solutions - Home">
-              <div className="relative">
-                <div className={`absolute inset-0 rounded-xl bg-gradient-primary opacity-20 blur-md group-hover:opacity-40 transition-opacity duration-300`} />
-                <div className="relative bg-gradient-primary p-2 rounded-xl shadow-blue-sm">
-                  <AppLogo
-                    size={28}
-                    iconName="CpuChipIcon"
-                    className="text-white"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <span
-                  className={`font-heading font-800 text-lg leading-tight tracking-tight transition-colors duration-300 ${
-                    scrolled ? 'text-foreground' : 'text-white'
-                  }`}
-                >
-                  Intellisys IT
-                </span>
-                <span
-                  className={`font-body text-[10px] font-500 tracking-widest uppercase transition-colors duration-300 ${
-                    scrolled ? 'text-foreground-muted' : 'text-white/60'
-                  }`}
-                >
-                  Solutions Pvt. Ltd.
-                </span>
-              </div>
+            {/* Brand Text (no image logo) */}
+            <Link href="/homepage" prefetch className="flex flex-col min-w-0" aria-label="Intellisys IT Solutions - Home">
+              <span
+                className={`font-heading font-800 text-lg leading-tight tracking-tight transition-colors duration-300 ${
+                  scrolled ? 'text-foreground' : 'text-white'
+                }`}
+              >
+                Intellisys IT
+              </span>
+              <span
+                className={`font-body text-[10px] font-500 tracking-widest uppercase transition-colors duration-300 ${
+                  scrolled ? 'text-foreground-muted' : 'text-white/60'
+                }`}
+              >
+                Solutions Pvt. Ltd.
+              </span>
             </Link>
 
             {/* Desktop Nav */}
@@ -139,6 +153,7 @@ export default function Header() {
                             <Link
                               key={item.label}
                               href={item.href}
+                              prefetch
                               className="flex items-start gap-3 p-3 rounded-xl hover:bg-background-elevated transition-colors duration-150 group"
                             >
                               <div className="flex-shrink-0 w-8 h-8 bg-primary-50 rounded-lg flex items-center justify-center group-hover:bg-primary-100 transition-colors">
@@ -158,6 +173,7 @@ export default function Header() {
                         <div className="border-t border-border px-4 py-3 bg-background-muted">
                           <Link
                             href="/services"
+                            prefetch
                             className="flex items-center justify-center gap-2 text-primary font-heading font-600 text-body-sm hover:gap-3 transition-all duration-200"
                           >
                             View All Services
@@ -171,6 +187,7 @@ export default function Header() {
                   <Link
                     key={link.label}
                     href={link.href}
+                    prefetch
                     className={`px-4 py-2 rounded-lg font-body font-500 text-body-sm transition-all duration-200 ${
                       isActive(link.href)
                         ? 'text-primary bg-primary-50'
@@ -197,8 +214,12 @@ export default function Header() {
 
             {/* Mobile Menu Button */}
             <button
-              className="lg:hidden p-2 rounded-lg transition-colors"
-              onClick={() => setMobileOpen(!mobileOpen)}
+              type="button"
+              className="lg:hidden p-2 rounded-lg transition-colors ml-2 relative z-[130] flex-shrink-0"
+              onClick={(e) => {
+                e.stopPropagation();
+                setMobileOpen((prev) => !prev);
+              }}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
             >
@@ -214,7 +235,7 @@ export default function Header() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-[90] lg:hidden transition-all duration-300 ${
+        className={`fixed inset-0 z-[120] lg:hidden transition-all duration-300 ${
           mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
@@ -228,6 +249,7 @@ export default function Header() {
             <div className="flex items-center justify-between p-6 border-b border-border">
               <span className="font-heading font-700 text-heading-xl text-foreground">Menu</span>
               <button
+                type="button"
                 onClick={() => setMobileOpen(false)}
                 className="p-2 rounded-lg hover:bg-background-muted transition-colors"
                 aria-label="Close menu"

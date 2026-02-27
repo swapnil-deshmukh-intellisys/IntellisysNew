@@ -1,6 +1,5 @@
-﻿import React from 'react';
+import React from 'react';
 import Link from 'next/link';
-import AppLogo from '@/components/ui/AppLogo';
 import Icon from '@/components/ui/AppIcon';
 
 const footerLinks = {
@@ -48,42 +47,16 @@ export default function Footer() {
       <div className="absolute inset-0 hero-grid-pattern opacity-30 pointer-events-none" />
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-radial-blue opacity-30 pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-gradient-radial-teal opacity-20 pointer-events-none" />
+      <div className="absolute inset-0 bg-black/45 pointer-events-none" />
 
       <div className="relative container-custom pt-20 pb-8">
-        {/* Top CTA Banner */}
-        <div className="mb-16 p-8 rounded-3xl bg-gradient-primary relative overflow-hidden shadow-blue-lg">
-          <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-10" />
-          <div className="relative flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="font-heading font-700 text-display-sm text-white mb-2">
-                Ready to Transform Your Business?
-              </h3>
-              <p className="font-body text-body-base text-white/70">
-                Get a free consultation with our technology experts today.
-              </p>
-            </div>
-            <Link
-              href="/contact"
-              className="flex-shrink-0 flex items-center gap-2 px-8 py-4 bg-white text-primary font-heading font-700 text-body-base rounded-xl hover:bg-primary-50 transition-all duration-300 hover:scale-105 shadow-xl-card"
-            >
-              Start Your Project
-              <Icon name="ArrowRightIcon" size={18} />
-            </Link>
-          </div>
-        </div>
-
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
           {/* Brand Column */}
           <div className="lg:col-span-4">
-            <Link href="/homepage" className="flex items-center gap-3 mb-6 group">
-              <div className="bg-gradient-primary p-2 rounded-xl">
-                <AppLogo size={28} iconName="CpuChipIcon" className="text-white" />
-              </div>
-              <div>
-                <span className="font-heading font-800 text-heading-xl text-white block">Intellisys IT</span>
-                <span className="font-body text-caption text-white/40 tracking-widest uppercase">Solutions Pvt. Ltd.</span>
-              </div>
+            <Link href="/homepage" className="inline-flex flex-col mb-6 group">
+              <span className="font-heading font-800 text-heading-xl text-white block">Intellisys IT</span>
+              <span className="font-body text-caption text-white/40 tracking-widest uppercase">Solutions Pvt. Ltd.</span>
             </Link>
             <p className="font-body text-body-sm text-white/50 leading-relaxed mb-6 max-w-xs">
               Delivering enterprise-grade IT solutions to startups, SMEs, and global enterprises since 2015. 

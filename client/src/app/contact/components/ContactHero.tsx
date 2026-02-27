@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Icon from '@/components/ui/AppIcon';
 
@@ -6,7 +6,10 @@ export default function ContactHero() {
   return (
     <section className="relative pt-32 pb-20 bg-gradient-hero overflow-hidden">
       <div className="absolute inset-0 hero-grid-pattern opacity-30 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[600px] h-[400px] bg-gradient-radial-teal opacity-30 pointer-events-none" />
+      <div
+        className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.32) 0%, transparent 72%)' }}
+      />
 
       {/* Floating shapes */}
       <div className="absolute top-24 left-16 w-12 h-12 border border-primary/30 rounded-xl rotate-12 animate-float opacity-20 hidden lg:block" />
@@ -28,7 +31,7 @@ export default function ContactHero() {
           Let's Build Something{' '}
           <span
             style={{
-              background: 'linear-gradient(135deg, #60A5FA 0%, #38BDF8 50%, #34D399 100%)',
+              background: 'var(--gradient-primary)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
@@ -44,7 +47,10 @@ export default function ContactHero() {
         </p>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-10 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background" />
+        <div className="absolute inset-x-0 bottom-0 h-2 bg-background/70 blur-sm" />
+      </div>
     </section>
   );
 }

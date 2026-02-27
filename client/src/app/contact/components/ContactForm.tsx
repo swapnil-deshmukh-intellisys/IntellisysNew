@@ -1,7 +1,8 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
+import { supabase } from '@/lib/supabaseClient';
 
 interface FormData {
   name: string;
@@ -9,7 +10,6 @@ interface FormData {
   phone: string;
   company: string;
   service: string;
-  budget: string;
   message: string;
 }
 
@@ -29,15 +29,6 @@ const serviceOptions = [
   'Not Sure - Need Consultation',
 ];
 
-const budgetOptions = [
-  'Under Rs 5 Lakhs',
-  'Rs 5-15 Lakhs',
-  'Rs 15-50 Lakhs',
-  'Rs 50 Lakhs - Rs 1 Crore',
-  'Above Rs 1 Crore',
-  'Let\'s Discuss',
-];
-
 export default function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -45,9 +36,9 @@ export default function ContactForm() {
     phone: '',
     company: '',
     service: '',
-    budget: '',
     message: '',
   });
+  const [requirementFile, setRequirementFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
@@ -58,6 +49,14 @@ export default function ContactForm() {
       newErrors.email = 'Email address is required.';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address.';
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Mobile number is required.';
+    } else {
+      const digits = formData.phone.replace(/\D/g, '');
+      if (digits.length < 7) {
+        newErrors.phone = 'Please enter a valid mobile number.';
+      }
     }
     if (!formData.service) newErrors.service = 'Please select a service.';
     if (!formData.message.trim()) newErrors.message = 'Please describe your project.';
@@ -74,15 +73,54 @@ export default function ContactForm() {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] ?? null;
+    setRequirementFile(file);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
     setStatus('submitting');
+    setErrors((prev) => ({ ...prev, submit: '' }));
 
-    // Mock submission - connect to backend API here
-    // Example: await fetch('/api/contact', { method: 'POST', body: JSON.stringify(formData) })
-    await new Promise((resolve) => setTimeout(resolve, 1800));
-    setStatus('success');
+    try {
+      let attachmentPath: string | null = null;
+
+      if (requirementFile) {
+        const safeName = requirementFile.name.replace(/[^a-zA-Z0-9.]/g, '_');
+        const path = `inquiries/${Date.now()}-${safeName}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from('contact-attachments')
+          .upload(path, requirementFile);
+
+        if (uploadError) throw uploadError;
+        attachmentPath = path;
+      }
+
+      const { error: insertError } = await supabase.from('contact_inquiries').insert({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        company: formData.company.trim() || null,
+        service: formData.service,
+        message: formData.message.trim(),
+        attachment_path: attachmentPath,
+      });
+
+      if (insertError) throw insertError;
+
+      setStatus('success');
+    } catch (err) {
+      console.error('Error submitting contact form to Supabase:', err);
+      setStatus('error');
+      setErrors((prev) => ({
+        ...prev,
+        submit:
+          'Something went wrong while sending your inquiry. Please try again in a moment.',
+      }));
+    }
   };
 
   const inputClass = (field: string) =>
@@ -93,7 +131,7 @@ export default function ContactForm() {
   if (status === 'success') {
     return (
       <div className="bg-background-card rounded-3xl border border-border shadow-lg-card p-12 text-center">
-        <div className="w-20 h-20 bg-emerald-50 rounded-3xl flex items-center justify-center mx-auto mb-6">
+        <div className="w-20 h-20 bg-secondary/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
           <Icon name="CheckCircleIcon" size={40} className="text-success" />
         </div>
         <h3 className="font-heading font-800 text-display-sm text-foreground mb-3">
@@ -107,7 +145,8 @@ export default function ContactForm() {
           <button
             onClick={() => {
               setStatus('idle');
-              setFormData({ name: '', email: '', phone: '', company: '', service: '', budget: '', message: '' });
+              setFormData({ name: '', email: '', phone: '', company: '', service: '', message: '' });
+              setRequirementFile(null);
             }}
             className="px-6 py-3 bg-background-muted border border-border text-foreground font-heading font-600 text-body-sm rounded-xl hover:bg-primary-50 hover:border-primary/30 transition-all duration-200"
           >
@@ -186,7 +225,7 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
             <label htmlFor="phone" className="block font-heading font-600 text-body-sm text-foreground mb-2">
-              Phone Number
+              Phone Number <span className="text-error">*</span>
             </label>
             <div className="relative">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 font-body text-body-sm text-foreground-muted">+91</span>
@@ -199,13 +238,21 @@ export default function ContactForm() {
                 value={formData.phone}
                 onChange={handleChange}
                 className={`${inputClass('phone')} pl-14`}
+                aria-describedby={errors.phone ? 'phone-error' : undefined}
+                aria-invalid={!!errors.phone}
               />
             </div>
+            {errors.phone && (
+              <p id="phone-error" className="mt-1.5 font-body text-caption text-error flex items-center gap-1">
+                <Icon name="ExclamationCircleIcon" size={12} />
+                {errors.phone}
+              </p>
+            )}
           </div>
 
           <div>
             <label htmlFor="company" className="block font-heading font-600 text-body-sm text-foreground mb-2">
-              Company / Organization
+              Company / Organization (Optional)
             </label>
             <input
               id="company"
@@ -220,7 +267,7 @@ export default function ContactForm() {
           </div>
         </div>
 
-        {/* Row 3: Service + Budget */}
+        {/* Row 3: Service + Requirement Document */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
             <label htmlFor="service" className="block font-heading font-600 text-body-sm text-foreground mb-2">
@@ -249,21 +296,20 @@ export default function ContactForm() {
           </div>
 
           <div>
-            <label htmlFor="budget" className="block font-heading font-600 text-body-sm text-foreground mb-2">
-              Estimated Budget
+            <label htmlFor="requirementFile" className="block font-heading font-600 text-body-sm text-foreground mb-2">
+              Attach Requirement Document (PDF, Optional)
             </label>
-            <select
-              id="budget"
-              name="budget"
-              value={formData.budget}
-              onChange={handleChange}
-              className={`${inputClass('budget')} cursor-pointer`}
-            >
-              <option value="">Select budget range...</option>
-              {budgetOptions.map((opt) => (
-                <option key={opt} value={opt}>{opt}</option>
-              ))}
-            </select>
+            <input
+              id="requirementFile"
+              name="requirementFile"
+              type="file"
+              accept="application/pdf,.pdf"
+              onChange={handleFileChange}
+              className="block w-full text-body-sm text-foreground file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-body-sm file:font-heading file:font-600 file:bg-background-muted file:text-foreground hover:file:bg-background-elevated cursor-pointer"
+            />
+            <p className="mt-1.5 font-body text-caption text-foreground-muted">
+              Optional: upload a detailed requirements PDF (max 1 file).
+            </p>
           </div>
         </div>
 
@@ -306,6 +352,12 @@ export default function ContactForm() {
         </p>
 
         {/* Submit */}
+        {errors.submit && (
+          <p className="font-body text-caption text-error flex items-center gap-1 mb-2">
+            <Icon name="ExclamationCircleIcon" size={12} />
+            {errors.submit}
+          </p>
+        )}
         <button
           type="submit"
           disabled={status === 'submitting'}

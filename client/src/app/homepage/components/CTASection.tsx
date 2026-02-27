@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Icon from '@/components/ui/AppIcon';
 
@@ -28,7 +28,7 @@ export default function CTASection() {
               Ready to Build Something{' '}
               <span
                 style={{
-                  background: 'linear-gradient(135deg, #60A5FA 0%, #38BDF8 50%, #34D399 100%)',
+                  background: 'var(--gradient-primary)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',

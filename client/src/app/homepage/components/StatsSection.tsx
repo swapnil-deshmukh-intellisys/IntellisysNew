@@ -20,9 +20,9 @@ const stats = [
     label: 'Client Retention',
     sublabel: 'Long-term partnerships',
     icon: 'HeartIcon',
-    color: 'from-pink-500 to-rose-500',
-    iconBg: 'bg-pink-50',
-    iconColor: 'text-pink-500',
+    color: 'from-accent to-secondary',
+    iconBg: 'bg-accent/10',
+    iconColor: 'text-accent',
   },
   {
     value: 11,
@@ -30,8 +30,8 @@ const stats = [
     label: 'Years of Excellence',
     sublabel: 'Since 2015',
     icon: 'TrophyIcon',
-    color: 'from-accent to-orange-500',
-    iconBg: 'bg-amber-50',
+    color: 'from-accent to-primary',
+    iconBg: 'bg-accent/10',
     iconColor: 'text-accent',
   },
   {
@@ -40,9 +40,9 @@ const stats = [
     label: 'Expert Engineers',
     sublabel: 'Full-stack specialists',
     icon: 'UsersIcon',
-    color: 'from-emerald-500 to-teal-500',
-    iconBg: 'bg-emerald-50',
-    iconColor: 'text-emerald-500',
+    color: 'from-secondary to-accent',
+    iconBg: 'bg-secondary/10',
+    iconColor: 'text-secondary',
   },
 ];
 

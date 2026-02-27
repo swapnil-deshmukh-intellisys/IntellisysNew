@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from './components/HeroSection';
-import StatsSection from './components/StatsSection';
 import ServicesOverview from './components/ServicesOverview';
 import WhyChooseUs from './components/WhyChooseUs';
 import TestimonialsSection from './components/TestimonialsSection';
@@ -35,7 +34,6 @@ export default function HomepagePage() {
       <Header />
       <main>
         <HeroSection />
-        <StatsSection />
         <ServicesOverview />
         <WhyChooseUs />
         <TestimonialsSection />

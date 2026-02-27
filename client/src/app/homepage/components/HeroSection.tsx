@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
@@ -72,9 +72,9 @@ export default function HeroSection() {
           <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <polygon
               points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5"
-              stroke="rgba(59,130,246,0.8)"
+              stroke="rgba(203,213,225,0.72)"
               strokeWidth="2"
-              fill="rgba(37,99,235,0.1)"
+              fill="rgba(148,163,184,0.08)"
             />
           </svg>
         </div>
@@ -86,9 +86,9 @@ export default function HeroSection() {
           <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <polygon
               points="50,5 95,90 5,90"
-              stroke="rgba(14,165,233,0.8)"
+              stroke="rgba(156,163,175,0.72)"
               strokeWidth="2"
-              fill="rgba(14,165,233,0.08)"
+              fill="rgba(107,114,128,0.08)"
             />
           </svg>
         </div>
@@ -114,7 +114,7 @@ export default function HeroSection() {
           className="absolute -left-[20%] -right-[20%] top-[34%] h-[130%] opacity-75"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(125,211,252,0.45) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(125,211,252,0.45) 1.5px, transparent 1.5px)',
+              'linear-gradient(rgba(226,232,240,0.38) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(226,232,240,0.38) 1.5px, transparent 1.5px)',
             backgroundSize: '64px 64px',
             transform: 'perspective(900px) rotateX(72deg)',
             transformOrigin: 'top center',
@@ -129,7 +129,7 @@ export default function HeroSection() {
         <div
           className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(37,99,235,0.2) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.42) 0%, transparent 72%)',
             transform: mounted ? `translate(${mousePos.x * 0.5}px, ${mousePos.y * 0.5}px)` : 'none',
             transition: 'transform 0.3s ease-out',
           }}
@@ -137,7 +137,7 @@ export default function HeroSection() {
         <div
           className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(14,165,233,0.15) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.32) 0%, transparent 72%)',
             transform: mounted ? `translate(${mousePos.x * -0.3}px, ${mousePos.y * -0.3}px)` : 'none',
             transition: 'transform 0.4s ease-out',
           }}
@@ -195,7 +195,7 @@ export default function HeroSection() {
             <span
               className="relative inline-block"
               style={{
-                background: 'linear-gradient(135deg, #60A5FA 0%, #38BDF8 50%, #34D399 100%)',
+                background: 'linear-gradient(135deg, #fb923c 0%, #f97316 45%, #ea580c 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',

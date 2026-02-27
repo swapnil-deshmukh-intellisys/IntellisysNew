@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
@@ -12,9 +12,9 @@ const steps = [
     icon: 'MagnifyingGlassIcon',
     duration: '1-3 days',
     output: 'Project Brief + Estimate',
-    color: 'text-blue-500',
-    bg: 'bg-blue-50',
-    border: 'border-blue-100',
+    color: 'text-primary',
+    bg: 'bg-primary/10',
+    border: 'border-primary/20',
   },
   {
     step: '02',
@@ -24,8 +24,8 @@ const steps = [
     icon: 'PencilSquareIcon',
     duration: '1-2 weeks',
     output: 'Tech Spec + Figma Prototype',
-    color: 'text-violet-500',
-    bg: 'bg-violet-50',
+    color: 'text-accent',
+    bg: 'bg-accent/10',
     border: 'border-violet-100',
   },
   {
@@ -36,8 +36,8 @@ const steps = [
     icon: 'CodeBracketSquareIcon',
     duration: '4-16 weeks',
     output: 'Working Software + Sprint Reports',
-    color: 'text-emerald-500',
-    bg: 'bg-emerald-50',
+    color: 'text-secondary',
+    bg: 'bg-secondary/10',
     border: 'border-emerald-100',
   },
   {
@@ -48,8 +48,8 @@ const steps = [
     icon: 'RocketLaunchIcon',
     duration: '1-2 weeks',
     output: 'Production Deployment + 30-day Support',
-    color: 'text-amber-500',
-    bg: 'bg-amber-50',
+    color: 'text-accent',
+    bg: 'bg-accent/10',
     border: 'border-amber-100',
   },
 ];
@@ -94,7 +94,7 @@ export default function ProcessSection() {
         {/* Steps */}
         <div className="relative">
           {/* Connecting Line */}
-          <div className="absolute top-10 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-200 via-violet-200 via-emerald-200 to-amber-200 hidden lg:block" />
+          <div className="absolute top-10 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 hidden lg:block" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, index) => (
@@ -105,14 +105,14 @@ export default function ProcessSection() {
                 }`}
                 style={{ animationDelay: `${index * 0.12}s` }}
               >
-                {/* Step Number Bubble */}
-                <div className={`w-12 h-12 ${step.bg} border-2 ${step.border} rounded-2xl flex items-center justify-center mb-6 relative z-10 bg-white`}>
-                  <span className={`font-heading font-900 text-heading-lg ${step.color}`}>{step.step}</span>
-                </div>
-
-                {/* Icon */}
-                <div className={`w-10 h-10 ${step.bg} rounded-xl flex items-center justify-center mb-4`}>
-                  <Icon name={step.icon as any} size={20} className={step.color} />
+                {/* Step Number + Icon */}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className={`w-12 h-12 ${step.bg} border-2 ${step.border} rounded-2xl flex items-center justify-center relative z-10 bg-white`}>
+                    <span className={`font-heading font-900 text-heading-lg ${step.color}`}>{step.step}</span>
+                  </div>
+                  <div className={`w-10 h-10 ${step.bg} rounded-xl flex items-center justify-center`}>
+                    <Icon name={step.icon as any} size={20} className={step.color} />
+                  </div>
                 </div>
 
                 <h3 className="font-heading font-700 text-heading-xl text-foreground mb-3">
