@@ -8,17 +8,16 @@ export default function CareersHero() {
       {/* Background */}
       <div className="absolute inset-0 hero-grid-pattern opacity-25 pointer-events-none" />
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[860px] h-[420px] pointer-events-none"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[160px] h-[420px] pointer-events-none"
         style={{
           background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.42) 0%, transparent 72%)',
         }}
       />
 
       {/* Floating shapes */}
-      <div className="absolute top-20 right-20 w-16 h-16 border border-primary/30 rounded-2xl rotate-12 animate-float opacity-30 hidden lg:block" />
+      <div className="absolute top-20 right-20 w-16 h-16 border-2 border-red-500 rounded-full animate-float opacity-90 hidden lg:block bg-red-500/10 shadow-[0_0_28px_rgba(239,68,68,0.5)]" />
       <div
-        className="absolute bottom-20 left-20 w-10 h-10 border border-secondary/30 rounded-full animate-float opacity-20 hidden lg:block"
-        style={{ animationDelay: '2s' }}
+        className="absolute bottom-20 left-0 w-10 h-10 border border-secondary/30 rounded-full animate-hero-sweep opacity-20 hidden lg:block"
       />
 
       <div className="container-custom relative z-10">

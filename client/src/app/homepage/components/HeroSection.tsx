@@ -156,7 +156,7 @@ export default function HeroSection() {
         {mounted && particles.map((p) => (
           <div
             key={p.id}
-            className="absolute rounded-full bg-primary-light animate-particle"
+            className="absolute rounded-full bg-orange-400 animate-particle"
             style={{
               left: p.x,
               top: p.y,
@@ -164,20 +164,10 @@ export default function HeroSection() {
               height: p.size,
               animationDelay: p.delay,
               animationDuration: p.duration,
+              boxShadow: '0 0 14px rgba(251,146,60,0.9), 0 0 28px rgba(249,115,22,0.55)',
             }}
           />
         ))}
-      </div>
-
-      {/* Layer 5: Orbiting Ring */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-        <div
-          className="w-[700px] h-[700px] rounded-full border border-primary/10 animate-spin-slow"
-          style={{
-            transform: mounted ? `rotate(${mousePos.x * 0.5}deg)` : 'none',
-          }}
-        />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-secondary/8 animate-spin-reverse" />
       </div>
 
       {/* Main Content */}
