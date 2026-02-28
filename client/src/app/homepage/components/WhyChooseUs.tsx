@@ -70,16 +70,37 @@ export default function WhyChooseUs() {
   return (
     <section className="section-padding bg-background relative overflow-hidden" ref={sectionRef}>
       <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} text-center max-w-4xl mx-auto mb-12`}>
+          <h2 className="font-heading font-800 text-display-md text-foreground mb-6">
+            We Don't Just Build Software.{' '}
+            <span
+              style={{
+                background: 'var(--gradient-primary)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>
+              
+              We Build Businesses.
+            </span>
+          </h2>
+
+          <p className="font-body text-body-lg text-foreground-secondary leading-relaxed">
+            With over 11 years of engineering excellence, our team of 50+ specialists has helped 
+            200+ companies across India and Southeast Asia transform their technology.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-16 items-start lg:items-end">
           {/* Left: Image + Floating Cards */}
-          <div className="relative">
+          <div className="relative h-full lg:self-end">
             <div
-              className={`relative rounded-3xl overflow-hidden shadow-xl-card ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}>
+              className={`relative h-[420px] sm:h-[480px] lg:h-[520px] rounded-3xl overflow-hidden shadow-xl-card ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}>
               
               <AppImage
                 src="https://img.rocket.new/generatedImages/rocket_gen_img_1539c59d0-1771170881858.png"
                 alt="Intellisys IT Solutions engineering team collaborating on software development in Mumbai office"
-                className="w-full h-[480px] object-cover" />
+                className="w-full h-full object-cover object-top" />
               
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent" />
@@ -88,28 +109,9 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Right: Content */}
-          <div className={isVisible ? 'animate-slide-in-right' : 'opacity-0'}>
-            <h2 className="font-heading font-800 text-display-md text-foreground mb-6">
-              We Don't Just Build Software.{' '}
-              <span
-                style={{
-                  background: 'var(--gradient-primary)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
-                }}>
-                
-                We Build Businesses.
-              </span>
-            </h2>
-
-            <p className="font-body text-body-lg text-foreground-secondary mb-10 leading-relaxed">
-              With over 11 years of engineering excellence, our team of 50+ specialists has helped 
-              200+ companies across India and Southeast Asia transform their technology.
-            </p>
-
+          <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} h-full`}>
             {/* Reasons Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {reasons.map((reason, i) =>
               <div
                 key={reason.title}
@@ -137,26 +139,58 @@ export default function WhyChooseUs() {
               )}
             </div>
 
-            {/* Tech Partners */}
-            <div>
-              <p className="font-body text-caption text-foreground-muted uppercase tracking-wider mb-4">
-                Technology Partners
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {techPartners.map((partner) =>
-                <div
-                  key={partner.name}
-                  className="flex items-center gap-2.5 px-3.5 py-2.5 bg-background-muted border border-border rounded-xl hover:border-primary/30 hover:bg-primary-50 transition-all duration-200">
-                  
-                    <BrandIcon name={partner.icon} size={18} />
-                    <span className="font-body text-body-base text-foreground-secondary">{partner.name}</span>
-                  </div>
-                )}
-              </div>
+          </div>
+        </div>
+
+        {/* Full-width Tech Partners */}
+        <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} mt-14`}>
+          <p className="font-heading font-700 text-sm sm:text-base md:text-lg text-foreground-muted uppercase tracking-[0.14em] text-center mb-5">
+            Technology Partners
+          </p>
+          <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden px-6 sm:px-8 lg:px-10">
+            <div className="tech-partners-track">
+              {[0, 1, 2].map((copy) =>
+              <div key={copy} className="tech-partners-group" aria-hidden={copy > 0}>
+                  {techPartners.map((partner) =>
+                  <div
+                    key={`${copy}-${partner.name}`}
+                    className="flex-shrink-0 flex items-center gap-2.5 px-3.5 py-2.5 bg-background-muted border border-border rounded-xl hover:border-primary/30 hover:bg-primary-50 transition-all duration-200">
+                    
+                      <BrandIcon name={partner.icon} size={18} />
+                      <span className="font-body text-body-base text-foreground-secondary">{partner.name}</span>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
+      <style jsx>{`
+        .tech-partners-track {
+          display: flex;
+          align-items: center;
+          width: max-content;
+          animation: tech-partners-rtl 22s linear infinite;
+        }
+
+        .tech-partners-group {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          padding-right: 0.75rem;
+          flex-shrink: 0;
+        }
+
+        @keyframes tech-partners-rtl {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-33.333333%);
+            }
+            }
+      `}</style>
     </section>);
 
 }
