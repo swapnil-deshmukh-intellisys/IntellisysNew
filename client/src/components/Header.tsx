@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import Icon from '@/components/ui/AppIcon';
 
@@ -13,13 +14,48 @@ interface ServiceDropdownItem {
 }
 
 const serviceItems: ServiceDropdownItem[] = [
-  { label: 'Website Development', description: 'Custom web solutions', icon: 'GlobeAltIcon', href: '/services' },
-  { label: 'Mobile App Development', description: 'iOS & Android apps', icon: 'DevicePhoneMobileIcon', href: '/services' },
-  { label: 'Full Stack Development', description: 'End-to-end development', icon: 'CodeBracketIcon', href: '/services' },
-  { label: 'Cloud Solutions', description: 'AWS, GCP & Azure', icon: 'CloudIcon', href: '/services' },
-  { label: 'Cybersecurity', description: 'Protect your systems', icon: 'ShieldCheckIcon', href: '/services' },
-  { label: 'UI/UX Design', description: 'User-centered design', icon: 'PaintBrushIcon', href: '/services' },
-  { label: 'Software Testing', description: 'QA & automation', icon: 'BeakerIcon', href: '/services' },
+  {
+    label: 'Website Development',
+    description: 'Custom web solutions',
+    icon: 'GlobeAltIcon',
+    href: '/services',
+  },
+  {
+    label: 'Mobile App Development',
+    description: 'iOS & Android apps',
+    icon: 'DevicePhoneMobileIcon',
+    href: '/services',
+  },
+  {
+    label: 'Full Stack Development',
+    description: 'End-to-end development',
+    icon: 'CodeBracketIcon',
+    href: '/services',
+  },
+  {
+    label: 'Cloud Solutions',
+    description: 'AWS, GCP & Azure',
+    icon: 'CloudIcon',
+    href: '/services',
+  },
+  {
+    label: 'Cybersecurity',
+    description: 'Protect your systems',
+    icon: 'ShieldCheckIcon',
+    href: '/services',
+  },
+  {
+    label: 'UI/UX Design',
+    description: 'User-centered design',
+    icon: 'PaintBrushIcon',
+    href: '/services',
+  },
+  {
+    label: 'Software Testing',
+    description: 'QA & automation',
+    icon: 'BeakerIcon',
+    href: '/services',
+  },
 ];
 
 const navLinks = [
@@ -84,40 +120,42 @@ export default function Header() {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [mobileOpen]);
 
   const currentPath = pathname ?? '';
-  const isActive = (href: string) => currentPath === href || (href !== '/homepage' && currentPath.startsWith(href));
+  const isActive = (href: string) =>
+    currentPath === href || (href !== '/homepage' && currentPath.startsWith(href));
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
           scrolled
-            ? 'bg-white/95 backdrop-blur-xl shadow-md-card border-b border-border'
+            ? 'bg-black/95 backdrop-blur-xl shadow-md-card border-b border-white/10'
             : 'bg-transparent'
         } ${showHeader ? 'translate-y-0' : '-translate-y-full'}${scrolled ? '' : ' border-b-0 border-none shadow-none'}`}
         style={{ willChange: 'transform' }}
       >
         <div className="container-custom">
           <div className="flex items-center justify-between h-20">
-            {/* Brand Text (no image logo) */}
-            <Link href="/homepage" prefetch className="flex flex-col min-w-0" aria-label="Intellisys IT Solutions - Home">
-              <span
-                className={`font-heading font-800 text-lg leading-tight tracking-tight transition-colors duration-300 ${
-                  scrolled ? 'text-foreground' : 'text-white'
-                }`}
-              >
-                Intellisys IT
-              </span>
-              <span
-                className={`font-body text-[10px] font-500 tracking-widest uppercase transition-colors duration-300 ${
-                  scrolled ? 'text-foreground-muted' : 'text-white/60'
-                }`}
-              >
-                Solutions Pvt. Ltd.
-              </span>
+            <Link
+              href="/homepage"
+              prefetch
+              className="flex items-center min-w-0"
+              aria-label="Intellisys IT Solutions - Home"
+            >
+              <Image
+                src="/assets/images/logo.gif"
+                alt="Intellisys IT Solutions"
+                width={572}
+                height={135}
+                priority
+                unoptimized
+                className="h-[6.5rem] md:h-[6.5rem] w-auto"
+              />
             </Link>
 
             {/* Desktop Nav */}
@@ -129,9 +167,7 @@ export default function Header() {
                       onClick={() => setDropdownOpen(!dropdownOpen)}
                       className={`flex items-center gap-1 px-4 py-2 rounded-lg font-body font-500 text-body-sm transition-all duration-200 ${
                         isActive(link.href)
-                          ? 'text-primary bg-primary-50'
-                          : scrolled
-                          ? 'text-foreground-secondary hover:text-foreground hover:bg-background-muted'
+                          ? 'text-white bg-white/15'
                           : 'text-white/80 hover:text-white hover:bg-white/10'
                       }`}
                       aria-expanded={dropdownOpen}
@@ -190,9 +226,7 @@ export default function Header() {
                     prefetch
                     className={`px-4 py-2 rounded-lg font-body font-500 text-body-sm transition-all duration-200 ${
                       isActive(link.href)
-                        ? 'text-primary bg-primary-50'
-                        : scrolled
-                        ? 'text-foreground-secondary hover:text-foreground hover:bg-background-muted'
+                        ? 'text-white bg-white/15'
                         : 'text-white/80 hover:text-white hover:bg-white/10'
                     }`}
                   >
@@ -224,9 +258,15 @@ export default function Header() {
               aria-expanded={mobileOpen}
             >
               <div className="w-6 flex flex-col gap-1.5">
-                <span className={`block h-0.5 rounded-full transition-all duration-300 ${scrolled ? 'bg-foreground' : 'bg-white'} ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
-                <span className={`block h-0.5 rounded-full transition-all duration-300 ${scrolled ? 'bg-foreground' : 'bg-white'} ${mobileOpen ? 'opacity-0' : ''}`} />
-                <span className={`block h-0.5 rounded-full transition-all duration-300 ${scrolled ? 'bg-foreground' : 'bg-white'} ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+                <span
+                  className={`block h-0.5 rounded-full transition-all duration-300 bg-white ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`}
+                />
+                <span
+                  className={`block h-0.5 rounded-full transition-all duration-300 bg-white ${mobileOpen ? 'opacity-0' : ''}`}
+                />
+                <span
+                  className={`block h-0.5 rounded-full transition-all duration-300 bg-white ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`}
+                />
               </div>
             </button>
           </div>
@@ -239,7 +279,10 @@ export default function Header() {
           mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <div className="absolute inset-0 bg-background-dark/95 backdrop-blur-xl" onClick={() => setMobileOpen(false)} />
+        <div
+          className="absolute inset-0 bg-background-dark/95 backdrop-blur-xl"
+          onClick={() => setMobileOpen(false)}
+        />
         <div
           className={`absolute top-0 right-0 h-full w-80 bg-white shadow-dark-xl transition-transform duration-300 ${
             mobileOpen ? 'translate-x-0' : 'translate-x-full'
@@ -265,7 +308,8 @@ export default function Header() {
                     href={link.href}
                     className={`flex items-center justify-between w-full px-4 py-3 rounded-xl font-body font-500 text-body-base transition-colors ${
                       isActive(link.href)
-                        ? 'bg-primary-50 text-primary' :'text-foreground-secondary hover:bg-background-muted hover:text-foreground'
+                        ? 'bg-primary-50 text-primary'
+                        : 'text-foreground-secondary hover:bg-background-muted hover:text-foreground'
                     }`}
                   >
                     {link.label}

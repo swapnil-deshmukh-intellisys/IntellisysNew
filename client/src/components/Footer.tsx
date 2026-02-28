@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Icon from '@/components/ui/AppIcon';
 
 const footerLinks = {
@@ -33,7 +34,10 @@ const socialLinks = [
 ];
 
 const contactInfo = [
-  { icon: 'MapPinIcon', text: 'Gera Imperim Rise, 328-B, Wipro Circle, Hinjawadi Phase II, Pune 411057' },
+  {
+    icon: 'MapPinIcon',
+    text: 'Gera Imperim Rise, 328-B, Wipro Circle, Hinjawadi Phase II, Pune 411057',
+  },
   { icon: 'PhoneIcon', text: '+91 91128 17771 / 84211 74213' },
   { icon: 'EnvelopeIcon', text: 'info@intellisysitsolutions.com' },
 ];
@@ -54,19 +58,29 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
           {/* Brand Column */}
           <div className="lg:col-span-4">
-            <Link href="/homepage" className="inline-flex flex-col mb-6 group">
-              <span className="font-heading font-800 text-heading-xl text-white block">Intellisys IT</span>
-              <span className="font-body text-caption text-white/40 tracking-widest uppercase">Solutions Pvt. Ltd.</span>
+            <Link href="/homepage" className="inline-flex items-center mb-6 group">
+              <Image
+                src="/assets/images/logo.gif"
+                alt="Intellisys IT Solutions"
+                width={660}
+                height={156}
+                unoptimized
+                className="h-[7.5rem] w-auto"
+              />
             </Link>
             <p className="font-body text-body-sm text-white/50 leading-relaxed mb-6 max-w-xs">
-              Delivering enterprise-grade IT solutions to startups, SMEs, and global enterprises since 2015. 
-              Your trusted technology partner in India.
+              Delivering enterprise-grade IT solutions to startups, SMEs, and global enterprises
+              since 2015. Your trusted technology partner in India.
             </p>
             {/* Contact Info */}
             <div className="space-y-3 mb-6">
               {contactInfo.map((item) => (
                 <div key={item.text} className="flex items-start gap-3">
-                  <Icon name={item.icon as any} size={16} className="text-primary-light mt-0.5 flex-shrink-0" />
+                  <Icon
+                    name={item.icon as any}
+                    size={16}
+                    className="text-primary-light mt-0.5 flex-shrink-0"
+                  />
                   <span className="font-body text-body-sm text-white/50">{item.text}</span>
                 </div>
               ))}
@@ -82,7 +96,11 @@ export default function Footer() {
                   aria-label={social.label}
                   className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-200 hover:scale-110"
                 >
-                  <Icon name={social.icon as any} size={16} className="text-white/60 hover:text-white" />
+                  <Icon
+                    name={social.icon as any}
+                    size={16}
+                    className="text-white/60 hover:text-white"
+                  />
                 </a>
               ))}
             </div>
@@ -169,10 +187,13 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-body text-caption text-white/30">
-            (c) {currentYear} Intellisys IT Solutions Pvt. Ltd. All rights reserved. CIN: U72200MH2015PTC123456
+            (c) {currentYear} Intellisys IT Solutions Pvt. Ltd. All rights reserved. CIN:
+            U72200MH2015PTC123456
           </p>
           <div className="flex items-center gap-6">
-            <span className="font-body text-caption text-white/30">Made with care in Pune, India</span>
+            <span className="font-body text-caption text-white/30">
+              Made with care in Pune, India
+            </span>
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
               <span className="font-body text-caption text-white/30">All systems operational</span>
