@@ -14,6 +14,9 @@ const floatingShapes = [
   { id: 6, size: 30, x: '92%', y: '45%', delay: '1.5s', duration: '6s', opacity: 0.2, type: 'triangle' },
 ];
 
+// Baseline particle sizes for quick revert: small=2, large=3
+const PARTICLE_SIZE_SCALE = 1.55;
+
 const particles = Array.from({ length: 20 }, (_, i) => ({
   id: i,
   x: `${Math.random() * 100}%`,
@@ -160,8 +163,8 @@ export default function HeroSection() {
             style={{
               left: p.x,
               top: p.y,
-              width: p.size,
-              height: p.size,
+              width: p.size * PARTICLE_SIZE_SCALE,
+              height: p.size * PARTICLE_SIZE_SCALE,
               animationDelay: p.delay,
               animationDuration: p.duration,
               boxShadow: '0 0 14px rgba(251,146,60,0.9), 0 0 28px rgba(249,115,22,0.55)',
