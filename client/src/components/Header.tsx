@@ -144,7 +144,7 @@ export default function Header() {
             <Link
               href="/homepage"
               prefetch
-              className="flex items-center min-w-0"
+              className="flex items-center min-w-0 -ml-2 md:-ml-3"
               aria-label="Intellisys IT Solutions - Home"
             >
               <Image
