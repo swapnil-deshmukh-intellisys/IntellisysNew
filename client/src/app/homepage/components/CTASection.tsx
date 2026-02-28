@@ -43,7 +43,7 @@ export default function CTASection() {
               Get a detailed project proposal within 24 hours.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/contact"
                 className="group flex items-center gap-3 px-10 py-5 bg-white text-primary font-heading font-800 text-body-base rounded-2xl hover:bg-primary-50 transition-all duration-300 hover:scale-105 shadow-xl-card"
@@ -57,23 +57,6 @@ export default function CTASection() {
               >
                 View Our Work
               </Link>
-            </div>
-
-            {/* Trust Metrics */}
-            <div className="flex items-center justify-center gap-8 flex-wrap">
-              {[
-                { value: '200+', label: 'Projects Delivered' },
-                { value: '4.9/5', label: 'Client Rating' },
-                { value: '24hrs', label: 'Response Time' },
-              ]?.map((item, i) => (
-                <React.Fragment key={item?.label}>
-                  {i > 0 && <div className="h-8 w-px bg-white/15 hidden sm:block" />}
-                  <div className="text-center">
-                    <div className="font-heading font-900 text-display-sm text-white">{item?.value}</div>
-                    <div className="font-body text-caption text-white/40 uppercase tracking-wider">{item?.label}</div>
-                  </div>
-                </React.Fragment>
-              ))}
             </div>
           </div>
         </div>
