@@ -38,7 +38,7 @@ const contactInfo = [
     icon: 'MapPinIcon',
     text: 'Gera Imperim Rise, 328-B, Wipro Circle, Hinjawadi Phase II, Pune 411057',
   },
-  { icon: 'PhoneIcon', text: '+91 91128 17771 / 84211 74213' },
+  { icon: 'PhoneIcon', text: '+91 84211 74213 / 91128 17771' },
   { icon: 'EnvelopeIcon', text: 'info@intellisysitsolutions.com' },
 ];
 

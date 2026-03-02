@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
+import { siInstagram, siX } from 'simple-icons';
 
 const contactCards = [
   {
@@ -22,10 +23,10 @@ const contactCards = [
     icon: 'PhoneIcon',
     title: 'Call Us',
     lines: [
-      '+91 91128 17771',
       '+91 84211 74213',
+      '+91 91128 17771',
     ],
-    action: { label: 'Call Now', href: 'tel:+919112817771' },
+    action: { label: 'Call Now', href: 'tel:+918421174213' },
     color: 'text-secondary',
     bg: 'bg-secondary/10',
     border: 'border-emerald-100',
@@ -50,19 +51,43 @@ const businessHours = [
 ];
 
 const socialLinks = [
-  { label: 'LinkedIn', icon: 'GlobeAltIcon', href: 'https://linkedin.com', color: 'hover:bg-primary' },
-  { label: 'Twitter / X', icon: 'ChatBubbleLeftRightIcon', href: 'https://twitter.com', color: 'hover:bg-secondary' },
-  { label: 'GitHub', icon: 'CodeBracketIcon', href: 'https://github.com', color: 'hover:bg-gray-800' },
-  { label: 'YouTube', icon: 'PlayCircleIcon', href: 'https://youtube.com', color: 'hover:bg-red-600' },
+  {
+    label: 'Instagram',
+    iconPath: siInstagram.path,
+    iconTitle: siInstagram.title,
+    href: 'https://instagram.com',
+    color: 'hover:bg-pink-600',
+  },
+  {
+    label: 'LinkedIn',
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
+    iconTitle: 'LinkedIn',
+    href: 'https://linkedin.com',
+    color: 'hover:bg-primary',
+  },
+  {
+    label: 'Twitter / X',
+    iconPath: siX.path,
+    iconTitle: siX.title,
+    href: 'https://x.com',
+    color: 'hover:bg-secondary',
+  },
 ];
 
 export default function ContactInfo() {
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedPhone, setCopiedPhone] = useState(false);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('info@intellisysitsolutions.com');
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2000);
+  };
+
+  const handleCopyPhone = () => {
+    navigator.clipboard.writeText('+91 84211 74213');
+    setCopiedPhone(true);
+    setTimeout(() => setCopiedPhone(false), 2000);
   };
 
   return (
@@ -125,18 +150,34 @@ export default function ContactInfo() {
       </div>
 
       {/* Quick Copy Email */}
-      <div className="bg-background-elevated rounded-2xl border border-border p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <div className="bg-background-elevated rounded-2xl border border-border p-4 flex flex-col items-start sm:flex-row sm:items-center sm:justify-between gap-3">
         <div className="flex items-center gap-3">
           <Icon name="EnvelopeIcon" size={16} className="text-primary" />
           <span className="font-mono text-body-sm text-foreground-secondary break-all">info@intellisysitsolutions.com</span>
         </div>
         <button
           onClick={handleCopyEmail}
-          className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-border rounded-lg font-heading font-600 text-caption text-foreground-secondary hover:bg-primary-50 hover:text-primary hover:border-primary/30 transition-all duration-200"
+          className="inline-flex self-start items-center gap-1.5 px-3 py-1.5 bg-white border border-border rounded-lg font-heading font-600 text-caption text-foreground-secondary hover:bg-primary-50 hover:text-primary hover:border-primary/30 transition-all duration-200"
           aria-label="Copy email address"
         >
           <Icon name={copiedEmail ? 'CheckIcon' : 'ClipboardDocumentIcon'} size={12} className={copiedEmail ? 'text-success' : ''} />
           {copiedEmail ? 'Copied!' : 'Copy'}
+        </button>
+      </div>
+
+      {/* Quick Copy Phone */}
+      <div className="bg-background-elevated rounded-2xl border border-border p-4 flex flex-col items-start sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <Icon name="PhoneIcon" size={16} className="text-primary" />
+          <span className="font-mono text-body-sm text-foreground-secondary">+91 84211 74213</span>
+        </div>
+        <button
+          onClick={handleCopyPhone}
+          className="inline-flex self-start items-center gap-1.5 px-3 py-1.5 bg-white border border-border rounded-lg font-heading font-600 text-caption text-foreground-secondary hover:bg-primary-50 hover:text-primary hover:border-primary/30 transition-all duration-200"
+          aria-label="Copy phone number"
+        >
+          <Icon name={copiedPhone ? 'CheckIcon' : 'ClipboardDocumentIcon'} size={12} className={copiedPhone ? 'text-success' : ''} />
+          {copiedPhone ? 'Copied!' : 'Copy'}
         </button>
       </div>
 
@@ -155,7 +196,25 @@ export default function ContactInfo() {
               aria-label={social.label}
               className={`w-11 h-11 bg-background-muted border border-border rounded-xl flex items-center justify-center text-foreground-secondary ${social.color} hover:text-white hover:border-transparent transition-all duration-200 hover:scale-110`}
             >
-              <Icon name={social.icon as any} size={18} />
+              {social.iconUrl ? (
+                <img
+                  src={social.iconUrl}
+                  alt={social.iconTitle}
+                  width={18}
+                  height={18}
+                  className="w-[18px] h-[18px]"
+                />
+              ) : (
+                <svg
+                  role="img"
+                  aria-label={social.iconTitle}
+                  viewBox="0 0 24 24"
+                  width={18}
+                  height={18}
+                >
+                  <path d={social.iconPath} fill="currentColor" />
+                </svg>
+              )}
             </a>
           ))}
         </div>

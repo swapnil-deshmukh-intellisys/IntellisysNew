@@ -169,7 +169,11 @@ export default function ContactForm() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-5 sm:p-7 space-y-5" noValidate>
+      <form
+        onSubmit={handleSubmit}
+        className="p-5 sm:p-7 space-y-5"
+        noValidate
+      >
         {/* Row 1: Name + Email */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
@@ -273,20 +277,27 @@ export default function ContactForm() {
             <label htmlFor="service" className="block font-heading font-600 text-body-sm text-foreground mb-2">
               Service Needed <span className="text-error">*</span>
             </label>
-            <select
-              id="service"
-              name="service"
-              value={formData.service}
-              onChange={handleChange}
-              className={`${inputClass('service')} cursor-pointer`}
-              aria-describedby={errors.service ? 'service-error' : undefined}
-              aria-invalid={!!errors.service}
-            >
-              <option value="">Select a service...</option>
-              {serviceOptions.map((opt) => (
-                <option key={opt} value={opt}>{opt}</option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                id="service"
+                name="service"
+                value={formData.service}
+                onChange={handleChange}
+                className={`${inputClass('service')} cursor-pointer appearance-none pr-10`}
+                aria-describedby={errors.service ? 'service-error' : undefined}
+                aria-invalid={!!errors.service}
+              >
+                <option value="">Select a service...</option>
+                {serviceOptions.map((opt) => (
+                  <option key={opt} value={opt}>{opt}</option>
+                ))}
+              </select>
+              <Icon
+                name="ChevronDownIcon"
+                size={16}
+                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-foreground-muted"
+              />
+            </div>
             {errors.service && (
               <p id="service-error" className="mt-1.5 font-body text-caption text-error flex items-center gap-1">
                 <Icon name="ExclamationCircleIcon" size={12} />
@@ -305,7 +316,7 @@ export default function ContactForm() {
               type="file"
               accept="application/pdf,.pdf"
               onChange={handleFileChange}
-              className="block w-full text-body-sm text-foreground file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-body-sm file:font-heading file:font-600 file:bg-background-muted file:text-foreground hover:file:bg-background-elevated cursor-pointer"
+              className="block w-full text-body-sm text-foreground file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-body-sm file:font-heading file:font-600 file:bg-gradient-primary file:text-white file:shadow-blue-sm hover:file:shadow-blue cursor-pointer"
             />
             <p className="mt-1.5 font-body text-caption text-foreground-muted">
               Optional: upload a detailed requirements PDF (max 1 file).

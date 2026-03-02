@@ -327,6 +327,7 @@ export default function OpenPositionsSection() {
   const [activeCategory, setActiveCategory] = useState<Category>('All');
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [location, setLocation] = useState('All Locations');
   const [draftSearchTerm, setDraftSearchTerm] = useState('');
   const [draftCategory, setDraftCategory] = useState<Category>('All');
@@ -354,6 +355,18 @@ export default function OpenPositionsSection() {
     );
   }, [activeCategory, location, searchTerm]);
 
+  const applyFilters = () => {
+    setSearchTerm(draftSearchTerm);
+    setActiveCategory(draftCategory);
+    setLocation(draftLocation);
+    setMobileFiltersOpen(false);
+  };
+
+  const filterInputClass =
+    'w-full rounded-lg border border-border bg-background-muted px-3 py-2.5 font-body text-body-sm text-foreground placeholder:text-foreground-muted focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20';
+  const filterSelectClass =
+    'w-full appearance-none rounded-lg border border-border bg-background-muted px-3 pr-10 py-2.5 font-body text-body-sm text-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20';
+
   return (
     <section
       className="pt-0 pb-16 md:pb-24 bg-background relative z-30 overflow-visible"
@@ -361,7 +374,7 @@ export default function OpenPositionsSection() {
     >
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none" />
       <div className="container-custom relative">
-        <div className="absolute z-40 left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl rounded-xl border border-border bg-background-card p-5 md:p-6 shadow-lg">
+        <div className="hidden md:block absolute z-40 left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl rounded-xl border border-border bg-background-card p-5 md:p-6 shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <p className="font-heading text-body-base font-700 text-foreground">Job Search</p>
             <span className="font-body text-[11px] text-foreground-muted underline underline-offset-2">
@@ -379,48 +392,58 @@ export default function OpenPositionsSection() {
                 value={draftSearchTerm}
                 onChange={(e) => setDraftSearchTerm(e.target.value)}
                 placeholder="Search title or skills"
-                className="w-full bg-transparent border-0 border-b border-border pb-2 px-0 font-body text-body-sm focus:outline-none focus:border-primary"
+                className={filterInputClass}
               />
             </div>
             <div>
               <label className="block font-body text-[11px] text-foreground-muted mb-1">
                 category
               </label>
-              <select
-                value={draftCategory}
-                onChange={(e) => setDraftCategory(e.target.value as Category)}
-                className="w-full bg-transparent border-0 border-b border-border pb-2 px-0 font-body text-body-sm focus:outline-none focus:border-primary"
-              >
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  value={draftCategory}
+                  onChange={(e) => setDraftCategory(e.target.value as Category)}
+                  className={filterSelectClass}
+                >
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+                <Icon
+                  name="ChevronDownIcon"
+                  size={14}
+                  className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-foreground-muted"
+                />
+              </div>
             </div>
             <div>
               <label className="block font-body text-[11px] text-foreground-muted mb-1">
                 location
               </label>
-              <select
-                value={draftLocation}
-                onChange={(e) => setDraftLocation(e.target.value)}
-                className="w-full bg-transparent border-0 border-b border-border pb-2 px-0 font-body text-body-sm focus:outline-none focus:border-primary"
-              >
-                {locations.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                ))}
-              </select>
+              <div className="relative">
+                <select
+                  value={draftLocation}
+                  onChange={(e) => setDraftLocation(e.target.value)}
+                  className={filterSelectClass}
+                >
+                  {locations.map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+                <Icon
+                  name="ChevronDownIcon"
+                  size={14}
+                  className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-foreground-muted"
+                />
+              </div>
             </div>
             <button
               type="button"
-              onClick={() => {
-                setSearchTerm(draftSearchTerm);
-                setActiveCategory(draftCategory);
-                setLocation(draftLocation);
-              }}
+              onClick={applyFilters}
               className="h-11 self-end border border-foreground/30 rounded-md font-body text-body-sm font-600 text-foreground hover:bg-background-muted transition-colors"
             >
               Submit
@@ -428,7 +451,92 @@ export default function OpenPositionsSection() {
           </div>
         </div>
 
-        <div className="pt-28 md:pt-32 grid lg:grid-cols-[minmax(0,1fr)_360px] gap-8 items-start">
+        <div className="md:hidden pt-5 mb-4">
+          <button
+            type="button"
+            onClick={() => setMobileFiltersOpen((prev) => !prev)}
+            className="w-full flex items-center justify-between rounded-xl border border-border bg-background-card px-4 py-3 font-body text-body-sm text-foreground shadow-sm"
+            aria-expanded={mobileFiltersOpen}
+            aria-controls="mobile-career-filters"
+          >
+            <span className="flex items-center gap-2">
+              <Icon name="AdjustmentsHorizontalIcon" size={16} />
+              Filters
+            </span>
+            <span className="text-[11px] text-foreground-muted">
+              {filteredJobs.length} roles
+            </span>
+          </button>
+
+          {mobileFiltersOpen && (
+            <div
+              id="mobile-career-filters"
+              className="mt-3 rounded-xl border border-border bg-background-card p-4 shadow-sm space-y-4"
+            >
+              <div>
+                <label className="block font-body text-[11px] text-foreground-muted mb-1">keyword</label>
+                <input
+                  type="text"
+                  value={draftSearchTerm}
+                  onChange={(e) => setDraftSearchTerm(e.target.value)}
+                  placeholder="Search title or skills"
+                  className={filterInputClass}
+                />
+              </div>
+              <div>
+                <label className="block font-body text-[11px] text-foreground-muted mb-1">category</label>
+                <div className="relative">
+                  <select
+                    value={draftCategory}
+                    onChange={(e) => setDraftCategory(e.target.value as Category)}
+                    className={filterSelectClass}
+                  >
+                    {categories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+                  <Icon
+                    name="ChevronDownIcon"
+                    size={14}
+                    className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-foreground-muted"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block font-body text-[11px] text-foreground-muted mb-1">location</label>
+                <div className="relative">
+                  <select
+                    value={draftLocation}
+                    onChange={(e) => setDraftLocation(e.target.value)}
+                    className={filterSelectClass}
+                  >
+                    {locations.map((item) => (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                  <Icon
+                    name="ChevronDownIcon"
+                    size={14}
+                    className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-foreground-muted"
+                  />
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={applyFilters}
+                className="w-full h-11 border border-foreground/30 rounded-md font-body text-body-sm font-600 text-foreground hover:bg-background-muted transition-colors"
+              >
+                Apply Filters
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className="pt-2 md:pt-32 grid lg:grid-cols-[minmax(0,1fr)_360px] gap-8 items-start">
           <div>
             {filteredJobs.length === 0 ? (
               <div className="bg-background-card border border-dashed border-border rounded-2xl p-12 text-center">
