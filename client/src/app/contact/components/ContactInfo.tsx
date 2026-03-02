@@ -110,7 +110,7 @@ export default function ContactInfo() {
         </div>
         <div className="space-y-3">
           {businessHours.map((item) => (
-            <div key={item.day} className="flex items-center justify-between">
+            <div key={item.day} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
               <span className="font-body text-body-sm text-white/60">{item.day}</span>
               <span className="font-heading font-600 text-body-sm text-white">{item.hours}</span>
             </div>
@@ -125,10 +125,10 @@ export default function ContactInfo() {
       </div>
 
       {/* Quick Copy Email */}
-      <div className="bg-background-elevated rounded-2xl border border-border p-4 flex items-center justify-between">
+      <div className="bg-background-elevated rounded-2xl border border-border p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div className="flex items-center gap-3">
           <Icon name="EnvelopeIcon" size={16} className="text-primary" />
-          <span className="font-mono text-body-sm text-foreground-secondary">info@intellisysitsolutions.com</span>
+          <span className="font-mono text-body-sm text-foreground-secondary break-all">info@intellisysitsolutions.com</span>
         </div>
         <button
           onClick={handleCopyEmail}
@@ -145,7 +145,7 @@ export default function ContactInfo() {
         <p className="font-body text-caption text-foreground-muted uppercase tracking-wider mb-3">
           Connect with us
         </p>
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-wrap">
           {socialLinks.map((social) => (
             <a
               key={social.label}

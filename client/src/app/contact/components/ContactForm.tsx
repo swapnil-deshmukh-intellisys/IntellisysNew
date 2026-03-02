@@ -130,7 +130,7 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="bg-background-card rounded-3xl border border-border shadow-lg-card p-12 text-center">
+      <div className="bg-background-card rounded-3xl border border-border shadow-lg-card p-6 sm:p-12 text-center">
         <div className="w-20 h-20 bg-secondary/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
           <Icon name="CheckCircleIcon" size={40} className="text-success" />
         </div>
@@ -160,7 +160,7 @@ export default function ContactForm() {
   return (
     <div className="bg-background-card rounded-3xl border border-border shadow-lg-card overflow-hidden">
       {/* Form Header */}
-      <div className="p-7 border-b border-border bg-background-elevated">
+      <div className="p-5 sm:p-7 border-b border-border bg-background-elevated">
         <h2 className="font-heading font-800 text-display-sm text-foreground mb-1">
           Tell Us About Your Project
         </h2>
@@ -169,7 +169,7 @@ export default function ContactForm() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-7 space-y-5" noValidate>
+      <form onSubmit={handleSubmit} className="p-5 sm:p-7 space-y-5" noValidate>
         {/* Row 1: Name + Email */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
@@ -329,7 +329,7 @@ export default function ContactForm() {
             aria-describedby={errors.message ? 'message-error' : undefined}
             aria-invalid={!!errors.message}
           />
-          <div className="flex items-center justify-between mt-1.5">
+          <div className="flex items-start sm:items-center justify-between mt-1.5 gap-2">
             {errors.message ? (
               <p id="message-error" className="font-body text-caption text-error flex items-center gap-1">
                 <Icon name="ExclamationCircleIcon" size={12} />

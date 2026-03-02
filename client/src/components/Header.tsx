@@ -144,7 +144,7 @@ export default function Header() {
             <Link
               href="/homepage"
               prefetch
-              className="flex items-center min-w-0 -ml-2 md:-ml-3"
+              className="flex items-center min-w-0 -ml-4 md:-ml-3"
               aria-label="Intellisys IT Solutions - Home"
             >
               <Image
@@ -154,7 +154,7 @@ export default function Header() {
                 height={135}
                 priority
                 unoptimized
-                className="h-[6.5rem] md:h-[6.5rem] w-auto"
+                className="h-[3.25rem] md:h-[6.5rem] w-auto"
               />
             </Link>
 
@@ -306,6 +306,7 @@ export default function Header() {
                 <div key={link.label}>
                   <Link
                     href={link.href}
+                    onClick={() => setMobileOpen(false)}
                     className={`flex items-center justify-between w-full px-4 py-3 rounded-xl font-body font-500 text-body-base transition-colors ${
                       isActive(link.href)
                         ? 'bg-primary-50 text-primary'
@@ -321,6 +322,7 @@ export default function Header() {
                         <Link
                           key={item.label}
                           href={item.href}
+                          onClick={() => setMobileOpen(false)}
                           className="flex items-center gap-2 px-3 py-2 rounded-lg text-foreground-muted hover:text-primary hover:bg-primary-50 transition-colors text-body-sm font-body"
                         >
                           <Icon name={item.icon as any} size={14} />
@@ -336,6 +338,7 @@ export default function Header() {
             <div className="p-6 border-t border-border">
               <Link
                 href="/contact"
+                onClick={() => setMobileOpen(false)}
                 className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-primary text-white font-heading font-600 text-body-base rounded-xl shadow-blue-sm"
               >
                 Get a Free Quote
