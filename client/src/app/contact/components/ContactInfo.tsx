@@ -24,7 +24,6 @@ const contactCards = [
     title: 'Call Us',
     lines: [
       '+91 84211 74213',
-      '+91 91128 17771',
     ],
     action: { label: 'Call Now', href: 'tel:+918421174213' },
     color: 'text-secondary',

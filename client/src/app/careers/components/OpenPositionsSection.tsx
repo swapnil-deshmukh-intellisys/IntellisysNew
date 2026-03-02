@@ -111,7 +111,7 @@ function JobApplicationForm({ jobTitle, onClose }: JobApplicationFormProps) {
     try {
       let attachmentPath: string | null = null;
       if (resumeFile) {
-        const path = `applications/${Date.now()}-${resumeFile.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
+        const path = `job-applications/${Date.now()}-${resumeFile.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
         const { error: uploadError } = await supabase.storage
           .from('contact-attachments')
           .upload(path, resumeFile);
@@ -223,16 +223,53 @@ function SendResumeForm() {
   const [message, setMessage] = useState('');
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [status, setStatus] = useState<Status>('idle');
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+    phone?: string;
+    submit?: string;
+  }>({});
+
+  const validate = () => {
+    const nextErrors: { name?: string; email?: string; phone?: string } = {};
+
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedPhone = phone.trim();
+    const phoneDigits = trimmedPhone.replace(/\D/g, '');
+
+    if (!trimmedName) {
+      nextErrors.name = 'Name is required.';
+    } else if (!/^[A-Za-z][A-Za-z\s.'-]{1,79}$/.test(trimmedName)) {
+      nextErrors.name = 'Enter a valid full name.';
+    }
+
+    if (!trimmedEmail) {
+      nextErrors.email = 'Email is required.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      nextErrors.email = 'Enter a valid email address.';
+    }
+
+    if (!trimmedPhone) {
+      nextErrors.phone = 'Mobile number is required.';
+    } else if (phoneDigits.length < 10 || phoneDigits.length > 15) {
+      nextErrors.phone = 'Enter a valid mobile number.';
+    }
+
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  };
 
   const submitResume = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim() || !phone.trim()) return;
+    setErrors({});
+    if (!validate()) return;
 
     setStatus('submitting');
     try {
       let attachmentPath: string | null = null;
       if (resumeFile) {
-        const path = `applications/${Date.now()}-${resumeFile.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
+        const path = `resumes/${Date.now()}-${resumeFile.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
         const { error: uploadError } = await supabase.storage
           .from('contact-attachments')
           .upload(path, resumeFile);
@@ -240,12 +277,12 @@ function SendResumeForm() {
         attachmentPath = path;
       }
 
-      const { error: insertError } = await supabase.from('job_applications').insert({
+      const { error: insertError } = await supabase.from('resumes').insert({
         name: name.trim(),
         email: email.trim(),
         phone: phone.trim(),
+        preferred_role: preferredRole.trim() || null,
         message: message.trim() || null,
-        job_title: preferredRole.trim() || 'General Application',
         attachment_path: attachmentPath,
       });
       if (insertError) throw insertError;
@@ -260,6 +297,7 @@ function SendResumeForm() {
     } catch (err) {
       console.error('Error sending resume', err);
       setStatus('error');
+      setErrors({ submit: 'Could not submit right now. Please try again.' });
     }
   };
 
@@ -267,23 +305,35 @@ function SendResumeForm() {
     <form id="send-resume" onSubmit={submitResume} className="space-y-3">
       <input
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => {
+          setName(e.target.value);
+          if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
+        }}
         placeholder="Full name*"
         className="w-full px-3 py-2.5 rounded-lg border border-white/30 bg-white/95 text-foreground text-body-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
       />
+      {errors.name && <p className="text-[11px] text-red-200">{errors.name}</p>}
       <input
         type="email"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => {
+          setEmail(e.target.value);
+          if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
+        }}
         placeholder="Email*"
         className="w-full px-3 py-2.5 rounded-lg border border-white/30 bg-white/95 text-foreground text-body-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
       />
+      {errors.email && <p className="text-[11px] text-red-200">{errors.email}</p>}
       <input
         value={phone}
-        onChange={(e) => setPhone(e.target.value)}
+        onChange={(e) => {
+          setPhone(e.target.value);
+          if (errors.phone) setErrors((prev) => ({ ...prev, phone: undefined }));
+        }}
         placeholder="Phone*"
         className="w-full px-3 py-2.5 rounded-lg border border-white/30 bg-white/95 text-foreground text-body-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
       />
+      {errors.phone && <p className="text-[11px] text-red-200">{errors.phone}</p>}
       <input
         value={preferredRole}
         onChange={(e) => setPreferredRole(e.target.value)}
@@ -307,9 +357,7 @@ function SendResumeForm() {
       {status === 'success' && (
         <p className="text-[11px] text-green-200">Resume received. We will contact you soon.</p>
       )}
-      {status === 'error' && (
-        <p className="text-[11px] text-red-200">Could not submit right now. Please try again.</p>
-      )}
+      {status === 'error' && <p className="text-[11px] text-red-200">{errors.submit}</p>}
 
       <button
         type="submit"
@@ -553,10 +601,10 @@ export default function OpenPositionsSection() {
                   connect.
                 </p>
                 <a
-                  href="mailto:careers@intellisysitsolutions.com"
+                  href="mailto:info@intellisysitsolutions.com"
                   className="inline-flex items-center gap-2 text-primary hover:text-primary-dark font-body text-body-sm font-600 transition-colors"
                 >
-                  careers@intellisysitsolutions.com
+                  info@intellisysitsolutions.com
                   <Icon name="ArrowRightIcon" size={14} />
                 </a>
               </div>
@@ -611,7 +659,7 @@ export default function OpenPositionsSection() {
                       <div className="xl:w-44">
                         <button
                           onClick={() => setSelectedJob(job)}
-                          className="w-full inline-flex items-center justify-center gap-2 py-2.5 border border-border rounded-xl text-foreground font-body text-body-sm font-600 hover:bg-primary hover:text-white hover:border-primary transition-all"
+                          className="relative overflow-hidden isolate w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-xl border border-black/80 bg-black/85 text-white font-body text-body-sm font-600 transition-all duration-300 hover:bg-black before:content-[''] before:absolute before:inset-y-0 before:-left-1/2 before:w-1/2 before:-skew-x-12 before:bg-gradient-to-r before:from-transparent before:via-white/35 before:to-transparent before:translate-x-[-220%] hover:before:translate-x-[440%] before:transition-transform before:duration-700"
                         >
                           Apply Now
                           <Icon name="ArrowRightIcon" size={14} />
@@ -645,7 +693,7 @@ export default function OpenPositionsSection() {
               </h4>
               <div className="space-y-3">
                 <a
-                  href="mailto:careers@intellisysitsolutions.com"
+                  href="mailto:info@intellisysitsolutions.com"
                   className="flex items-start gap-3 rounded-lg p-2.5 hover:bg-background-muted transition-colors"
                 >
                   <span className="mt-0.5 inline-flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10">
@@ -654,7 +702,7 @@ export default function OpenPositionsSection() {
                   <span>
                     <p className="font-body text-[11px] text-foreground-muted">Email</p>
                     <p className="font-body text-body-sm text-foreground">
-                      careers@intellisysitsolutions.com
+                      info@intellisysitsolutions.com
                     </p>
                   </span>
                 </a>
@@ -667,7 +715,7 @@ export default function OpenPositionsSection() {
                   </span>
                   <span>
                     <p className="font-body text-[11px] text-foreground-muted">Phone</p>
-                    <p className="font-body text-body-sm text-foreground">+91 98765 43210</p>
+                    <p className="font-body text-body-sm text-foreground">+91 84211 74213</p>
                   </span>
                 </a>
                 <div className="flex items-start gap-3 rounded-lg p-2.5">

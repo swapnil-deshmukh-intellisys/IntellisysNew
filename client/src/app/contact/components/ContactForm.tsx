@@ -44,19 +44,26 @@ export default function ContactForm() {
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Full name is required.';
-    if (!formData.email.trim()) {
+    const trimmedName = formData.name.trim();
+    const trimmedEmail = formData.email.trim();
+    const trimmedPhone = formData.phone.trim();
+
+    if (!trimmedName) {
+      newErrors.name = 'Full name is required.';
+    } else if (!/^[A-Za-z][A-Za-z\s.'-]{1,79}$/.test(trimmedName)) {
+      newErrors.name = 'Please enter a valid full name.';
+    }
+
+    if (!trimmedEmail) {
       newErrors.email = 'Email address is required.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
       newErrors.email = 'Please enter a valid email address.';
     }
-    if (!formData.phone.trim()) {
+
+    if (!trimmedPhone) {
       newErrors.phone = 'Mobile number is required.';
-    } else {
-      const digits = formData.phone.replace(/\D/g, '');
-      if (digits.length < 7) {
-        newErrors.phone = 'Please enter a valid mobile number.';
-      }
+    } else if (!/^\d{10}$/.test(trimmedPhone)) {
+      newErrors.phone = 'Please enter a valid 10-digit mobile number.';
     }
     if (!formData.service) newErrors.service = 'Please select a service.';
     if (!formData.message.trim()) newErrors.message = 'Please describe your project.';
@@ -145,7 +152,14 @@ export default function ContactForm() {
           <button
             onClick={() => {
               setStatus('idle');
-              setFormData({ name: '', email: '', phone: '', company: '', service: '', message: '' });
+              setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                company: '',
+                service: '',
+                message: '',
+              });
               setRequirementFile(null);
             }}
             className="px-6 py-3 bg-background-muted border border-border text-foreground font-heading font-600 text-body-sm rounded-xl hover:bg-primary-50 hover:border-primary/30 transition-all duration-200"
@@ -231,21 +245,21 @@ export default function ContactForm() {
             <label htmlFor="phone" className="block font-heading font-600 text-body-sm text-foreground mb-2">
               Phone Number <span className="text-error">*</span>
             </label>
-            <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 font-body text-body-sm text-foreground-muted">+91</span>
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                autoComplete="tel"
-                placeholder="91128 17771"
-                value={formData.phone}
-                onChange={handleChange}
-                className={`${inputClass('phone')} pl-14`}
-                aria-describedby={errors.phone ? 'phone-error' : undefined}
-                aria-invalid={!!errors.phone}
-              />
-            </div>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              inputMode="numeric"
+              pattern="[0-9]{10}"
+              maxLength={10}
+              placeholder="9112817771"
+              value={formData.phone}
+              onChange={handleChange}
+              className={inputClass('phone')}
+              aria-describedby={errors.phone ? 'phone-error' : undefined}
+              aria-invalid={!!errors.phone}
+            />
             {errors.phone && (
               <p id="phone-error" className="mt-1.5 font-body text-caption text-error flex items-center gap-1">
                 <Icon name="ExclamationCircleIcon" size={12} />
