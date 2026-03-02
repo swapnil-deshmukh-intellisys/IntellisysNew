@@ -68,9 +68,6 @@ export default function TestimonialsSection() {
         </div>
 
         <div className="relative overflow-hidden">
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background-dark to-transparent z-10" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background-dark to-transparent z-10" />
-
           <div className="reviews-track flex gap-5 w-max py-2">
             {movingCards.map((item, idx) => (
               <article
@@ -110,15 +107,15 @@ export default function TestimonialsSection() {
 
       <style jsx>{`
         .reviews-track {
-          animation: reviews-ltr 34s linear infinite;
+          animation: reviews-rtl 34s linear infinite;
         }
 
-        @keyframes reviews-ltr {
+        @keyframes reviews-rtl {
           0% {
-            transform: translateX(-50%);
+            transform: translateX(0%);
           }
           100% {
-            transform: translateX(0%);
+            transform: translateX(-50%);
           }
         }
       `}</style>
