@@ -1,9 +1,76 @@
-﻿import React from 'react';
+'use client';
+
+import React, { useEffect, useRef } from 'react';
 import Icon from '@/components/ui/AppIcon';
 
 export default function MapSection() {
   const mapLink = 'https://maps.app.goo.gl/eFdceVnpjysspftaA';
   const mapEmbedUrl = 'https://www.google.com/maps?q=18.5946784,73.7095365&z=16&output=embed';
+  const mapRef = useRef<HTMLDivElement>(null);
+  const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+  const hasOfficialDarkMap = Boolean(googleMapsApiKey);
+
+  useEffect(() => {
+    if (!hasOfficialDarkMap || !mapRef.current) return;
+
+    let disposed = false;
+
+    const loadMap = async () => {
+      if (!(window as any).google?.maps) {
+        await new Promise<void>((resolve, reject) => {
+          const existingScript = document.querySelector(
+            'script[data-google-maps-loader="true"]'
+          ) as HTMLScriptElement | null;
+
+          if (existingScript) {
+            existingScript.addEventListener('load', () => resolve(), { once: true });
+            existingScript.addEventListener('error', () => reject(new Error('Google Maps script failed to load')), {
+              once: true,
+            });
+            return;
+          }
+
+          const script = document.createElement('script');
+          script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&v=weekly`;
+          script.async = true;
+          script.defer = true;
+          script.dataset.googleMapsLoader = 'true';
+          script.onload = () => resolve();
+          script.onerror = () => reject(new Error('Google Maps script failed to load'));
+          document.head.appendChild(script);
+        });
+      }
+
+      if (disposed || !mapRef.current) return;
+
+      const mapsLib = (await (window as any).google.maps.importLibrary('maps')) as any;
+      const coreLib = (await (window as any).google.maps.importLibrary('core')) as any;
+
+      const map = new mapsLib.Map(mapRef.current, {
+        center: { lat: 18.5946784, lng: 73.7095365 },
+        zoom: 16,
+        mapTypeId: 'roadmap',
+        colorScheme: coreLib.ColorScheme.DARK,
+        disableDefaultUI: true,
+        clickableIcons: false,
+        gestureHandling: 'greedy',
+      });
+
+      new (window as any).google.maps.Marker({
+        position: { lat: 18.5946784, lng: 73.7095365 },
+        map,
+        title: 'Intellisys IT Solutions',
+      });
+    };
+
+    loadMap().catch((error) => {
+      console.error('Failed to initialize official Google dark mode map:', error);
+    });
+
+    return () => {
+      disposed = true;
+    };
+  }, [googleMapsApiKey, hasOfficialDarkMap]);
 
   return (
     <section className="section-padding bg-background relative">
@@ -28,25 +95,36 @@ export default function MapSection() {
         </div>
 
         <div className="relative rounded-3xl overflow-hidden border border-border shadow-lg-card h-[320px] sm:h-[400px] bg-background-muted">
-          <iframe
-            title="Intellisys IT Solutions location map"
-            src={mapEmbedUrl}
-            className="absolute inset-0 w-full h-full"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          {hasOfficialDarkMap ? (
+            <div
+              ref={mapRef}
+              className="absolute inset-0 w-full h-full"
+              aria-label="Google map in official dark mode"
+            />
+          ) : (
+            <iframe
+              title="Intellisys IT Solutions location map"
+              src={mapEmbedUrl}
+              className="absolute inset-0 w-full h-full"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          )}
 
           <div className="absolute top-3 left-3 right-3 sm:top-4 sm:right-4 sm:left-auto z-10 bg-white/95 backdrop-blur-sm rounded-2xl border border-border shadow-xl-card px-4 sm:px-6 py-4 text-left max-w-none sm:max-w-sm">
-            <div className="flex items-center gap-2 mb-2">
+            <div className="hidden sm:flex items-center gap-2 mb-2">
               <div className="w-2 h-2 bg-success rounded-full animate-pulse" />
               <span className="font-body text-caption text-success font-600">Open Now</span>
             </div>
             <p className="font-heading font-800 text-heading-lg sm:text-heading-xl text-foreground">Intellisys IT Solutions</p>
             <p className="font-body text-body-sm text-foreground-secondary mt-1">Pune, Maharashtra</p>
-            <p className="font-body text-body-sm text-foreground-secondary mt-2">
-              Gera Imperim Rise, 328-B, Wipro Circle,<br />
-              Opp. to Wipro Company, Hinjawadi Phase II,<br />
-              Hinjawadi Rajiv Gandhi Infotech Park,<br />
+            <p className="hidden sm:block font-body text-body-sm text-foreground-secondary mt-2">
+              Gera Imperim Rise, 328-B, Wipro Circle,
+              <br />
+              Opp. to Wipro Company, Hinjawadi Phase II,
+              <br />
+              Hinjawadi Rajiv Gandhi Infotech Park,
+              <br />
               Pune, Maharashtra 411057
             </p>
             <a
@@ -59,6 +137,12 @@ export default function MapSection() {
               <Icon name="ArrowTopRightOnSquareIcon" size={12} />
             </a>
           </div>
+
+          {!hasOfficialDarkMap && (
+            <div className="absolute left-3 bottom-3 z-10 rounded-lg bg-black/75 text-white text-[11px] font-body px-3 py-2">
+              Add <code className="font-mono">NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> to enable official Google dark mode.
+            </div>
+          )}
         </div>
 
         <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
