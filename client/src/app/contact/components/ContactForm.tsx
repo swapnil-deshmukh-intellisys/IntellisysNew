@@ -172,9 +172,9 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="bg-background-card rounded-3xl border border-border shadow-lg-card overflow-hidden">
+    <div className="bg-background-card rounded-3xl border border-border shadow-lg-card overflow-hidden bg-background-elevated">
       {/* Form Header */}
-      <div className="p-5 sm:p-7 border-b border-border bg-background-elevated">
+      <div className="p-5 sm:p-7 bg-background-elevated">
         <h2 className="font-heading font-800 text-display-sm text-foreground mb-1">
           Tell Us About Your Project
         </h2>
@@ -185,7 +185,7 @@ export default function ContactForm() {
 
       <form
         onSubmit={handleSubmit}
-        className="p-5 sm:p-7 space-y-5"
+        className="p-5 sm:p-7 space-y-5 rounded-3xl border border-border bg-white"
         noValidate
       >
         {/* Row 1: Name + Email */}

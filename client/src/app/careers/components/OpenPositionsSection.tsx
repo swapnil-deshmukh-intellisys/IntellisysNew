@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
 import { supabase } from '@/lib/supabaseClient';
 
@@ -19,7 +19,7 @@ interface Job {
   department?: string;
 }
 
-const jobs: Job[] = [
+const fallbackJobs: Job[] = [
   {
     id: 'senior-frontend-engineer',
     title: 'Senior Frontend Engineer',
@@ -372,6 +372,7 @@ function SendResumeForm() {
 }
 
 export default function OpenPositionsSection() {
+  const [jobs, setJobs] = useState<Job[]>(fallbackJobs);
   const [activeCategory, setActiveCategory] = useState<Category>('All');
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -380,6 +381,44 @@ export default function OpenPositionsSection() {
   const [draftSearchTerm, setDraftSearchTerm] = useState('');
   const [draftCategory, setDraftCategory] = useState<Category>('All');
   const [draftLocation, setDraftLocation] = useState('All Locations');
+
+  useEffect(() => {
+    let cancelled = false;
+    const enableSupabaseJobs = process.env.NEXT_PUBLIC_ENABLE_SUPABASE_JOBS === 'true';
+    if (!enableSupabaseJobs) return;
+
+    const loadPublishedJobs = async () => {
+      const { data, error } = await supabase
+        .from('jobs')
+        .select('id,title,location,type,experience,category,tags,summary,salary,department')
+        .eq('status', 'published')
+        .order('updated_at', { ascending: false });
+
+      if (error || !data || cancelled) return;
+
+      const normalized = data.map((row: any) => ({
+        id: String(row.id),
+        title: String(row.title),
+        location: String(row.location || 'Pune / Remote'),
+        type: String(row.type || 'Full-time'),
+        experience: String(row.experience || 'N/A'),
+        category: (['Engineering', 'Design', 'Project Management', 'Sales & BD'] as const).includes(row.category)
+          ? row.category
+          : 'Engineering',
+        tags: Array.isArray(row.tags) ? row.tags.map((t: unknown) => String(t)) : [],
+        summary: String(row.summary || ''),
+        salary: row.salary ? String(row.salary) : undefined,
+        department: row.department ? String(row.department) : undefined,
+      })) as Job[];
+
+      if (normalized.length > 0) setJobs(normalized);
+    };
+
+    loadPublishedJobs();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const locations = useMemo(
     () => ['All Locations', ...Array.from(new Set(jobs.map((job) => job.location)))],

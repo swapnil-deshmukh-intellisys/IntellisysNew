@@ -140,53 +140,47 @@ export default function ServicesOverview() {
           </p>
         </div>
 
-        {/* Dark container holding service cards, similar to Technologies layout */}
-        <div className="relative mt-4 sm:mt-6 lg:mt-8 rounded-3xl bg-background-dark overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(255,255,255,0.05),transparent_45%)] pointer-events-none" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.04),transparent_22%,transparent_78%,rgba(255,255,255,0.04))] pointer-events-none" />
-
-          <div className="relative px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+        <div className="mt-4 sm:mt-6 lg:mt-8">
+          <div className="px-4 sm:px-6 lg:px-0 py-2 sm:py-4 lg:py-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {services.map((service, index) => (
-                <div
-                  key={service.id}
-                  id={service.id}
-                  ref={(el) => {
-                    if (el) refs.current.set(service.id, el);
-                  }}
-                  className={`group relative border border-[#ff8a3d]/70 bg-[linear-gradient(155deg,rgba(255,255,255,0.16),rgba(255,255,255,0.03)_42%,rgba(255,255,255,0.01))] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_18px_40px_rgba(0,0,0,0.45),0_0_22px_rgba(255,138,61,0.2)] transition-all duration-400 hover:-translate-y-1 hover:border-[#ffb074] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_24px_52px_rgba(0,0,0,0.6),0_0_30px_rgba(255,138,61,0.35)] p-6 [clip-path:polygon(0_0,58%_0,64%_8%,100%_8%,100%_100%,0_100%)] ${
-                    visibleItems.has(service.id) ? 'animate-fade-up' : 'opacity-0'
-                  }`}
-                  style={{ animationDelay: `${index * 0.07}s` }}
-                >
-                  <div className="pointer-events-none absolute inset-0 opacity-50 bg-[linear-gradient(130deg,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0.05)_34%,transparent_58%)]" />
-                  <div className="pointer-events-none absolute inset-0 opacity-25 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.14),transparent_28%,transparent_78%,rgba(255,255,255,0.08))]" />
-                  <div className="pointer-events-none absolute top-[8%] right-0 h-[1px] w-24 bg-[#ffb074]/90" />
-                  <div className="pointer-events-none absolute bottom-0 left-0 h-[1px] w-20 bg-[#ff8a3d]/70" />
-
-                  <div className={`relative z-10 w-12 h-12 ${service.bg} border border-sky-300/35 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_18px_rgba(56,189,248,0.3)]`}>
-                    <Icon name={service.icon as any} size={22} className="text-sky-300 drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]" />
-                  </div>
-                  <h3 className="relative z-10 font-heading font-700 text-xl sm:text-heading-xl text-white mb-2">{service.title}</h3>
-                  <p className="relative z-10 font-body text-sm sm:text-body-sm text-white/70 mb-4 leading-relaxed">{service.description}</p>
-                  <div className="relative z-10 flex flex-wrap gap-1.5 mb-4">
-                    {service.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/15 rounded-lg font-mono text-xs sm:text-sm text-white/75"
-                      >
-                        {resolveBrandName(tag) ? <BrandIcon name={resolveBrandName(tag)!} size={16} /> : null}
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <Link
-                    href="/services"
-                    className="relative z-10 inline-flex items-center gap-1.5 text-primary-light font-heading font-700 text-body-sm uppercase tracking-wide hover:gap-2.5 transition-all duration-200"
+                  <div
+                    key={service.id}
+                    id={service.id}
+                    ref={(el) => {
+                      if (el) refs.current.set(service.id, el);
+                    }}
+                    className={`group relative transition-all duration-400 p-6 border border-white/70 rounded-2xl bg-[linear-gradient(145deg,#eef2f6_0%,#d9dee6_55%,#cfd6e1_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_16px_32px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_22px_38px_rgba(0,0,0,0.45)] ${visibleItems.has(service.id) ? 'animate-fade-up' : 'opacity-0'}`}
+                    style={{ animationDelay: `${index * 0.07}s` }}
                   >
-                    Learn More <Icon name="ArrowRightIcon" size={12} />
-                  </Link>
-                </div>
+                    <div className="relative z-10 w-12 h-12 rounded-xl border border-slate-300 bg-white/55 flex items-center justify-center mb-5 shadow-[0_6px_14px_rgba(15,23,42,0.12)]">
+                      <Icon name={service.icon as any} size={22} className="text-slate-700" />
+                    </div>
+
+                    <h3 className="relative z-10 font-heading font-700 text-xl sm:text-heading-xl mb-2 text-slate-900">
+                      {service.title}
+                    </h3>
+                    <p className="relative z-10 font-body text-sm sm:text-body-sm mb-4 leading-relaxed text-slate-700">
+                      {service.description}
+                    </p>
+                    <div className="relative z-10 flex flex-wrap gap-1.5 mb-4">
+                      {service.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs sm:text-sm bg-white/70 border border-slate-300 text-slate-700"
+                        >
+                          {resolveBrandName(tag) ? <BrandIcon name={resolveBrandName(tag)!} size={16} /> : null}
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <Link
+                      href="/services"
+                      className="relative z-10 inline-flex items-center gap-1.5 font-heading font-700 text-body-sm uppercase tracking-wide text-slate-500 hover:text-slate-700 hover:gap-2.5 transition-all duration-200"
+                    >
+                      Learn More <Icon name="ArrowRightIcon" size={12} />
+                    </Link>
+                  </div>
               ))}
             </div>
 

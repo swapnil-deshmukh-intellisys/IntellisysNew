@@ -6,20 +6,6 @@ import { siInstagram, siX } from 'simple-icons';
 
 const contactCards = [
   {
-    icon: 'MapPinIcon',
-    title: 'Visit Our Office',
-    lines: [
-      'Gera Imperim Rise, 328-B, Wipro Circle,',
-      'Opp. to Wipro Company, Hinjawadi Phase II,',
-      'Hinjawadi Rajiv Gandhi Infotech Park,',
-      'Pune, Maharashtra 411057',
-    ],
-    action: { label: 'Get Directions', href: 'https://maps.app.goo.gl/eFdceVnpjysspftaA' },
-    color: 'text-primary',
-    bg: 'bg-primary/10',
-    border: 'border-primary/20',
-  },
-  {
     icon: 'PhoneIcon',
     title: 'Call Us',
     lines: [
@@ -92,20 +78,37 @@ export default function ContactInfo() {
   return (
     <div className="space-y-6">
       {/* Contact Cards */}
-      {contactCards.map((card) => (
+      {contactCards.map((card) => {
+        const isCallCard = card.title === 'Call Us';
+        return (
         <div
           key={card.title}
-          className={`bg-background-card rounded-3xl border ${card.border} p-6 shadow-md-card hover:shadow-lg-card transition-all duration-300 hover:-translate-y-0.5`}
+          className={`rounded-3xl border p-6 shadow-md-card hover:shadow-lg-card transition-all duration-300 hover:-translate-y-0.5 ${
+            isCallCard ? 'bg-background-dark border-white/10 text-white' : `bg-background-card ${card.border}`
+          }`}
         >
           <div className="flex items-start gap-4">
-            <div className={`w-12 h-12 ${card.bg} rounded-2xl flex items-center justify-center flex-shrink-0`}>
-              <Icon name={card.icon as any} size={22} className={card.color} />
+            <div
+              className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 ${
+                isCallCard ? 'bg-white/10 border border-white/30' : card.bg
+              }`}
+            >
+              <Icon
+                name={card.icon as any}
+                size={22}
+                className={isCallCard ? 'text-white/85' : card.color}
+              />
             </div>
             <div className="flex-1">
-              <h3 className="font-heading font-700 text-heading-xl text-foreground mb-2">{card.title}</h3>
+              <h3 className={`font-heading font-700 text-heading-xl mb-2 ${isCallCard ? 'text-white' : 'text-foreground'}`}>
+                {card.title}
+              </h3>
               <div className="space-y-0.5 mb-4">
                 {card.lines.map((line) => (
-                  <p key={line} className="font-body text-body-sm text-foreground-secondary">
+                  <p
+                    key={line}
+                    className={`font-body text-body-sm ${isCallCard ? 'text-white/70' : 'text-foreground-secondary'}`}
+                  >
                     {line}
                   </p>
                 ))}
@@ -114,7 +117,9 @@ export default function ContactInfo() {
                 href={card.action.href}
                 target={card.action.href.startsWith('http') ? '_blank' : undefined}
                 rel={card.action.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className={`inline-flex items-center gap-1.5 font-heading font-600 text-body-sm ${card.color} hover:gap-2.5 transition-all duration-200`}
+                className={`inline-flex items-center gap-1.5 font-heading font-600 text-body-sm hover:gap-2.5 transition-all duration-200 ${
+                  isCallCard ? 'text-white/80' : card.color
+                }`}
               >
                 {card.action.label}
                 <Icon name="ArrowRightIcon" size={12} />
@@ -122,13 +127,14 @@ export default function ContactInfo() {
             </div>
           </div>
         </div>
-      ))}
+        );
+      })}
 
       {/* Business Hours */}
       <div className="bg-background-dark rounded-3xl border border-white/10 p-6 shadow-dark-card">
         <div className="flex items-center gap-3 mb-5">
-          <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center">
-            <Icon name="ClockIcon" size={18} className="text-primary-light" />
+          <div className="w-10 h-10 bg-primary/20 border border-white/30 rounded-xl flex items-center justify-center">
+            <Icon name="ClockIcon" size={18} className="text-white/85" />
           </div>
           <h3 className="font-heading font-700 text-heading-xl text-white">Business Hours</h3>
         </div>
