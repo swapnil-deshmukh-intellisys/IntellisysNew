@@ -108,7 +108,7 @@ export default function HeroSection() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-hero"
+      className="relative overflow-hidden bg-gradient-hero"
       aria-label="Hero section"
     >
       {/* Layer 1: Perspective Grid Plane */}
@@ -174,7 +174,7 @@ export default function HeroSection() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 container-custom w-full pt-32 pb-20">
+      <div className="relative z-10 container-custom pt-32 pb-12 md:pt-36 md:pb-16">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Headline */}
           <h1
@@ -210,7 +210,7 @@ export default function HeroSection() {
 
           {/* CTA Buttons */}
           <div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
             style={{ animation: 'fade-up 0.7s ease-out 0.5s both' }}
           >
             <Link
@@ -231,15 +231,6 @@ export default function HeroSection() {
 
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
-        <span className="font-body text-caption text-white/40 uppercase tracking-widest">Scroll</span>
-        <div className="w-5 h-8 border border-white/20 rounded-full flex items-start justify-center pt-1.5">
-          <div className="w-1 h-2 bg-white/40 rounded-full animate-bounce" />
-        </div>
-      </div>
-
     </section>
   );
 }

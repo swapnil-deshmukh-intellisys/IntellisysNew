@@ -18,43 +18,43 @@ const serviceItems: ServiceDropdownItem[] = [
     label: 'Website Development',
     description: 'Custom web solutions',
     icon: 'GlobeAltIcon',
-    href: '/services',
+    href: '/services/website-development',
   },
   {
     label: 'Mobile App Development',
     description: 'iOS & Android apps',
     icon: 'DevicePhoneMobileIcon',
-    href: '/services',
+    href: '/services/mobile-app-development',
   },
   {
     label: 'Full Stack Development',
     description: 'End-to-end development',
     icon: 'CodeBracketIcon',
-    href: '/services',
+    href: '/services/full-stack-development',
   },
   {
     label: 'Cloud Solutions',
     description: 'AWS, GCP & Azure',
     icon: 'CloudIcon',
-    href: '/services',
+    href: '/services/cloud-solutions',
   },
   {
     label: 'Cybersecurity',
     description: 'Protect your systems',
     icon: 'ShieldCheckIcon',
-    href: '/services',
+    href: '/services/cybersecurity',
   },
   {
     label: 'UI/UX Design',
     description: 'User-centered design',
     icon: 'PaintBrushIcon',
-    href: '/services',
+    href: '/services/ui-ux-design',
   },
   {
     label: 'Software Testing',
     description: 'QA & automation',
     icon: 'BeakerIcon',
-    href: '/services',
+    href: '/services/software-testing',
   },
 ];
 
@@ -72,6 +72,7 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -116,6 +117,7 @@ export default function Header() {
   useEffect(() => {
     setMobileOpen(false);
     setDropdownOpen(false);
+    setMobileServicesOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -304,20 +306,39 @@ export default function Header() {
             <nav className="flex-1 overflow-y-auto p-6 space-y-1">
               {navLinks.map((link) => (
                 <div key={link.label}>
-                  <Link
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={`flex items-center justify-between w-full px-4 py-3 rounded-xl font-body font-500 text-body-base transition-colors ${
-                      isActive(link.href)
-                        ? 'bg-primary-50 text-primary'
-                        : 'text-foreground-secondary hover:bg-background-muted hover:text-foreground'
-                    }`}
-                  >
-                    {link.label}
-                    {link.hasDropdown && <Icon name="ChevronRightIcon" size={16} />}
-                  </Link>
+                  {link.hasDropdown ? (
+                    <button
+                      type="button"
+                      onClick={() => setMobileServicesOpen((prev) => !prev)}
+                      className={`flex items-center justify-between w-full px-4 py-3 rounded-xl font-body font-500 text-body-base transition-colors ${
+                        isActive(link.href)
+                          ? 'bg-primary-50 text-primary'
+                          : 'text-foreground-secondary hover:bg-background-muted hover:text-foreground'
+                      }`}
+                      aria-expanded={mobileServicesOpen}
+                    >
+                      {link.label}
+                      <Icon
+                        name="ChevronRightIcon"
+                        size={16}
+                        className={`transition-transform duration-200 ${mobileServicesOpen ? 'rotate-90' : ''}`}
+                      />
+                    </button>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className={`flex items-center justify-between w-full px-4 py-3 rounded-xl font-body font-500 text-body-base transition-colors ${
+                        isActive(link.href)
+                          ? 'bg-primary-50 text-primary'
+                          : 'text-foreground-secondary hover:bg-background-muted hover:text-foreground'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                   {link.hasDropdown && (
-                    <div className="mt-1 ml-4 space-y-1">
+                    <div className={`mt-1 ml-4 space-y-1 overflow-hidden transition-all duration-200 ${mobileServicesOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
                       {serviceItems.map((item) => (
                         <Link
                           key={item.label}

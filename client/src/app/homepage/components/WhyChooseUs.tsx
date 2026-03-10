@@ -68,7 +68,7 @@ export default function WhyChooseUs() {
   }, []);
 
   return (
-    <section className="section-padding bg-background relative overflow-hidden" ref={sectionRef}>
+    <section className="section-padding pt-6 sm:pt-8 lg:pt-10 bg-background relative overflow-hidden" ref={sectionRef}>
       <div className="container-custom">
         <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} text-center max-w-4xl mx-auto mb-12`}>
           <h2 className="font-heading font-800 text-display-md text-foreground mb-6">
@@ -91,17 +91,17 @@ export default function WhyChooseUs() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start lg:items-end">
+        <div className="grid lg:grid-cols-2 gap-16 items-start lg:items-center">
           {/* Left: Image + Floating Cards */}
-          <div className="relative h-full lg:self-end">
+          <div className="relative lg:self-center">
             <div
-              className={`relative h-[420px] sm:h-[480px] lg:h-[520px] rounded-3xl overflow-hidden shadow-xl-card ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}>
-              
+              className={`relative h-[400px] sm:h-[400px] lg:h-[520px] rounded-3xl overflow-hidden shadow-xl-card ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}>
+
               <AppImage
                 src="https://img.rocket.new/generatedImages/rocket_gen_img_1539c59d0-1771170881858.png"
                 alt="Intellisys IT Solutions engineering team collaborating on software development in Mumbai office"
                 className="w-full h-full object-cover object-top" />
-              
+
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent" />
             </div>
@@ -109,30 +109,36 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Right: Content */}
-          <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} h-full`}>
+          <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} lg:self-center`}>
             {/* Reasons Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {reasons.map((reason, i) =>
               <div
                 key={reason.title}
-                className="p-5 bg-background-card rounded-2xl border border-border hover:border-primary/20 transition-all duration-300 hover:shadow-md-card group"
+                className="group relative p-5 rounded-[1.35rem] border border-slate-200 bg-white/92 shadow-[0_12px_26px_rgba(15,23,42,0.10),inset_0_1px_0_rgba(255,255,255,0.85)] hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(15,23,42,0.14),inset_0_1px_0_rgba(255,255,255,0.9)] transition-all duration-300 overflow-hidden"
                 style={{ animationDelay: `${i * 0.1}s` }}>
-                
-                  <div className={`w-10 h-10 ${reason.bg} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                    <Icon name={reason.icon as any} size={18} className={reason.color} />
+                  <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-accent" />
+                  <div className="absolute -bottom-10 -left-10 w-24 h-24 rounded-full bg-secondary/10 blur-2xl pointer-events-none" />
+
+                  <div className="relative z-10 flex items-start justify-between gap-3 mb-4">
+                    <div className="w-10 h-10 bg-white border border-slate-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
+                      <Icon name={reason.icon as any} size={18} className="text-slate-700" />
+                    </div>
+                    <div className="text-right min-w-0">
+                      <p className="font-body text-body-sm text-slate-700 leading-relaxed">{reason.metric}</p>
+                      <p className="font-body text-caption text-slate-500 mt-1">{reason.metricLabel}</p>
+                    </div>
                   </div>
-                  <h4 className="font-heading font-700 text-heading-lg text-foreground mb-1">
+                  <h4 className="relative z-10 font-heading font-700 text-xl sm:text-heading-xl text-foreground mb-2 leading-tight">
                     {reason.title}
                   </h4>
-                  <p className="font-body text-body-sm text-foreground-muted leading-relaxed mb-3">
+                  <p className="relative z-10 font-body text-body-sm text-foreground-secondary leading-relaxed mb-4">
                     {reason.description}
                   </p>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className={`font-heading font-800 text-heading-xl ${reason.color}`}>
-                      {reason.metric}
-                    </span>
-                    <span className="font-body text-caption text-foreground-muted">
-                      {reason.metricLabel}
+                  <div className="relative z-10 inline-flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    <span className="font-body text-body-sm text-slate-700 leading-relaxed">
+                      Business-focused delivery model
                     </span>
                   </div>
                 </div>

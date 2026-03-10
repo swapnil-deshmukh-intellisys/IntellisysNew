@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Icon from '@/components/ui/AppIcon';
+import AppImage from '@/components/ui/AppImage';
 
 const allServices = [
   {
@@ -214,10 +215,45 @@ const allServices = [
   },
 ];
 
+const serviceCutoutImages: Record<string, string> = {
+  'custom-software-development':
+    'https://www.flexsin.com/blog/wp-content/uploads/2019/12/Custom-Software-Development.jpg',
+  'cloud-solutions':
+    'https://media.licdn.com/dms/image/v2/C4E12AQGkqpmFu5vN9g/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1630381366351?e=2147483647&v=beta&t=mXPCq_FD-1qIVDzJIN5TIyE7BieZeu6KCPf1Hu6dO6U',
+  'mobile-app-development':
+    'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=900&q=80',
+  'web-application-maintenance':
+    'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
+  'ui-ux-design':
+    'https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=900&q=80',
+  'e-publishing-solutions':
+    'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=900&q=80',
+  'it-staffing':
+    'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80',
+  'it-consulting-and-sourcing':
+    'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80',
+  'internship-programs':
+    'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80',
+};
+
+const serviceOverlayTints: Record<string, string> = {
+  'custom-software-development': 'rgba(37, 99, 235, 0.65)',
+  'cloud-solutions': 'rgba(20, 184, 166, 0.65)',
+  'mobile-app-development': 'rgba(79, 70, 229, 0.65)',
+  'web-application-maintenance': 'rgba(71, 85, 105, 0.65)',
+  'ui-ux-design': 'rgba(139, 92, 246, 0.65)',
+  'e-publishing-solutions': 'rgba(59, 130, 246, 0.65)',
+  'it-staffing': 'rgba(51, 65, 85, 0.65)',
+  'it-consulting-and-sourcing': 'rgba(16, 185, 129, 0.65)',
+  'internship-programs': 'rgba(79, 70, 229, 0.65)',
+};
+
 export default function ServiceCardsGrid() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [visibleItems, setVisibleItems] = useState<Set<string>>(new Set());
   const refs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const leftColumnServices = allServices.filter((_, index) => index % 2 === 0);
+  const rightColumnServices = allServices.filter((_, index) => index % 2 !== 0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -234,11 +270,144 @@ export default function ServiceCardsGrid() {
     return () => observer.disconnect();
   }, []);
 
+  const renderServiceCard = (service: (typeof allServices)[number], index: number) => {
+    const isExpanded = expandedId === service.id;
+    const tint = serviceOverlayTints[service.id] ?? 'rgba(37, 99, 235, 0.65)';
+
+    return (
+      <div
+        key={service.id}
+        id={service.id}
+        ref={(el) => {
+          if (el) refs.current.set(service.id, el);
+        }}
+        className={`group relative rounded-3xl border transition-all duration-400 overflow-hidden ${
+          isExpanded
+            ? 'border-white/45 shadow-[0_26px_50px_rgba(2,6,23,0.45)] -translate-y-1'
+            : 'border-white/25 shadow-[0_14px_30px_rgba(2,6,23,0.33)] hover:-translate-y-1.5 hover:border-white/40 hover:shadow-[0_24px_44px_rgba(2,6,23,0.42)]'
+        } ${visibleItems.has(service.id) ? 'animate-fade-up' : 'opacity-0'}`}
+        style={{ animationDelay: `${index * 0.08}s` }}
+      >
+        <div className="absolute inset-0">
+          <AppImage
+            src={serviceCutoutImages[service.id]}
+            alt={`${service.title} background`}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          />
+          <div className="absolute inset-0" style={{ backgroundColor: tint }} />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.15)_0%,rgba(0,0,0,0.75)_100%)]" />
+        </div>
+
+        <button
+          onClick={() => setExpandedId(isExpanded ? null : service.id)}
+          className="relative z-10 w-full text-left p-7 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          aria-expanded={isExpanded}
+        >
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div className="w-14 h-14 rounded-2xl border border-white/45 bg-white/20 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]">
+                  <Icon name={service.icon as any} size={26} className="text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]" />
+                </div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/25 bg-white/10 flex-shrink-0">
+                  <Icon name="SparklesIcon" size={12} className="text-white/80" />
+                  <span className="font-mono text-caption text-white/80 uppercase tracking-wider">Service</span>
+                </div>
+              </div>
+              <h3 className="font-heading font-800 text-display-sm text-white mb-2 leading-tight [text-shadow:0_1px_2px_rgba(0,0,0,0.55)]">
+                {service.title}
+              </h3>
+              <p className="font-body text-body-sm text-white/90 [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]">{service.shortDesc}</p>
+              <div className="flex items-center gap-4 mt-3 flex-wrap">
+                <div className="flex items-center gap-1.5">
+                  <Icon name="ClockIcon" size={12} className="text-white/75" />
+                  <span className="font-body text-caption text-white/75">{service.timeline}</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Icon name="UsersIcon" size={12} className="text-white/75" />
+                  <span className="font-body text-caption text-white/75">{service.teamSize}</span>
+                </div>
+              </div>
+            </div>
+            <div
+              className={`w-8 h-8 rounded-xl border border-white/20 flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                isExpanded ? 'bg-white/20 text-white rotate-180' : 'bg-white/10 text-white/80'
+              }`}
+            >
+              <Icon name="ChevronDownIcon" size={16} />
+            </div>
+          </div>
+        </button>
+
+        <div
+          className={`overflow-hidden transition-all duration-500 ${
+            isExpanded ? 'max-h-[900px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
+        >
+          <div className="relative z-10 px-7 pb-7 border-t border-white/25 pt-6 bg-black/15 backdrop-blur-[1px]">
+            <p className="font-body text-body-base text-white/90 leading-relaxed mb-6 [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]">
+              {service.longDesc}
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+              <div>
+                <h4 className="font-heading font-700 text-heading-lg text-white mb-3 flex items-center gap-2 [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]">
+                  <Icon name="ListBulletIcon" size={16} className="text-white/85" />
+                  Capabilities
+                </h4>
+                <ul className="space-y-2">
+                  {service.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-2">
+                      <Icon name="CheckCircleIcon" size={14} className="text-green-300 mt-0.5 flex-shrink-0" />
+                      <span className="font-body text-body-sm text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-heading font-700 text-heading-lg text-white mb-3 flex items-center gap-2 [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]">
+                  <Icon name="DocumentCheckIcon" size={16} className="text-white/85" />
+                  Deliverables
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {service.deliverables.map((d) => (
+                    <span
+                      key={d}
+                      className="px-3 py-1.5 bg-white/18 border border-white/30 backdrop-blur-sm text-white font-body text-caption rounded-xl [text-shadow:0_1px_2px_rgba(0,0,0,0.35)]"
+                    >
+                      {d}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-primary text-white font-heading font-600 text-body-sm rounded-xl shadow-blue-sm hover:shadow-blue transition-all duration-300 hover:scale-105"
+            >
+              Get a Quote for {service.title}
+              <Icon name="ArrowRightIcon" size={14} />
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <section id="services-grid" className="section-padding bg-background relative">
-      <div className="container-custom">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="font-heading font-800 text-display-md text-foreground mb-4">
+    <section id="services-grid" className="section-padding bg-background relative overflow-hidden">
+      <div className="absolute inset-0 bg-grid-pattern opacity-[0.04] pointer-events-none" />
+      <div className="absolute -top-24 -left-20 w-80 h-80 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -right-20 w-80 h-80 rounded-full bg-secondary/10 blur-3xl pointer-events-none" />
+
+      <div className="container-custom relative">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <p className="font-mono text-caption text-primary uppercase tracking-[0.18em] mb-2">Explore Expertise</p>
+          <h2 className="font-heading font-900 text-display-md text-foreground mb-4 leading-tight">
             Our{' '}
             <span
               style={{
@@ -252,109 +421,17 @@ export default function ServiceCardsGrid() {
             </span>
           </h2>
           <p className="font-body text-body-lg text-foreground-secondary">
-            Explore all 9 services to see capabilities, deliverables, and timelines.
+            Explore all 9 services with clear scope, capabilities, deliverables, and execution timelines.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {allServices.map((service, index) => {
-            const isExpanded = expandedId === service.id;
-            return (
-              <div
-                key={service.id}
-                id={service.id}
-                ref={(el) => {
-                  if (el) refs.current.set(service.id, el);
-                }}
-                className={`bg-background-card rounded-3xl border transition-all duration-400 overflow-hidden ${
-                  isExpanded ? 'border-primary/30 shadow-blue' : `border-border shadow-md-card ${service.borderHover}`
-                } ${visibleItems.has(service.id) ? 'animate-fade-up' : 'opacity-0'}`}
-                style={{ animationDelay: `${(index % 2) * 0.1}s` }}
-              >
-                <button
-                  onClick={() => setExpandedId(isExpanded ? null : service.id)}
-                  className="w-full text-left p-7 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-                  aria-expanded={isExpanded}
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <div className={`w-14 h-14 ${service.bg} rounded-2xl flex items-center justify-center mb-4`}>
-                        <Icon name={service.icon as any} size={26} className={service.iconColor} />
-                      </div>
-                      <h3 className="font-heading font-700 text-display-sm text-foreground mb-2">{service.title}</h3>
-                      <p className="font-body text-body-sm text-foreground-secondary">{service.shortDesc}</p>
-                      <div className="flex items-center gap-4 mt-3">
-                        <div className="flex items-center gap-1.5">
-                          <Icon name="ClockIcon" size={12} className="text-foreground-muted" />
-                          <span className="font-body text-caption text-foreground-muted">{service.timeline}</span>
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <Icon name="UsersIcon" size={12} className="text-foreground-muted" />
-                          <span className="font-body text-caption text-foreground-muted">{service.teamSize}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-                        isExpanded ? 'bg-primary text-white rotate-180' : 'bg-background-muted text-foreground-muted'
-                      }`}
-                    >
-                      <Icon name="ChevronDownIcon" size={16} />
-                    </div>
-                  </div>
-                </button>
-
-                <div
-                  className={`overflow-hidden transition-all duration-500 ${
-                    isExpanded ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
-                  }`}
-                >
-                  <div className="px-7 pb-7 border-t border-border pt-6">
-                    <p className="font-body text-body-base text-foreground-secondary leading-relaxed mb-6">{service.longDesc}</p>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                      <div>
-                        <h4 className="font-heading font-700 text-heading-lg text-foreground mb-3 flex items-center gap-2">
-                          <Icon name="ListBulletIcon" size={16} className="text-primary" />
-                          Capabilities
-                        </h4>
-                        <ul className="space-y-2">
-                          {service.features.map((feature) => (
-                            <li key={feature} className="flex items-start gap-2">
-                              <Icon name="CheckCircleIcon" size={14} className="text-success mt-0.5 flex-shrink-0" />
-                              <span className="font-body text-body-sm text-foreground-secondary">{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div>
-                        <h4 className="font-heading font-700 text-heading-lg text-foreground mb-3 flex items-center gap-2">
-                          <Icon name="DocumentCheckIcon" size={16} className="text-primary" />
-                          Deliverables
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {service.deliverables.map((d) => (
-                            <span key={d} className={`px-3 py-1.5 bg-gradient-to-r ${service.gradient} text-white font-body text-caption rounded-xl`}>
-                              {d}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    <Link
-                      href="/contact"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-primary text-white font-heading font-600 text-body-sm rounded-xl shadow-blue-sm hover:shadow-blue transition-all duration-300 hover:scale-105"
-                    >
-                      Get a Quote for {service.title}
-                      <Icon name="ArrowRightIcon" size={14} />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+          <div className="space-y-6">
+            {leftColumnServices.map((service, index) => renderServiceCard(service, index))}
+          </div>
+          <div className="space-y-6">
+            {rightColumnServices.map((service, index) => renderServiceCard(service, index + leftColumnServices.length))}
+          </div>
         </div>
       </div>
     </section>

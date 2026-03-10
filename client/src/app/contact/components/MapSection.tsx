@@ -112,10 +112,6 @@ export default function MapSection() {
           )}
 
           <div className="absolute top-3 left-3 right-3 sm:top-4 sm:right-4 sm:left-auto z-10 bg-white/95 backdrop-blur-sm rounded-2xl border border-border shadow-xl-card px-4 sm:px-6 py-4 text-left max-w-none sm:max-w-sm">
-            <div className="hidden sm:flex items-center gap-2 mb-2">
-              <div className="w-2 h-2 bg-success rounded-full animate-pulse" />
-              <span className="font-body text-caption text-success font-600">Open Now</span>
-            </div>
             <p className="font-heading font-800 text-heading-lg sm:text-heading-xl text-foreground">Intellisys IT Solutions</p>
             <p className="font-body text-body-sm text-foreground-secondary mt-1">Pune, Maharashtra</p>
             <p className="hidden sm:block font-body text-body-sm text-foreground-secondary mt-2">
