@@ -20,8 +20,8 @@ export default function CareersHero() {
         className="absolute bottom-20 left-0 w-10 h-10 border border-secondary/30 rounded-full animate-hero-sweep opacity-20 hidden lg:block"
       />
 
-      <div className="container-custom relative z-10">
-        <nav className="flex items-center gap-2 mb-10" aria-label="Breadcrumb">
+      <div className="container-custom relative z-10 text-center">
+        <nav className="flex items-center justify-center gap-2 mb-10" aria-label="Breadcrumb">
           <Link
             href="/homepage"
             className="font-body text-body-sm text-white/40 hover:text-white/70 transition-colors"
@@ -32,7 +32,7 @@ export default function CareersHero() {
           <span className="font-body text-body-sm text-white/70">Careers</span>
         </nav>
 
-        <div className="max-w-3xl">
+        <div className="max-w-3xl mx-auto">
           <h1
             className="font-heading font-900 text-white mb-4 leading-tight"
             style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)' }}

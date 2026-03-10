@@ -150,33 +150,35 @@ export default function ServicesOverview() {
                     ref={(el) => {
                       if (el) refs.current.set(service.id, el);
                     }}
-                    className={`group relative transition-all duration-400 p-6 border border-white/70 rounded-2xl bg-[linear-gradient(145deg,#eef2f6_0%,#d9dee6_55%,#cfd6e1_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_16px_32px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_22px_38px_rgba(0,0,0,0.45)] ${visibleItems.has(service.id) ? 'animate-fade-up' : 'opacity-0'}`}
+                    className={`group relative flex flex-col h-full transition-all duration-400 p-6 border border-white/70 rounded-2xl bg-[linear-gradient(145deg,#eef2f6_0%,#d9dee6_55%,#cfd6e1_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_16px_32px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_22px_38px_rgba(0,0,0,0.45)] ${visibleItems.has(service.id) ? 'animate-fade-up' : 'opacity-0'}`}
                     style={{ animationDelay: `${index * 0.07}s` }}
                   >
                     <div className="relative z-10 w-12 h-12 rounded-xl border border-slate-300 bg-white/55 flex items-center justify-center mb-5 shadow-[0_6px_14px_rgba(15,23,42,0.12)]">
                       <Icon name={service.icon as any} size={22} className="text-slate-700" />
                     </div>
 
-                    <h3 className="relative z-10 font-heading font-700 text-xl sm:text-heading-xl mb-2 text-slate-900">
-                      {service.title}
-                    </h3>
-                    <p className="relative z-10 font-body text-sm sm:text-body-sm mb-4 leading-relaxed text-slate-700">
-                      {service.description}
-                    </p>
+                    <div className="relative z-10">
+                      <h3 className="font-heading font-700 text-xl sm:text-heading-xl mb-2 lg:min-h-[3.5rem] text-slate-900">
+                        {service.title}
+                      </h3>
+                      <p className="font-body text-sm sm:text-body-sm mb-2.5 leading-relaxed lg:min-h-[4.25rem] text-slate-700">
+                        {service.description}
+                      </p>
+                    </div>
                     <div className="relative z-10 flex flex-wrap gap-1.5 mb-4">
                       {service.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg font-mono text-xs sm:text-sm bg-white/70 border border-slate-300 text-slate-700"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 lg:px-2.5 lg:py-1.5 rounded-lg font-mono text-xs lg:text-xs bg-white/70 border border-slate-300 text-slate-700 whitespace-nowrap"
                         >
-                          {resolveBrandName(tag) ? <BrandIcon name={resolveBrandName(tag)!} size={16} /> : null}
+                          {resolveBrandName(tag) ? <BrandIcon name={resolveBrandName(tag)!} size={15} /> : null}
                           {tag}
                         </span>
                       ))}
                     </div>
                     <Link
                       href="/services"
-                      className="relative z-10 inline-flex items-center gap-1.5 font-heading font-700 text-body-sm uppercase tracking-wide text-slate-500 hover:text-slate-700 hover:gap-2.5 transition-all duration-200"
+                      className="relative z-10 mt-auto inline-flex items-center gap-1.5 font-heading font-700 text-body-sm uppercase tracking-wide text-slate-500 hover:text-slate-700 hover:gap-2.5 transition-all duration-200"
                     >
                       Learn More <Icon name="ArrowRightIcon" size={12} />
                     </Link>

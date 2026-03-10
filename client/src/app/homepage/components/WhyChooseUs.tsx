@@ -91,11 +91,11 @@ export default function WhyChooseUs() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start lg:items-end">
+        <div className="grid lg:grid-cols-2 gap-16 items-start lg:items-center">
           {/* Left: Image + Floating Cards */}
-          <div className="relative h-full lg:self-end">
+          <div className="relative lg:self-center">
             <div
-              className={`relative h-[420px] sm:h-[480px] lg:h-[520px] rounded-3xl overflow-hidden shadow-xl-card ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}>
+              className={`relative h-[400px] sm:h-[400px] lg:h-[520px] rounded-3xl overflow-hidden shadow-xl-card ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}>
 
               <AppImage
                 src="https://img.rocket.new/generatedImages/rocket_gen_img_1539c59d0-1771170881858.png"
@@ -109,7 +109,7 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Right: Content */}
-          <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} h-full`}>
+          <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} lg:self-center`}>
             {/* Reasons Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {reasons.map((reason, i) =>

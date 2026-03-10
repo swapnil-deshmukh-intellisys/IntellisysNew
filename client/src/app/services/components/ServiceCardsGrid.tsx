@@ -252,6 +252,8 @@ export default function ServiceCardsGrid() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [visibleItems, setVisibleItems] = useState<Set<string>>(new Set());
   const refs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const leftColumnServices = allServices.filter((_, index) => index % 2 === 0);
+  const rightColumnServices = allServices.filter((_, index) => index % 2 !== 0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -424,14 +426,12 @@ export default function ServiceCardsGrid() {
         </div>
 
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-          <div className="hidden lg:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-            <div className="relative w-16 h-52">
-              <div className="absolute inset-0 rounded-[46%_54%_63%_37%/37%_43%_57%_63%] border border-primary/25 bg-gradient-to-b from-primary/10 to-secondary/10 shadow-[0_10px_30px_rgba(0,0,0,0.12)]" />
-              <div className="absolute inset-0 scale-x-[-1] translate-x-8 rounded-[46%_54%_63%_37%/37%_43%_57%_63%] border border-secondary/25 bg-gradient-to-b from-secondary/10 to-primary/10" />
-            </div>
+          <div className="space-y-6">
+            {leftColumnServices.map((service, index) => renderServiceCard(service, index))}
           </div>
-
-          {allServices.map((service, index) => renderServiceCard(service, index))}
+          <div className="space-y-6">
+            {rightColumnServices.map((service, index) => renderServiceCard(service, index + leftColumnServices.length))}
+          </div>
         </div>
       </div>
     </section>

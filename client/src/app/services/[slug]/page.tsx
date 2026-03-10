@@ -253,12 +253,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </div>
 
             <div className="relative grid md:grid-cols-2 xl:grid-cols-4 gap-5">
-              <div className="hidden xl:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-                <div className="relative w-16 h-36">
-                  <div className="absolute inset-0 rounded-[55%_45%_43%_57%/62%_39%_61%_38%] border border-primary/25 bg-primary/10" />
-                  <div className="absolute inset-0 scale-x-[-1] translate-x-7 rounded-[55%_45%_43%_57%/62%_39%_61%_38%] border border-secondary/25 bg-secondary/10" />
-                </div>
-              </div>
               {service.process.map((item) => (
                 <article key={item.step} className="relative rounded-3xl bg-background-card border border-border p-6 shadow-md-card hover:shadow-lg-card transition-all duration-300 overflow-hidden">
                   <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-primary/10 blur-2xl pointer-events-none" />
@@ -275,15 +269,15 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
         <section className="section-padding bg-background">
           <div className="container-custom">
-            <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-7 items-start">
-              <aside className="relative rounded-[2rem] bg-[linear-gradient(155deg,#0f172a_0%,#111827_55%,#0b1323_100%)] border border-white/10 p-7 shadow-dark-card overflow-hidden">
+            <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-7 items-stretch">
+              <aside className="relative flex h-full flex-col rounded-[2rem] bg-[linear-gradient(155deg,#0f172a_0%,#111827_55%,#0b1323_100%)] border border-white/10 p-6 shadow-dark-card overflow-hidden">
                 <div className="absolute -top-8 -left-8 w-32 h-32 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
                 <p className="font-mono text-caption text-white/65 uppercase tracking-[0.18em] mb-2">Support Desk</p>
                 <h2 className="font-heading font-900 text-display-sm text-white mb-3">FAQs</h2>
-                <p className="font-body text-body-sm text-white/72 leading-relaxed mb-6">
+                <p className="font-body text-body-sm text-white leading-relaxed mb-5">
                   Key questions teams usually ask before engagement, timelines, and operating model alignment.
                 </p>
-                <div className="relative w-full h-40 rounded-[20%_80%_44%_56%/54%_34%_66%_46%] overflow-hidden border border-white/20">
+                <div className="relative w-full flex-1 min-h-[18rem] rounded-2xl overflow-hidden border border-white/20">
                   <AppImage
                     src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1000&q=80"
                     alt="Team discussing delivery roadmap and service FAQs"
@@ -294,9 +288,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                 </div>
               </aside>
 
-              <div className="space-y-4">
+              <div className="grid h-full gap-4 auto-rows-fr">
                 {service.faq.map((item, idx) => (
-                  <article key={item.q} className="relative rounded-2xl border border-border bg-background-card p-5 shadow-md-card overflow-hidden">
+                  <article key={item.q} className="relative h-full rounded-2xl border border-border bg-background-card p-5 shadow-md-card overflow-hidden">
                     <div className="absolute top-0 left-0 h-full w-1.5 bg-gradient-to-b from-primary to-secondary" />
                     <div className="pl-3">
                       <div className="flex items-start gap-3">
@@ -338,7 +332,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   href={`/services/${item.slug}`}
                   className="group rounded-2xl border border-border bg-background-card p-5 shadow-md-card hover:shadow-lg-card hover:border-primary/20 transition-all duration-300"
                 >
-                  <div className="mb-4 relative w-full h-28 rounded-[18%_82%_42%_58%/56%_38%_62%_44%] overflow-hidden border border-primary/20">
+                  <div className="mb-4 relative w-full aspect-square max-h-40 rounded-2xl overflow-hidden border border-primary/20">
                     <AppImage
                       src={serviceVisuals[item.slug].heroImage}
                       alt={`${item.navLabel} visual`}
