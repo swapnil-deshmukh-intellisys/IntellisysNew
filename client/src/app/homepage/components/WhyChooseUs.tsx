@@ -97,10 +97,10 @@ export default function WhyChooseUs() {
             <div
               className={`relative h-[400px] sm:h-[400px] lg:h-full rounded-3xl overflow-hidden shadow-xl-card ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}>
 
-              <AppImage
-                src="https://img.rocket.new/generatedImages/rocket_gen_img_1539c59d0-1771170881858.png"
-                alt="Intellisys IT Solutions engineering team collaborating on software development in Mumbai office"
-                className="w-full h-full object-cover object-top" />
+                <AppImage
+                  src="https://img.rocket.new/generatedImages/rocket_gen_img_1539c59d0-1771170881858.png"
+                  alt="Intellisys IT Solutions engineering team collaborating on software development in Pune office"
+                  className="w-full h-full object-cover object-top" />
 
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-transparent" />

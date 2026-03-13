@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     'Get in touch with Intellisys IT Solutions. Request a free consultation, project proposal, or technical advice. Pune office: +91 91128 17771 / +91 84211 74213. info@intellisysitsolutions.com',
   keywords: [
     'contact Intellisys IT',
-    'IT company Mumbai contact',
+    'IT company Pune contact',
     'software development consultation',
     'free project proposal India',
   ],

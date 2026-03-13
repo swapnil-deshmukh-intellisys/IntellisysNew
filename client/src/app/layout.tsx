@@ -8,8 +8,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Next.js with Tailwind CSS',
-  description: 'A boilerplate project with Next.js and Tailwind CSS',
+  title: 'Intellisys IT Solutions Pvt. Ltd. | Enterprise IT Services & Software Development',
+  description:
+    'Intellisys IT Solutions Pvt. Ltd. delivers custom software development, cloud solutions, mobile apps, cybersecurity, UI/UX design, and enterprise technology services in India.',
   icons: {
     icon: [
       { url: '/assets/images/LogoDark.png', type: 'image/png' }

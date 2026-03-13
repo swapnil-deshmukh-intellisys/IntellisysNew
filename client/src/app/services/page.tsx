@@ -9,9 +9,9 @@ import ServicesCTA from './components/ServicesCTA';
 export const metadata: Metadata = {
   title: 'IT Services | Intellisys IT Solutions Pvt. Ltd.',
   description:
-    'Explore our full range of IT services: website development, mobile apps, full stack development, cloud solutions, cybersecurity, UI/UX design, and software testing. Mumbai, India.',
+    'Explore our full range of IT services: website development, mobile apps, full stack development, cloud solutions, cybersecurity, UI/UX design, and software testing. Pune, India.',
   keywords: [
-    'IT services Mumbai',
+    'IT services Pune',
     'web development company India',
     'mobile app development',
     'cloud solutions India',
