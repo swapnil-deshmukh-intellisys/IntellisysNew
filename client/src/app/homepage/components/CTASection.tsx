@@ -6,7 +6,7 @@ export default function CTASection() {
   return (
     <section className="section-padding bg-background relative overflow-hidden">
       <div className="container-custom">
-        <div className="relative bg-gradient-hero rounded-4xl overflow-hidden px-8 py-20 text-center shadow-dark-xl border border-white/10">
+        <div className="relative bg-gradient-hero rounded-4xl overflow-hidden px-8 py-14 sm:py-16 text-center shadow-dark-xl border border-white/10">
           {/* Grid overlay */}
           <div className="absolute inset-0 hero-grid-pattern opacity-30 pointer-events-none" />
           {/* Glow */}
@@ -38,7 +38,7 @@ export default function CTASection() {
               </span>
             </h2>
 
-            <p className="font-body text-body-lg text-white/60 mb-12 leading-relaxed">
+            <p className="font-body text-body-lg text-white/60 mb-8 sm:mb-9 leading-relaxed">
               Join 200+ companies that chose Intellisys IT Solutions as their technology partner. 
               Get a detailed project proposal within 24 hours.
             </p>

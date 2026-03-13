@@ -2,54 +2,41 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Icon from '@/components/ui/AppIcon';
-import { siGithub, siX, siYoutube } from 'simple-icons';
+import { siInstagram } from 'simple-icons';
 
 const footerLinks = {
   company: [
-    { label: 'About Us', href: '/homepage' },
     { label: 'Our Services', href: '/services' },
-    { label: 'Careers', href: '/homepage' },
+    { label: 'Careers', href: '/careers' },
     { label: 'Contact Us', href: '/contact' },
   ],
   services: [
-    { label: 'Website Development', href: '/services' },
-    { label: 'Mobile App Development', href: '/services' },
-    { label: 'Full Stack Development', href: '/services' },
-    { label: 'Cloud Solutions', href: '/services' },
-    { label: 'Cybersecurity', href: '/services' },
-    { label: 'UI/UX Design', href: '/services' },
+    { label: 'Website Development', href: '/services/website-development' },
+    { label: 'Mobile App Development', href: '/services/mobile-app-development' },
+    { label: 'Full Stack Development', href: '/services/full-stack-development' },
+    { label: 'Cloud Solutions', href: '/services/cloud-solutions' },
+    { label: 'Cybersecurity', href: '/services/cybersecurity' },
+    { label: 'UI/UX Design', href: '/services/ui-ux-design' },
   ],
   legal: [
-    { label: 'Privacy Policy', href: '/homepage' },
-    { label: 'Terms of Service', href: '/homepage' },
-    { label: 'Cookie Policy', href: '/homepage' },
-    { label: 'Sitemap', href: '/homepage' },
+    { label: 'Privacy Policy', href: '/privacy-policy' },
+    { label: 'Terms of Service', href: '/terms-of-service' },
+    { label: 'Cookie Policy', href: '/cookie-policy' },
+    { label: 'Sitemap', href: '/sitemap' },
   ],
 };
 
 const socialLinks = [
   {
     label: 'LinkedIn',
-    href: 'https://linkedin.com',
+    href: 'https://www.linkedin.com/company/intellisys-it-solutions-private-limited/',
     iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg',
   },
   {
-    label: 'Twitter / X',
-    href: 'https://x.com',
-    iconPath: siX.path,
-    iconColor: '#000000',
-  },
-  {
-    label: 'GitHub',
-    href: 'https://github.com',
-    iconPath: siGithub.path,
-    iconColor: '#181717',
-  },
-  {
-    label: 'YouTube',
-    href: 'https://youtube.com',
-    iconPath: siYoutube.path,
-    iconColor: '#FF0000',
+    label: 'Instagram',
+    href: 'https://www.instagram.com/intellisys_it_solutions/',
+    iconPath: siInstagram.path,
+    iconColor: '#E4405F',
   },
 ];
 
@@ -68,13 +55,12 @@ export default function Footer() {
   return (
     <footer className="bg-background-dark relative overflow-hidden">
       {/* Decorative Background */}
-      <div className="absolute inset-0 hero-grid-pattern opacity-30 pointer-events-none" />
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-radial-blue opacity-30 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-gradient-radial-teal opacity-20 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-[420px] h-[420px] bg-gradient-radial-blue opacity-18 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[320px] h-[320px] bg-gradient-radial-teal opacity-12 pointer-events-none" />
       <div className="absolute inset-0 bg-black/45 pointer-events-none" />
 
-      <div className="relative container-custom pt-10 pb-8">
-        <div className="mb-6 flex justify-center">
+      <div className="relative container-custom pt-7 pb-7">
+        <div className="mb-4 flex justify-center">
           <Link href="/homepage" className="inline-flex items-center group">
             <Image
               src="/assets/images/logo.gif"
@@ -82,13 +68,13 @@ export default function Footer() {
               width={660}
               height={156}
               unoptimized
-              className="h-[7.5rem] w-auto"
+              className="h-20 sm:h-24 w-auto"
             />
           </Link>
         </div>
 
-        <div className="border-t border-white/10 pt-10">
-          <div className="mb-14 flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-20">
+        <div className="border-t border-white/10 pt-7">
+          <div className="mb-9 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
             {/* Left Section */}
             <div className="w-full lg:max-w-md">
               <p className="font-body text-body-sm text-white/55 leading-relaxed mb-4">
@@ -107,7 +93,7 @@ export default function Footer() {
                   </div>
                 ))}
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}
@@ -115,12 +101,12 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="w-9 h-9 rounded-lg bg-white border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all duration-200 hover:scale-110"
+                    className="inline-flex items-center justify-center transition-transform duration-200 hover:scale-110"
                   >
                     {social.iconUrl ? (
-                      <img src={social.iconUrl} alt={social.label} width={16} height={16} className="w-4 h-4" />
+                      <img src={social.iconUrl} alt={social.label} width={22} height={22} className="w-[22px] h-[22px]" />
                     ) : (
-                      <svg role="img" aria-label={social.label} viewBox="0 0 24 24" width={16} height={16}>
+                      <svg role="img" aria-label={social.label} viewBox="0 0 24 24" width={22} height={22}>
                         <path d={social.iconPath} fill={social.iconColor} />
                       </svg>
                     )}
@@ -134,7 +120,7 @@ export default function Footer() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-6">
                 {/* Services Column */}
                 <div className="order-3">
-                  <h4 className="pl-3 font-heading font-700 text-body-base text-white mb-5 uppercase tracking-wider">
+                  <h4 className="font-heading font-700 text-body-base text-white mb-4 uppercase tracking-wider">
                     Services
                   </h4>
                   <ul className="space-y-3">
@@ -154,7 +140,7 @@ export default function Footer() {
 
                 {/* Company Column */}
                 <div className="order-1">
-                  <h4 className="pl-3 font-heading font-700 text-body-base text-white mb-5 uppercase tracking-wider">
+                  <h4 className="font-heading font-700 text-body-base text-white mb-4 uppercase tracking-wider">
                     Company
                   </h4>
                   <ul className="space-y-3">
@@ -174,7 +160,7 @@ export default function Footer() {
 
                 {/* Legal Column */}
                 <div className="order-2">
-                  <h4 className="pl-3 font-heading font-700 text-body-base text-white mb-5 uppercase tracking-wider">
+                  <h4 className="font-heading font-700 text-body-base text-white mb-4 uppercase tracking-wider">
                     Legal
                   </h4>
                   <ul className="space-y-3">
@@ -192,7 +178,7 @@ export default function Footer() {
                   </ul>
 
                   {/* Certifications */}
-                  <div className="mt-7 pt-5 border-t border-white/10">
+                  <div className="mt-6 pt-4 border-t border-white/10">
                     <h4 className="font-heading font-700 text-body-sm text-white mb-3 uppercase tracking-wider">
                       Certifications
                     </h4>
@@ -214,12 +200,12 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-body text-caption text-white/30">
             (c) {currentYear} Intellisys IT Solutions Pvt. Ltd. All rights reserved. CIN:
             U72200MH2015PTC123456
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-5">
             <span className="font-body text-caption text-white/30">
               Made with care in Pune, India
             </span>

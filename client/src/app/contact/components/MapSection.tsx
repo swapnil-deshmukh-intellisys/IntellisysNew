@@ -73,7 +73,7 @@ export default function MapSection() {
   }, [googleMapsApiKey, hasOfficialDarkMap]);
 
   return (
-    <section className="section-padding bg-background relative">
+    <section className="section-padding bg-[#FEFEFE] relative">
       <div className="container-custom">
         <div className="text-center mb-12">
           <h2 className="font-heading font-800 text-display-md text-foreground mb-3">

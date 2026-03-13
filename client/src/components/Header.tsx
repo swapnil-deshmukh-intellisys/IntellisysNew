@@ -128,6 +128,11 @@ export default function Header() {
   }, [mobileOpen]);
 
   const currentPath = pathname ?? '';
+  const useServicesHeroHeader = currentPath === '/services' && !scrolled;
+  const forceLightSurfaceHeader = currentPath === '/technologies' && !scrolled;
+  const useLightLogo = useServicesHeroHeader;
+  const useDarkLogo = (!scrolled && !useServicesHeroHeader) || forceLightSurfaceHeader;
+  const useDarkNav = (!scrolled && !useServicesHeroHeader) || forceLightSurfaceHeader;
   const isActive = (href: string) =>
     currentPath === href || (href !== '/homepage' && currentPath.startsWith(href));
 
@@ -135,10 +140,10 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-          scrolled
+          scrolled || useServicesHeroHeader
             ? 'bg-black/95 backdrop-blur-xl shadow-md-card border-b border-white/10'
             : 'bg-transparent'
-        } ${showHeader ? 'translate-y-0' : '-translate-y-full'}${scrolled ? '' : ' border-b-0 border-none shadow-none'}`}
+        } ${showHeader ? 'translate-y-0' : '-translate-y-full'}${scrolled || useServicesHeroHeader ? '' : ' border-b-0 border-none shadow-none'}`}
         style={{ willChange: 'transform' }}
       >
         <div className="container-custom">
@@ -150,13 +155,19 @@ export default function Header() {
               aria-label="Intellisys IT Solutions - Home"
             >
               <Image
-                src="/assets/images/logo.gif"
+                src={
+                  useLightLogo
+                    ? "/assets/images/LogoLight.png"
+                    : useDarkLogo
+                      ? "/assets/images/LogoDark.png"
+                      : "/assets/images/logo.gif"
+                }
                 alt="Intellisys IT Solutions"
                 width={572}
                 height={135}
                 priority
-                unoptimized
-                className="h-[3.25rem] md:h-[6.5rem] w-auto"
+                unoptimized={useLightLogo ? false : !useDarkLogo}
+                className={`${useLightLogo ? 'h-[2.7rem] md:h-[5rem]' : 'h-[3.25rem] md:h-[6.5rem]'} w-auto`}
               />
             </Link>
 
@@ -169,8 +180,12 @@ export default function Header() {
                       onClick={() => setDropdownOpen(!dropdownOpen)}
                       className={`flex items-center gap-1 px-4 py-2 rounded-lg font-body font-500 text-body-sm transition-all duration-200 ${
                         isActive(link.href)
-                          ? 'text-white bg-white/15'
-                          : 'text-white/80 hover:text-white hover:bg-white/10'
+                          ? useDarkNav
+                            ? 'text-slate-950 bg-slate-900/10'
+                            : 'text-white bg-white/15'
+                          : useDarkNav
+                            ? 'text-slate-700 hover:text-slate-950 hover:bg-slate-900/8'
+                            : 'text-white/80 hover:text-white hover:bg-white/10'
                       }`}
                       aria-expanded={dropdownOpen}
                       aria-haspopup="true"
@@ -228,8 +243,12 @@ export default function Header() {
                     prefetch
                     className={`px-4 py-2 rounded-lg font-body font-500 text-body-sm transition-all duration-200 ${
                       isActive(link.href)
-                        ? 'text-white bg-white/15'
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                        ? useDarkNav
+                          ? 'text-slate-950 bg-slate-900/10'
+                          : 'text-white bg-white/15'
+                        : useDarkNav
+                          ? 'text-slate-700 hover:text-slate-950 hover:bg-slate-900/8'
+                          : 'text-white/80 hover:text-white hover:bg-white/10'
                     }`}
                   >
                     {link.label}
@@ -261,13 +280,13 @@ export default function Header() {
             >
               <div className="w-6 flex flex-col gap-1.5">
                 <span
-                  className={`block h-0.5 rounded-full transition-all duration-300 bg-white ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`}
+                  className={`block h-0.5 rounded-full transition-all duration-300 ${useDarkNav ? 'bg-slate-950' : 'bg-white'} ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`}
                 />
                 <span
-                  className={`block h-0.5 rounded-full transition-all duration-300 bg-white ${mobileOpen ? 'opacity-0' : ''}`}
+                  className={`block h-0.5 rounded-full transition-all duration-300 ${useDarkNav ? 'bg-slate-950' : 'bg-white'} ${mobileOpen ? 'opacity-0' : ''}`}
                 />
                 <span
-                  className={`block h-0.5 rounded-full transition-all duration-300 bg-white ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`}
+                  className={`block h-0.5 rounded-full transition-all duration-300 ${useDarkNav ? 'bg-slate-950' : 'bg-white'} ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`}
                 />
               </div>
             </button>

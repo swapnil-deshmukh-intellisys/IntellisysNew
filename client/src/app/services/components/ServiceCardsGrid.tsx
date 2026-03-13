@@ -399,10 +399,8 @@ export default function ServiceCardsGrid() {
   };
 
   return (
-    <section id="services-grid" className="section-padding bg-background relative overflow-hidden">
+    <section id="services-grid" className="section-padding bg-[#FEFEFE] relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.04] pointer-events-none" />
-      <div className="absolute -top-24 -left-20 w-80 h-80 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -right-20 w-80 h-80 rounded-full bg-secondary/10 blur-3xl pointer-events-none" />
 
       <div className="container-custom relative">
         <div className="text-center max-w-3xl mx-auto mb-16">
