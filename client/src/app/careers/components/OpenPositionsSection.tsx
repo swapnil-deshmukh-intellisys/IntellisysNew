@@ -456,7 +456,7 @@ export default function OpenPositionsSection() {
 
   return (
     <section
-      className="pt-0 pb-16 md:pb-24 bg-background relative z-30 overflow-visible"
+      className="pt-0 pb-16 md:pb-24 bg-[#FEFEFE] relative z-30 overflow-visible"
       id="open-positions"
     >
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none" />

@@ -63,7 +63,7 @@ export default function TechStackSection() {
   }, []);
 
   return (
-    <section className="section-padding bg-background relative" ref={sectionRef}>
+    <section className="section-padding bg-[#FEFEFE] relative" ref={sectionRef}>
       <div className="container-custom">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16"><h2 className="font-heading font-800 text-display-md text-foreground mb-4">
@@ -90,28 +90,40 @@ export default function TechStackSection() {
               {techCategories.map((cat, index) => (
                 <div
                   key={cat.category}
-                  className={`group relative transition-all duration-400 p-6 border border-white/70 rounded-2xl bg-[linear-gradient(145deg,#eef2f6_0%,#d9dee6_55%,#cfd6e1_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.75),0_16px_32px_rgba(0,0,0,0.35)] hover:-translate-y-1 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_22px_38px_rgba(0,0,0,0.45)] ${
+                  className={`group relative h-full ${
                     isVisible ? 'animate-fade-up' : 'opacity-0'
                   }`}
                   style={{ animationDelay: `${index * 0.07}s` }}
                 >
-                  <div className="relative z-10 w-12 h-12 rounded-xl border border-slate-300 bg-white/55 flex items-center justify-center mb-5 shadow-[0_6px_14px_rgba(15,23,42,0.12)]">
-                    <Icon name={cat.icon as any} size={22} className="text-slate-700" />
-                  </div>
-                  <h3 className="relative z-10 font-heading font-700 text-xl sm:text-heading-xl text-slate-900 mb-2">{cat.category}</h3>
-                  <p className="relative z-10 font-body text-sm sm:text-body-sm text-slate-700 mb-4 leading-relaxed">
-                    Our {cat.category.toLowerCase()} stack combines proven tools and modern frameworks.
-                  </p>
-                  <div className="relative z-10 flex flex-wrap gap-1.5 mb-0">
-                    {cat.techs.map((tech) => (
-                      <span
-                        key={tech}
-                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/70 border border-slate-300 rounded-lg font-mono text-xs sm:text-sm text-slate-700"
-                      >
-                        {resolveBrandName(tech) ? <BrandIcon name={resolveBrandName(tech)!} size={16} /> : null}
-                        {tech}
-                      </span>
-                    ))}
+                  <div className="relative h-full translate-x-0 translate-y-0 transition-transform duration-400 group-hover:-translate-y-1">
+                    <div className="pointer-events-none absolute inset-0 translate-x-[6px] translate-y-[6px] rounded-2xl bg-[linear-gradient(145deg,rgba(186,194,205,0.96)_0%,rgba(205,213,223,0.94)_45%,rgba(221,227,235,0.92)_100%)] border border-slate-300/70" />
+
+                    <div className="relative h-full flex flex-col overflow-hidden p-6 border border-white/85 rounded-2xl bg-[linear-gradient(145deg,rgba(255,255,255,0.82)_0%,rgba(244,247,251,0.74)_45%,rgba(232,238,246,0.78)_100%)] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.98),inset_0_-1px_0_rgba(255,255,255,0.22)]">
+                      <div className="pointer-events-none absolute inset-0 rounded-2xl border border-white/45" />
+                      <div className="pointer-events-none absolute inset-x-0 top-0 h-14 bg-[linear-gradient(180deg,rgba(255,255,255,0.34),transparent)]" />
+                      <div className="pointer-events-none absolute -left-5 top-[-10%] h-[145%] w-20 rotate-[28deg] bg-[linear-gradient(180deg,rgba(255,255,255,0.58)_0%,rgba(255,255,255,0.12)_45%,rgba(255,255,255,0.02)_100%)] opacity-80" />
+                      <div className="pointer-events-none absolute right-7 top-[-20%] h-[138%] w-px rotate-[28deg] bg-white/85 opacity-85 shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
+                      <div className="pointer-events-none absolute left-10 top-[8%] h-px w-[78%] rotate-[28deg] bg-white/70 opacity-75 shadow-[0_0_8px_rgba(255,255,255,0.45)]" />
+
+                      <div className="relative z-10 w-12 h-12 rounded-xl border border-slate-300 bg-[#FEFEFE] flex items-center justify-center mb-5 shadow-[0_8px_18px_rgba(148,163,184,0.12)]">
+                        <Icon name={cat.icon as any} size={22} className="text-slate-700" />
+                      </div>
+                      <h3 className="relative z-10 font-heading font-700 text-xl sm:text-heading-xl text-slate-900 mb-2">{cat.category}</h3>
+                      <p className="relative z-10 font-body text-sm sm:text-body-sm text-slate-700 mb-4 leading-relaxed">
+                        Our {cat.category.toLowerCase()} stack combines proven tools and modern frameworks.
+                      </p>
+                      <div className="relative z-10 mt-auto flex flex-wrap gap-1.5 mb-0">
+                        {cat.techs.map((tech) => (
+                          <span
+                            key={tech}
+                            className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FEFEFE] border border-slate-300 rounded-lg font-mono text-xs sm:text-sm text-slate-700"
+                          >
+                            {resolveBrandName(tech) ? <BrandIcon name={resolveBrandName(tech)!} size={16} /> : null}
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}

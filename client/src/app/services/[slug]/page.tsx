@@ -82,34 +82,19 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
     <>
       <Header />
       <main>
-        <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-20 bg-gradient-hero overflow-hidden">
-          <div className="absolute inset-0 hero-grid-pattern opacity-30 pointer-events-none" />
-          <div className="absolute -top-20 -left-10 w-64 h-64 rounded-full bg-primary/20 blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -right-10 w-72 h-72 rounded-full bg-secondary/20 blur-3xl pointer-events-none" />
+        <section className="relative overflow-hidden border-b border-slate-200/70 bg-[#FEFEFE] pt-22 sm:pt-24 pb-10 sm:pb-12">
+          <div className="absolute inset-0 hero-grid-pattern opacity-[0.04] pointer-events-none" />
+          <div className="absolute top-20 right-[10%] hidden h-16 w-16 rounded-2xl border border-primary/20 rotate-12 opacity-60 lg:block pointer-events-none" />
+          <div className="absolute bottom-16 left-[8%] hidden h-10 w-10 rounded-full border border-secondary/20 opacity-50 lg:block pointer-events-none" />
 
           <div className="container-custom relative z-10">
-            <nav className="flex items-center gap-2 mb-8" aria-label="Breadcrumb">
-              <Link href="/homepage" className="font-body text-body-sm text-white/45 hover:text-white/75 transition-colors">
-                Home
-              </Link>
-              <Icon name="ChevronRightIcon" size={12} className="text-white/30" />
-              <Link href="/services" className="font-body text-body-sm text-white/45 hover:text-white/75 transition-colors">
-                Services
-              </Link>
-              <Icon name="ChevronRightIcon" size={12} className="text-white/30" />
-              <span className="font-body text-body-sm text-white/75">{service.navLabel}</span>
-            </nav>
-
             <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-12 items-center">
               <div>
-                <span className="inline-flex px-3 py-1.5 rounded-full bg-white/12 border border-white/20 font-mono text-caption text-white/80 tracking-wider uppercase mb-5">
-                  {service.navLabel}
-                </span>
-                <h1 className="font-heading font-900 text-white mb-5 leading-tight text-[clamp(2.1rem,5vw,3.8rem)]">
+                <h1 className="font-heading font-900 text-foreground mb-5 leading-tight text-[clamp(2.1rem,5vw,3.8rem)]">
                   {service.title}
                 </h1>
-                <p className="font-body text-body-lg text-white/75 max-w-2xl leading-relaxed mb-5">{service.subtitle}</p>
-                <p className="font-body text-body-base text-white/80 max-w-2xl leading-relaxed">{service.description}</p>
+                <p className="font-body text-body-lg text-foreground-secondary max-w-2xl leading-relaxed mb-5">{service.subtitle}</p>
+                <p className="font-body text-body-base text-foreground-secondary max-w-2xl leading-relaxed">{service.description}</p>
 
                 <div className="flex flex-col sm:flex-row gap-3 mt-9">
                   <Link
@@ -121,7 +106,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                   </Link>
                   <Link
                     href="/services"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-white/25 text-white font-heading font-600 text-body-base rounded-2xl hover:bg-white/10 transition-all duration-300"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-slate-300 bg-white/85 text-foreground font-heading font-600 text-body-base rounded-2xl hover:border-primary/30 hover:bg-white transition-all duration-300"
                   >
                     Compare Services
                   </Link>
@@ -130,8 +115,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
               <div className="relative">
                 <div className="relative mx-auto w-full max-w-[560px] h-[360px] sm:h-[440px]">
-                  <div className="absolute -inset-4 bg-gradient-to-br from-primary/25 to-secondary/25 blur-2xl rounded-[34%_66%_57%_43%/39%_36%_64%_61%]" />
-                  <div className="relative h-full rounded-[34%_66%_57%_43%/39%_36%_64%_61%] overflow-hidden border border-white/25 shadow-dark-xl">
+                  <div className="relative h-full rounded-[34%_66%_57%_43%/39%_36%_64%_61%] overflow-hidden border border-slate-200 shadow-[0_18px_45px_rgba(15,23,42,0.08)]">
                     <AppImage
                       src={visual.heroImage}
                       alt={visual.heroAlt}
@@ -139,17 +123,16 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
                       sizes="(max-width: 768px) 95vw, 50vw"
                       className="h-full w-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
                   </div>
 
-                  <div className="absolute -left-2 sm:-left-8 top-4 sm:top-8 rounded-xl border border-white/25 bg-white/12 backdrop-blur px-3 py-2 sm:px-4 sm:py-3">
-                    <p className="font-heading text-white font-700 text-body-base">{service.heroStats[0]?.value}</p>
-                    <p className="font-body text-white/70 text-caption uppercase tracking-wider">{service.heroStats[0]?.label}</p>
+                  <div className="absolute -left-2 sm:-left-8 top-4 sm:top-8 rounded-xl border border-slate-200 bg-white px-3 py-2 sm:px-4 sm:py-3 shadow-[0_12px_26px_rgba(15,23,42,0.12)]">
+                    <p className="font-heading text-foreground font-700 text-body-base">{service.heroStats[0]?.value}</p>
+                    <p className="font-body text-slate-700 text-caption uppercase tracking-wider">{service.heroStats[0]?.label}</p>
                   </div>
 
-                  <div className="absolute -right-2 sm:-right-8 bottom-8 sm:bottom-12 rounded-xl border border-white/25 bg-white/12 backdrop-blur px-3 py-2 sm:px-4 sm:py-3">
-                    <p className="font-heading text-white font-700 text-body-base">{service.heroStats[1]?.value}</p>
-                    <p className="font-body text-white/70 text-caption uppercase tracking-wider">{service.heroStats[1]?.label}</p>
+                  <div className="absolute -right-2 sm:-right-8 bottom-8 sm:bottom-12 rounded-xl border border-slate-200 bg-white px-3 py-2 sm:px-4 sm:py-3 shadow-[0_12px_26px_rgba(15,23,42,0.12)]">
+                    <p className="font-heading text-foreground font-700 text-body-base">{service.heroStats[1]?.value}</p>
+                    <p className="font-body text-slate-700 text-caption uppercase tracking-wider">{service.heroStats[1]?.label}</p>
                   </div>
                 </div>
               </div>
@@ -157,12 +140,12 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </div>
         </section>
 
-        <section className="bg-background-dark py-7 border-y border-white/10">
+        <section className="bg-[#FEFEFE] py-7 border-b border-slate-200/70">
           <div className="container-custom">
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
-              <span className="font-heading font-700 text-body-sm text-white/70 uppercase tracking-[0.14em]">Core Stack</span>
+              <span className="font-heading font-700 text-body-sm text-slate-600 uppercase tracking-[0.14em]">Core Stack</span>
               {visual.brands.map((brand) => (
-                <span key={brand} className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-slate-200 shadow-[0_6px_16px_rgba(0,0,0,0.18)]">
+                <span key={brand} className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white border border-slate-200 shadow-[0_8px_18px_rgba(15,23,42,0.06)]">
                   <BrandIcon name={brand} size={16} />
                   <span className="font-body text-body-sm text-slate-700 capitalize">{brand.replace('-', ' ')}</span>
                 </span>
@@ -171,7 +154,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </div>
         </section>
 
-        <section className="section-padding bg-background">
+        <section className="section-padding bg-[#FEFEFE]">
           <div className="container-custom">
             <div className="flex items-center justify-between flex-wrap gap-4 mb-8">
               <div>
@@ -240,7 +223,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </div>
         </section>
 
-        <section className="section-padding bg-background-muted">
+        <section className="section-padding bg-[#FEFEFE]">
           <div className="container-custom">
             <div className="flex items-center justify-between flex-wrap gap-4 mb-10">
               <div>
@@ -267,7 +250,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </div>
         </section>
 
-        <section className="section-padding bg-background">
+        <section className="section-padding bg-[#FEFEFE]">
           <div className="container-custom">
             <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-7 items-stretch">
               <aside className="relative flex h-full flex-col rounded-[2rem] bg-[linear-gradient(155deg,#0f172a_0%,#111827_55%,#0b1323_100%)] border border-white/10 p-6 shadow-dark-card overflow-hidden">
@@ -290,9 +273,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
               <div className="grid h-full gap-4 auto-rows-fr">
                 {service.faq.map((item, idx) => (
-                  <article key={item.q} className="relative h-full rounded-2xl border border-border bg-background-card p-5 shadow-md-card overflow-hidden">
+                  <article key={item.q} className="relative h-full rounded-2xl border border-border bg-background-card p-5 shadow-md-card overflow-hidden flex items-center">
                     <div className="absolute top-0 left-0 h-full w-1.5 bg-gradient-to-b from-primary to-secondary" />
-                    <div className="pl-3">
+                    <div className="pl-3 w-full">
                       <div className="flex items-start gap-3">
                         <span className="w-7 h-7 rounded-lg bg-primary/10 text-primary font-mono text-caption flex items-center justify-center flex-shrink-0 mt-0.5">
                           {String(idx + 1).padStart(2, '0')}
@@ -310,7 +293,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </div>
         </section>
 
-        <section className="section-padding bg-background-muted">
+        <section className="section-padding bg-[#FEFEFE]">
           <div className="container-custom">
             <div className="flex items-center justify-between flex-wrap gap-4 mb-8">
               <div>
@@ -323,9 +306,6 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             </div>
 
             <div className="relative grid md:grid-cols-3 gap-4 mb-10">
-              <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-10 pointer-events-none">
-                <div className="w-full h-full opacity-45 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.2)_0%,transparent_70%)]" />
-              </div>
               {relatedServices.map((item) => (
                 <Link
                   key={item.slug}

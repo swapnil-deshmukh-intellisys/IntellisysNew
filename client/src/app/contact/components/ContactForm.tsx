@@ -172,26 +172,39 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="bg-background-card rounded-3xl border border-border shadow-lg-card overflow-hidden bg-background-elevated">
+    <div className="relative">
+      <div className="pointer-events-none absolute inset-0 translate-x-[6px] translate-y-[6px] rounded-3xl border border-slate-300/70 bg-[linear-gradient(145deg,rgba(186,194,205,0.96)_0%,rgba(205,213,223,0.94)_45%,rgba(221,227,235,0.92)_100%)]" />
       {/* Form Header */}
-      <div className="p-5 sm:p-7 bg-background-elevated">
-        <h2 className="font-heading font-800 text-display-sm text-foreground mb-1">
+      <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/55 bg-[linear-gradient(145deg,rgba(255,255,255,0.88)_0%,rgba(242,246,250,0.82)_38%,rgba(226,233,242,0.84)_100%)] backdrop-blur-xl shadow-[0_22px_55px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,1),inset_0_-1px_0_rgba(255,255,255,0.28)]">
+        <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_18%_16%,rgba(255,255,255,0.42),transparent_30%),radial-gradient(circle_at_84%_22%,rgba(255,255,255,0.18),transparent_28%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,rgba(255,255,255,0.46),transparent)]" />
+        <div className="pointer-events-none absolute -left-6 top-[-12%] h-[150%] w-24 rotate-[28deg] bg-[linear-gradient(180deg,rgba(255,255,255,0.72)_0%,rgba(255,255,255,0.18)_45%,rgba(255,255,255,0.03)_100%)] opacity-90" />
+        <div className="pointer-events-none absolute right-7 top-[-20%] h-[138%] w-[2px] rotate-[28deg] bg-white/95 opacity-95 shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
+        <div className="pointer-events-none absolute left-10 top-[8%] h-[2px] w-[78%] rotate-[28deg] bg-white/85 opacity-85 shadow-[0_0_10px_rgba(255,255,255,0.65)]" />
+      </div>
+      <div className="relative p-5 sm:p-7">
+        <div className="relative z-10">
+        <p className="font-mono text-caption text-primary uppercase tracking-[0.18em] mb-2">
+          Project Inquiry
+        </p>
+        <h2 className="font-heading font-800 text-display-sm text-foreground mb-2">
           Tell Us About Your Project
         </h2>
-        <p className="font-body text-body-sm text-foreground-secondary">
-          Fill out the form below and we'll prepare a custom proposal for you.
+        <p className="font-body text-body-base text-foreground-secondary leading-relaxed">
+          Fill out the form below and we&apos;ll prepare a practical response with the right next step for your project.
         </p>
+        </div>
       </div>
 
       <form
         onSubmit={handleSubmit}
-        className="p-5 sm:p-7 space-y-5 rounded-3xl border border-border bg-white"
+        className="relative z-10 -mt-2 sm:-mt-3 mx-0 p-5 sm:p-7 space-y-5 rounded-3xl border border-border bg-white shadow-lg-card"
         noValidate
       >
         {/* Row 1: Name + Email */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <label htmlFor="name" className="block font-heading font-600 text-body-sm text-foreground mb-2">
+            <label htmlFor="name" className="block font-heading font-700 text-body-sm text-foreground mb-2">
               Full Name <span className="text-error">*</span>
             </label>
             <input
@@ -215,7 +228,7 @@ export default function ContactForm() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block font-heading font-600 text-body-sm text-foreground mb-2">
+            <label htmlFor="email" className="block font-heading font-700 text-body-sm text-foreground mb-2">
               Email Address <span className="text-error">*</span>
             </label>
             <input
@@ -242,7 +255,7 @@ export default function ContactForm() {
         {/* Row 2: Phone + Company */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <label htmlFor="phone" className="block font-heading font-600 text-body-sm text-foreground mb-2">
+            <label htmlFor="phone" className="block font-heading font-700 text-body-sm text-foreground mb-2">
               Phone Number <span className="text-error">*</span>
             </label>
             <input
@@ -269,7 +282,7 @@ export default function ContactForm() {
           </div>
 
           <div>
-            <label htmlFor="company" className="block font-heading font-600 text-body-sm text-foreground mb-2">
+            <label htmlFor="company" className="block font-heading font-700 text-body-sm text-foreground mb-2">
               Company / Organization (Optional)
             </label>
             <input
@@ -288,7 +301,7 @@ export default function ContactForm() {
         {/* Row 3: Service + Requirement Document */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
-            <label htmlFor="service" className="block font-heading font-600 text-body-sm text-foreground mb-2">
+            <label htmlFor="service" className="block font-heading font-700 text-body-sm text-foreground mb-2">
               Service Needed <span className="text-error">*</span>
             </label>
             <div className="relative">
@@ -321,7 +334,7 @@ export default function ContactForm() {
           </div>
 
           <div>
-            <label htmlFor="requirementFile" className="block font-heading font-600 text-body-sm text-foreground mb-2">
+            <label htmlFor="requirementFile" className="block font-heading font-700 text-body-sm text-foreground mb-2">
               Attach Requirement Document (PDF, Optional)
             </label>
             <input
@@ -330,9 +343,9 @@ export default function ContactForm() {
               type="file"
               accept="application/pdf,.pdf"
               onChange={handleFileChange}
-              className="block w-full text-body-sm text-foreground file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-body-sm file:font-heading file:font-600 file:bg-gradient-primary file:text-white file:shadow-blue-sm hover:file:shadow-blue cursor-pointer"
+              className="block w-full text-body-sm text-foreground file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-body-sm file:font-heading file:font-600 file:bg-gradient-primary file:text-white cursor-pointer"
             />
-            <p className="mt-1.5 font-body text-caption text-foreground-muted">
+            <p className="mt-1.5 font-body text-caption text-foreground-muted leading-relaxed">
               Optional: upload a detailed requirements PDF (max 1 file).
             </p>
           </div>
@@ -340,7 +353,7 @@ export default function ContactForm() {
 
         {/* Message */}
         <div>
-          <label htmlFor="message" className="block font-heading font-600 text-body-sm text-foreground mb-2">
+          <label htmlFor="message" className="block font-heading font-700 text-body-sm text-foreground mb-2">
             Project Description <span className="text-error">*</span>
           </label>
           <textarea
@@ -370,7 +383,7 @@ export default function ContactForm() {
         </div>
 
         {/* Privacy Note */}
-        <p className="font-body text-caption text-foreground-muted">
+        <p className="font-body text-caption text-foreground-muted leading-relaxed">
           By submitting this form, you agree to our{' '}
           <a href="#" className="text-primary hover:underline">Privacy Policy</a>. 
           Your information is never shared with third parties. We'll sign an NDA on request.

@@ -51,7 +51,7 @@ export default function TestimonialsSection() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-radial-blue opacity-30 pointer-events-none" />
 
       <div className="container-custom relative">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 sm:mb-9">
           <h2 className="font-heading font-800 text-4xl md:text-5xl text-white leading-tight">
             Trusted by{' '}
             <span
@@ -68,7 +68,7 @@ export default function TestimonialsSection() {
         </div>
 
         <div className="relative overflow-hidden">
-          <div className="reviews-track flex gap-5 w-max py-2">
+          <div className="reviews-track flex gap-5 w-max py-0.5">
             {movingCards.map((item, idx) => (
               <article
                 key={`${item.id}-${idx}`}

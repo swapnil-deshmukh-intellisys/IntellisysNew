@@ -13,6 +13,7 @@ const steps = [
     duration: '1-3 days',
     output: 'Project Brief + Estimate',
     color: 'text-primary',
+    badgeColor: 'bg-sky-600',
     bg: 'bg-primary/10',
     border: 'border-primary/20',
   },
@@ -25,6 +26,7 @@ const steps = [
     duration: '1-2 weeks',
     output: 'Tech Spec + Figma Prototype',
     color: 'text-accent',
+    badgeColor: 'bg-violet-600',
     bg: 'bg-accent/10',
     border: 'border-violet-100',
   },
@@ -37,6 +39,7 @@ const steps = [
     duration: '4-16 weeks',
     output: 'Working Software + Sprint Reports',
     color: 'text-secondary',
+    badgeColor: 'bg-emerald-600',
     bg: 'bg-secondary/10',
     border: 'border-emerald-100',
   },
@@ -49,6 +52,7 @@ const steps = [
     duration: '1-2 weeks',
     output: 'Production Deployment + 30-day Support',
     color: 'text-accent',
+    badgeColor: 'bg-amber-500',
     bg: 'bg-accent/10',
     border: 'border-amber-100',
   },
@@ -68,7 +72,7 @@ export default function ProcessSection() {
   }, []);
 
   return (
-    <section className="section-padding bg-background-muted relative overflow-hidden" ref={sectionRef}>
+    <section className="section-padding bg-[#FEFEFE] relative overflow-hidden" ref={sectionRef}>
       <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20 pointer-events-none" />
 
       <div className="container-custom relative">
@@ -94,43 +98,55 @@ export default function ProcessSection() {
         {/* Steps */}
         <div className="relative">
           {/* Connecting Line */}
-          <div className="absolute top-10 left-0 right-0 h-0.5 bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 hidden lg:block" />
+          <div className="absolute left-0 right-0 top-1/2 h-0.5 -translate-y-1/2 bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 hidden lg:block" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step, index) => (
               <div
                 key={step.step}
-                className={`relative bg-background-card rounded-3xl border ${step.border} p-7 shadow-md-card hover:shadow-lg-card transition-all duration-400 hover:-translate-y-1 ${
+                className={`group relative h-full ${
                   isVisible ? 'animate-fade-up' : 'opacity-0'
                 }`}
                 style={{ animationDelay: `${index * 0.12}s` }}
               >
-                {/* Step Number + Icon */}
-                <div className="flex items-center gap-3 mb-5">
-                  <div className={`w-12 h-12 ${step.bg} border-2 ${step.border} rounded-2xl flex items-center justify-center relative z-10 bg-white`}>
-                    <span className={`font-heading font-900 text-heading-lg ${step.color}`}>{step.step}</span>
-                  </div>
-                  <div className={`w-10 h-10 ${step.bg} rounded-xl flex items-center justify-center`}>
-                    <Icon name={step.icon as any} size={20} className={step.color} />
-                  </div>
-                </div>
+                <div className="relative h-full translate-x-0 translate-y-0 transition-transform duration-400 group-hover:-translate-y-1">
+                  <div className="pointer-events-none absolute inset-0 translate-x-[6px] translate-y-[6px] rounded-3xl bg-[linear-gradient(145deg,rgba(186,194,205,0.96)_0%,rgba(205,213,223,0.94)_45%,rgba(221,227,235,0.92)_100%)] border border-slate-300/70" />
 
-                <h3 className="font-heading font-700 text-heading-xl text-foreground mb-3">
-                  {step.title}
-                </h3>
-                <p className="font-body text-body-sm text-foreground-secondary leading-relaxed mb-5">
-                  {step.description}
-                </p>
+                  <div className="relative h-full flex flex-col overflow-hidden rounded-3xl border border-white/85 p-7 bg-[linear-gradient(145deg,rgba(255,255,255,0.82)_0%,rgba(244,247,251,0.74)_45%,rgba(232,238,246,0.78)_100%)] backdrop-blur-md shadow-[inset_0_1px_0_rgba(255,255,255,0.98),inset_0_-1px_0_rgba(255,255,255,0.22)]">
+                    <div className="pointer-events-none absolute inset-0 rounded-3xl border border-white/45" />
+                    <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-[linear-gradient(180deg,rgba(255,255,255,0.34),transparent)]" />
+                    <div className="pointer-events-none absolute -left-5 top-[-10%] h-[145%] w-20 rotate-[28deg] bg-[linear-gradient(180deg,rgba(255,255,255,0.58)_0%,rgba(255,255,255,0.12)_45%,rgba(255,255,255,0.02)_100%)] opacity-80" />
+                    <div className="pointer-events-none absolute right-7 top-[-20%] h-[138%] w-px rotate-[28deg] bg-white/85 opacity-85 shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
+                    <div className="pointer-events-none absolute left-10 top-[8%] h-px w-[78%] rotate-[28deg] bg-white/70 opacity-75 shadow-[0_0_8px_rgba(255,255,255,0.45)]" />
 
-                {/* Meta */}
-                <div className="space-y-2 pt-4 border-t border-border">
-                  <div className="flex items-center gap-2">
-                    <Icon name="ClockIcon" size={12} className="text-foreground-muted" />
-                    <span className="font-body text-caption text-foreground-muted">Duration: {step.duration}</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <Icon name="DocumentCheckIcon" size={12} className="text-foreground-muted mt-0.5 flex-shrink-0" />
-                    <span className="font-body text-caption text-foreground-muted">{step.output}</span>
+                    {/* Step Number + Icon */}
+                    <div className="relative z-10 flex items-center gap-3 mb-5">
+                      <div className={`w-12 h-12 ${step.badgeColor} rounded-2xl flex items-center justify-center shadow-[0_10px_18px_rgba(15,23,42,0.12)]`}>
+                        <span className="font-heading font-900 text-heading-lg text-white">{step.step}</span>
+                      </div>
+                      <div className={`w-10 h-10 ${step.bg} rounded-xl flex items-center justify-center border border-white/60 bg-[#FEFEFE]`}>
+                        <Icon name={step.icon as any} size={20} className={step.color} />
+                      </div>
+                    </div>
+
+                    <h3 className="relative z-10 font-heading font-700 text-heading-xl text-foreground mb-3">
+                      {step.title}
+                    </h3>
+                    <p className="relative z-10 font-body text-body-sm text-foreground-secondary leading-relaxed mb-5">
+                      {step.description}
+                    </p>
+
+                    {/* Meta */}
+                    <div className="relative z-10 space-y-2 pt-4 border-t border-border mt-auto">
+                      <div className="flex items-center gap-2">
+                        <Icon name="ClockIcon" size={12} className="text-foreground-muted" />
+                        <span className="font-body text-caption text-foreground-muted">Duration: {step.duration}</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <Icon name="DocumentCheckIcon" size={12} className="text-foreground-muted mt-0.5 flex-shrink-0" />
+                        <span className="font-body text-caption text-foreground-muted">{step.output}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

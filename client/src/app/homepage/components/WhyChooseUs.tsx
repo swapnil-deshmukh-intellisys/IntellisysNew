@@ -68,9 +68,9 @@ export default function WhyChooseUs() {
   }, []);
 
   return (
-    <section className="section-padding pt-6 sm:pt-8 lg:pt-10 bg-background relative overflow-hidden" ref={sectionRef}>
+    <section className="section-padding pt-2 sm:pt-3 lg:pt-4 bg-[#FEFEFE] relative overflow-hidden" ref={sectionRef}>
       <div className="container-custom">
-        <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} text-center max-w-4xl mx-auto mb-12`}>
+        <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} text-center max-w-4xl mx-auto mb-9 sm:mb-10`}>
           <h2 className="font-heading font-800 text-display-md text-foreground mb-6">
             We Don't Just Build Software.{' '}
             <span
@@ -91,11 +91,11 @@ export default function WhyChooseUs() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start lg:items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start lg:items-stretch">
           {/* Left: Image + Floating Cards */}
-          <div className="relative lg:self-center">
+          <div className="relative lg:h-full">
             <div
-              className={`relative h-[400px] sm:h-[400px] lg:h-[520px] rounded-3xl overflow-hidden shadow-xl-card ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}>
+              className={`relative h-[400px] sm:h-[400px] lg:h-full rounded-3xl overflow-hidden shadow-xl-card ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}>
 
               <AppImage
                 src="https://img.rocket.new/generatedImages/rocket_gen_img_1539c59d0-1771170881858.png"
@@ -109,7 +109,7 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Right: Content */}
-          <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} lg:self-center`}>
+          <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} lg:h-full`}>
             {/* Reasons Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {reasons.map((reason, i) =>
@@ -129,10 +129,12 @@ export default function WhyChooseUs() {
                       <p className="font-body text-caption text-slate-500 mt-1">{reason.metricLabel}</p>
                     </div>
                   </div>
-                  <h4 className="relative z-10 font-heading font-700 text-xl sm:text-heading-xl text-foreground mb-2 leading-tight">
-                    {reason.title}
-                  </h4>
-                  <p className="relative z-10 font-body text-body-sm text-foreground-secondary leading-relaxed mb-4">
+                  <div className="relative z-10 lg:min-h-[5rem]">
+                    <h4 className="font-heading font-700 text-xl sm:text-heading-xl text-foreground mb-2 leading-tight">
+                      {reason.title}
+                    </h4>
+                  </div>
+                  <p className="relative z-10 font-body text-body-sm text-foreground-secondary leading-relaxed mb-4 lg:min-h-[4.5rem]">
                     {reason.description}
                   </p>
                   <div className="relative z-10 inline-flex items-center gap-2">
@@ -149,7 +151,7 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Full-width Tech Partners */}
-        <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} mt-14`}>
+        <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} mt-9 sm:mt-10`}>
           <p className="font-heading font-700 text-sm sm:text-base md:text-lg text-foreground-muted uppercase tracking-[0.14em] text-center mb-5">
             Technology Partners
           </p>

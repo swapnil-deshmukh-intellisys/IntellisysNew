@@ -15,7 +15,7 @@ export default function CareersPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-[#FEFEFE]">
         <CareersHero />
         {/* <WhyJoinSection />
         <LifeAtIntellisys /> */}
