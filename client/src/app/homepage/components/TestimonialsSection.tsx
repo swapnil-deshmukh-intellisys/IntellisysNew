@@ -23,7 +23,7 @@ const testimonials = [
     author: 'Arjun Sharma',
     role: 'VP Engineering',
     company: 'FinBridge Technologies',
-    location: 'Mumbai',
+    location: 'Pune',
     avatar: 'https://img.rocket.new/generatedImages/rocket_gen_img_1e1073bc1-1767880718853.png',
     metric: '40%',
     metricLabel: 'cost reduction',

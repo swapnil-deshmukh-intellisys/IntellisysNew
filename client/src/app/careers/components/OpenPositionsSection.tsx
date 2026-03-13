@@ -71,7 +71,7 @@ const fallbackJobs: Job[] = [
   {
     id: 'business-development-manager',
     title: 'Business Development Manager',
-    location: 'Mumbai / Pune',
+    location: 'Pune',
     type: 'Full-time',
     experience: '4-7 years',
     category: 'Sales & BD',
