@@ -80,16 +80,16 @@
   --gradient-card: linear-gradient(145deg, rgba(17,24,39,0.07) 0%, rgba(75,85,99,0.06) 100%);
 
   
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
-  --shadow-lg: 0 10px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
-  --shadow-xl: 0 20px 60px rgba(0,0,0,0.15), 0 8px 20px rgba(0,0,0,0.08);
-  --shadow-blue: 0 8px 32px rgba(0,0,0,0.3);
-  --shadow-blue-lg: 0 16px 48px rgba(0,0,0,0.35);
-  --shadow-blue-sm: 0 4px 16px rgba(0,0,0,0.24);
-  --shadow-teal: 0 8px 32px rgba(55,65,81,0.24);
-  --shadow-dark-card: 0 4px 24px rgba(0,0,0,0.3);
-  --shadow-dark-xl: 0 20px 80px rgba(0,0,0,0.5);
+  --shadow-sm: 1px 1px 3px rgba(15,23,42,0.07), 2px 3px 5px rgba(15,23,42,0.05);
+  --shadow-md: 1px 1px 3px rgba(15,23,42,0.07), 2px 3px 5px rgba(15,23,42,0.05);
+  --shadow-lg: 1px 2px 4px rgba(15,23,42,0.08), 3px 4px 6px rgba(15,23,42,0.06);
+  --shadow-xl: 1px 2px 4px rgba(15,23,42,0.08), 3px 4px 6px rgba(15,23,42,0.06);
+  --shadow-blue: 1px 1px 3px rgba(15,23,42,0.07), 2px 3px 5px rgba(15,23,42,0.05);
+  --shadow-blue-lg: 1px 2px 4px rgba(15,23,42,0.08), 3px 4px 6px rgba(15,23,42,0.06);
+  --shadow-blue-sm: 1px 1px 3px rgba(15,23,42,0.07), 2px 3px 5px rgba(15,23,42,0.05);
+  --shadow-teal: 1px 1px 3px rgba(15,23,42,0.07), 2px 3px 5px rgba(15,23,42,0.05);
+  --shadow-dark-card: 1px 1px 3px rgba(2,6,23,0.24), 2px 3px 5px rgba(2,6,23,0.18);
+  --shadow-dark-xl: 1px 2px 4px rgba(2,6,23,0.28), 3px 4px 6px rgba(2,6,23,0.2);
 
   
   --space-xs: 0.25rem;
@@ -105,7 +105,7 @@
   
   --font-heading: 'Plus Jakarta Sans', sans-serif;
   --font-body: 'DM Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'JetBrains Mono', monospace;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -292,12 +292,18 @@ h1, h2, h3, h4, h5, h6 {
   100% { transform: translateX(90vw) translateY(0); opacity: 0.1; }
 }
 
+@keyframes reviews-rtl {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
 .animate-float { animation: float-up-down 6s ease-in-out infinite; }
 .animate-float-diagonal { animation: float-diagonal 8s ease-in-out infinite; }
 .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
 .animate-spin-slow { animation: spin-slow 20s linear infinite; }
 .animate-fade-up { animation: fade-up 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
 .animate-hero-sweep { animation: hero-sweep 16s linear infinite; }
+.animate-reviews-rtl { animation: reviews-rtl 34s linear infinite; }
 
 
 .hero-grid-pattern {

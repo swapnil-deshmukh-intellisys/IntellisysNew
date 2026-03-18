@@ -72,12 +72,12 @@ export default function ProcessSection() {
   }, []);
 
   return (
-    <section className="section-padding bg-[#FEFEFE] relative overflow-hidden" ref={sectionRef}>
+    <section className="py-10 sm:py-12 bg-[#FEFEFE] relative overflow-hidden" ref={sectionRef}>
       <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20 pointer-events-none" />
 
       <div className="container-custom relative">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16"><h2 className="font-heading font-800 text-display-md text-foreground mb-4">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12"><h2 className="font-heading font-800 text-display-md text-foreground mb-4">
             Our{' '}
             <span
               style={{
@@ -119,13 +119,10 @@ export default function ProcessSection() {
                     <div className="pointer-events-none absolute right-7 top-[-20%] h-[138%] w-px rotate-[28deg] bg-white/85 opacity-85 shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
                     <div className="pointer-events-none absolute left-10 top-[8%] h-px w-[78%] rotate-[28deg] bg-white/70 opacity-75 shadow-[0_0_8px_rgba(255,255,255,0.45)]" />
 
-                    {/* Step Number + Icon */}
-                    <div className="relative z-10 flex items-center gap-3 mb-5">
-                      <div className={`w-12 h-12 ${step.badgeColor} rounded-2xl flex items-center justify-center shadow-[0_10px_18px_rgba(15,23,42,0.12)]`}>
+                    {/* Step Number */}
+                    <div className="relative z-10 mb-5">
+                      <div className={`w-12 h-12 ${step.badgeColor} rounded-2xl flex items-center justify-center shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)]`}>
                         <span className="font-heading font-900 text-heading-lg text-white">{step.step}</span>
-                      </div>
-                      <div className={`w-10 h-10 ${step.bg} rounded-xl flex items-center justify-center border border-white/60 bg-[#FEFEFE]`}>
-                        <Icon name={step.icon as any} size={20} className={step.color} />
                       </div>
                     </div>
 
@@ -157,3 +154,4 @@ export default function ProcessSection() {
     </section>
   );
 }
+

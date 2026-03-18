@@ -13,7 +13,7 @@ export default async function ProtectedLayout({ children }: { children: React.Re
       <Sidebar />
       <div className="flex-1 min-w-0 pb-20 lg:pb-0">
         <Topbar />
-        <main className="p-4 sm:p-6">{children}</main>
+        <main className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 sm:py-6">{children}</main>
       </div>
       <MobileNav />
     </div>

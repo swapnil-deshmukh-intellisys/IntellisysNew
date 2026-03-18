@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 interface Column<T> {
   key: keyof T;
@@ -12,9 +15,20 @@ interface DataTableProps<T> {
   rows: T[];
   rowKey: (row: T) => string;
   mobileCard: (row: T) => React.ReactNode;
+  rowHref?: (row: T) => string | null;
 }
 
-export function DataTable<T>({ columns, rows, rowKey, mobileCard }: DataTableProps<T>) {
+export function DataTable<T>({ columns, rows, rowKey, mobileCard, rowHref }: DataTableProps<T>) {
+  const router = useRouter();
+
+  const isInteractiveTarget = (target: EventTarget | null) => {
+    return target instanceof HTMLElement && Boolean(target.closest('a,button,input,select,textarea,label'));
+  };
+
+  const openRow = (href: string | null) => {
+    if (href) router.push(href);
+  };
+
   return (
     <div>
       <div className="hidden md:block overflow-x-auto card">
@@ -29,8 +43,25 @@ export function DataTable<T>({ columns, rows, rowKey, mobileCard }: DataTablePro
             </tr>
           </thead>
           <tbody>
-            {rows.map((row) => (
-              <tr key={rowKey(row)} className="border-b border-slate-100">
+            {rows.map((row) => {
+              const href = rowHref ? rowHref(row) : null;
+              return (
+              <tr
+                key={rowKey(row)}
+                className={`border-b border-slate-100 ${href ? 'cursor-pointer transition hover:bg-slate-50 focus-within:bg-slate-50' : ''}`}
+                onClick={(e) => {
+                  if (!href || isInteractiveTarget(e.target)) return;
+                  openRow(href);
+                }}
+                onKeyDown={(e) => {
+                  if (!href || e.target !== e.currentTarget) return;
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openRow(href);
+                  }
+                }}
+                tabIndex={href ? 0 : -1}
+              >
                 {columns.map((col) => {
                   const value = row[col.key];
                   return (
@@ -40,15 +71,35 @@ export function DataTable<T>({ columns, rows, rowKey, mobileCard }: DataTablePro
                   );
                 })}
               </tr>
-            ))}
+            )})}
           </tbody>
         </table>
       </div>
 
-      <div className="md:hidden space-y-3">
-        {rows.map((row) => (
-          <div key={rowKey(row)} className="card p-3">{mobileCard(row)}</div>
-        ))}
+      <div className="space-y-3 md:hidden">
+        {rows.map((row) => {
+          const href = rowHref ? rowHref(row) : null;
+          return (
+            <div
+              key={rowKey(row)}
+              className={`card p-4 ${href ? 'cursor-pointer transition hover:border-brand-200 hover:bg-slate-50' : ''}`}
+              onClick={(e) => {
+                if (!href || isInteractiveTarget(e.target)) return;
+                openRow(href);
+              }}
+              onKeyDown={(e) => {
+                if (!href || e.target !== e.currentTarget) return;
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  openRow(href);
+                }
+              }}
+              tabIndex={href ? 0 : -1}
+            >
+              {mobileCard(row)}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

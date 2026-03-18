@@ -70,7 +70,7 @@ export default function AboutPage() {
           <div className="container-custom relative pb-16 sm:pb-20">
             <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
               <div>
-                <p className="mb-4 font-mono text-caption uppercase tracking-[0.18em] text-primary">About Intellisys</p>
+                <p className="mb-4 font-body text-caption uppercase  text-primary">About Intellisys</p>
                 <h1 className="max-w-4xl font-heading text-4xl font-900 leading-tight text-foreground sm:text-5xl lg:text-display-lg">
                   We build digital systems that are structured for delivery, scale, and real business use.
                 </h1>
@@ -80,8 +80,8 @@ export default function AboutPage() {
                 </p>
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <Link
-                    href="/contact"
-                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-gradient-primary px-7 py-3.5 font-heading text-body-base font-700 text-white shadow-blue transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-lg"
+                    href="/contact#contact-form"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-gradient-primary px-7 py-3.5 font-heading text-body-base font-700 text-white shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] transition-all duration-300 hover:scale-[1.02]"
                   >
                     Talk to Our Team
                     <Icon name="ArrowRightIcon" size={18} />
@@ -97,8 +97,8 @@ export default function AboutPage() {
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-[1.75rem] border border-slate-200/80 bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)] sm:col-span-2">
-                  <p className="font-mono text-caption uppercase tracking-[0.16em] text-primary">Snapshot</p>
+                <div className="rounded-[1.75rem] border border-slate-200/80 bg-white p-6 shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] sm:col-span-2">
+                  <p className="font-body text-caption uppercase tracking-[0.16em] text-primary">Snapshot</p>
                   <div className="mt-4 grid gap-5 sm:grid-cols-3">
                     <div>
                       <div className="font-heading text-3xl font-800 text-foreground">End-to-end</div>
@@ -143,7 +143,7 @@ export default function AboutPage() {
           <div className="container-custom">
             <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
               <div>
-                <p className="font-mono text-caption uppercase tracking-[0.18em] text-primary">Who We Are</p>
+                <p className="font-body text-caption uppercase  text-primary">Who We Are</p>
                 <h2 className="mt-3 font-heading text-display-md font-800 leading-tight text-foreground">
                   A delivery-focused technology partner, not just a vendor.
                 </h2>
@@ -167,14 +167,14 @@ export default function AboutPage() {
         <section className="section-padding bg-[#F8FAFC] border-y border-slate-200/70">
           <div className="container-custom">
             <div className="max-w-3xl">
-              <p className="font-mono text-caption uppercase tracking-[0.18em] text-primary">Core Values</p>
+              <p className="font-body text-caption uppercase  text-primary">Core Values</p>
               <h2 className="mt-3 font-heading text-display-md font-800 text-foreground">The standards behind our work</h2>
             </div>
             <div className="mt-10 grid gap-6 lg:grid-cols-3">
               {coreValues.map((value) => (
                 <div
                   key={value.title}
-                  className="rounded-[1.75rem] border border-slate-200/80 bg-white p-7 shadow-[0_16px_40px_rgba(15,23,42,0.05)]"
+                  className="rounded-[1.75rem] border border-slate-200/80 bg-white p-7 shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)]"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10">
                     <Icon name={value.icon as any} size={22} className="text-primary" />
@@ -191,7 +191,7 @@ export default function AboutPage() {
           <div className="container-custom">
             <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-14">
               <div className="rounded-[2rem] border border-slate-200/80 bg-[linear-gradient(145deg,rgba(255,255,255,0.95)_0%,rgba(244,247,251,0.92)_100%)] p-8">
-                <p className="font-mono text-caption uppercase tracking-[0.18em] text-primary">Capabilities</p>
+                <p className="font-body text-caption uppercase  text-primary">Capabilities</p>
                 <h2 className="mt-3 font-heading text-display-sm font-800 leading-tight text-foreground">
                   What we help teams build and improve
                 </h2>
@@ -210,8 +210,8 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="rounded-[2rem] border border-slate-200/80 bg-white p-8 shadow-[0_18px_45px_rgba(15,23,42,0.05)]">
-                <p className="font-mono text-caption uppercase tracking-[0.18em] text-primary">Operating Model</p>
+              <div className="rounded-[2rem] border border-slate-200/80 bg-white p-8 shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)]">
+                <p className="font-body text-caption uppercase  text-primary">Operating Model</p>
                 <h2 className="mt-3 font-heading text-display-sm font-800 leading-tight text-foreground">
                   How an engagement typically moves forward
                 </h2>
@@ -235,10 +235,10 @@ export default function AboutPage() {
 
         <section className="section-padding bg-[#F8FAFC] border-t border-slate-200/70">
           <div className="container-custom">
-            <div className="overflow-hidden rounded-[2rem] border border-slate-200/80 bg-[linear-gradient(145deg,rgba(255,255,255,0.96)_0%,rgba(244,247,251,0.92)_100%)] px-6 py-8 shadow-[0_20px_60px_rgba(15,23,42,0.06)] sm:px-8 sm:py-10 lg:px-12">
+            <div className="overflow-hidden rounded-[2rem] border border-slate-200/80 bg-[linear-gradient(145deg,rgba(255,255,255,0.96)_0%,rgba(244,247,251,0.92)_100%)] px-6 py-8 shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] sm:px-8 sm:py-10 lg:px-12">
               <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
                 <div>
-                  <p className="font-mono text-caption uppercase tracking-[0.18em] text-primary">Start a Conversation</p>
+                  <p className="font-body text-caption uppercase  text-primary">Start a Conversation</p>
                   <h2 className="mt-3 font-heading text-display-md font-800 leading-tight text-foreground">
                     If you need a team that can actually move from scope to shipped product, talk to us.
                   </h2>
@@ -249,8 +249,8 @@ export default function AboutPage() {
                 </div>
                 <div className="flex flex-col gap-4 lg:items-end">
                   <Link
-                    href="/contact"
-                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-gradient-primary px-7 py-3.5 font-heading text-body-base font-700 text-white shadow-blue transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-lg"
+                    href="/contact#contact-form"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-gradient-primary px-7 py-3.5 font-heading text-body-base font-700 text-white shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] transition-all duration-300 hover:scale-[1.02]"
                   >
                     Contact Intellisys
                     <Icon name="ArrowRightIcon" size={18} />
@@ -272,3 +272,4 @@ export default function AboutPage() {
     </>
   );
 }
+

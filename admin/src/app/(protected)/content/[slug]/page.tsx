@@ -61,7 +61,7 @@ export default function ContentPageEditor() {
           <label className="text-sm font-medium">Page Title</label>
           <input className="input mt-1" value={title} onChange={(e) => setTitle(e.target.value)} />
           <label className="text-sm font-medium mt-4 block">Sections JSON</label>
-          <textarea className="input mt-1 min-h-[360px] font-mono text-xs" value={sectionsJson} onChange={(e) => setSectionsJson(e.target.value)} />
+          <textarea className="input mt-1 min-h-[360px] font-body text-xs" value={sectionsJson} onChange={(e) => setSectionsJson(e.target.value)} />
         </section>
         <aside className="space-y-4">
           <div className="card p-4">

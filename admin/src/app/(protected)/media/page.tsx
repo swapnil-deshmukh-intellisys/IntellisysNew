@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import { PageHeader } from '@/components/PageHeader';
 import { useToast } from '@/components/ToastProvider';
 
+const bucketOptions = ['contact-inquiries', 'recruitment-attachments', 'contact-attachments'];
+
 export default function MediaPage() {
   const { pushToast } = useToast();
   const [rows, setRows] = useState<any[]>([]);
-  const [bucket, setBucket] = useState('contact-attachments');
+  const [bucket, setBucket] = useState(bucketOptions[0]);
   const [folder, setFolder] = useState('');
   const [file, setFile] = useState<File | null>(null);
 
@@ -41,10 +43,12 @@ export default function MediaPage() {
 
   return (
     <div>
-      <PageHeader title="Media Library" subtitle="Grid/list, upload, and asset references" actions={<button className="btn-secondary" onClick={load}>Refresh</button>} />
+      <PageHeader title="Media Library" subtitle="Manage sales, recruitment, and legacy storage buckets" actions={<button className="btn-secondary" onClick={load}>Refresh</button>} />
 
       <div className="card p-4 mb-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        <input className="input" value={bucket} onChange={(e) => setBucket(e.target.value)} placeholder="Bucket" />
+        <select className="input" value={bucket} onChange={(e) => setBucket(e.target.value)}>
+          {bucketOptions.map((item) => <option key={item} value={item}>{item}</option>)}
+        </select>
         <input className="input" value={folder} onChange={(e) => setFolder(e.target.value)} placeholder="Folder" />
         <input className="input" type="file" onChange={(e) => setFile(e.target.files?.[0] || null)} />
         <button className="btn-primary min-h-11" onClick={upload}>Upload</button>

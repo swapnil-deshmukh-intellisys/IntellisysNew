@@ -34,7 +34,7 @@ export default function UsersPage() {
 
   return (
     <div>
-      <PageHeader title="Users & Roles" subtitle="RBAC access control" actions={<button className="btn-secondary" onClick={load}>Refresh</button>} />
+      <PageHeader title="Team & Roles" subtitle="RBAC access control" actions={<button className="btn-secondary" onClick={load}>Refresh</button>} />
       <div className="card overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-slate-50 border-b border-slate-200">

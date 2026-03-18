@@ -27,7 +27,7 @@ export default function NewJobPage() {
 
   return (
     <div>
-      <PageHeader title="Create Job" subtitle="Draft, preview, publish workflow" actions={<button className="btn-primary" onClick={submit}>Save Draft</button>} />
+      <PageHeader title="Create Role" subtitle="Draft, preview, publish workflow" actions={<button className="btn-primary" onClick={submit}>Save Draft</button>} />
       <div className="card p-4 grid sm:grid-cols-2 gap-3">
         {[
           ['title', 'Title'], ['category', 'Category'], ['location', 'Location'], ['type', 'Type'], ['experience', 'Experience'], ['salary', 'Salary'], ['department', 'Department']

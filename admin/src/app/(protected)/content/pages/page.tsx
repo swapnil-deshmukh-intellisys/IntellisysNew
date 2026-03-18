@@ -6,7 +6,7 @@ const pages = ['homepage', 'services', 'technologies', 'careers', 'contact', 'he
 export default function ContentPagesIndex() {
   return (
     <div>
-      <PageHeader title="Content Pages" subtitle="Draft, review, publish, rollback" />
+      <PageHeader title="Content" subtitle="Draft, review, publish, rollback" />
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {pages.map((slug) => (
           <div key={slug} className="card p-4">

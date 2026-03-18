@@ -105,10 +105,14 @@ export default function TechStackSection() {
                       <div className="pointer-events-none absolute right-7 top-[-20%] h-[138%] w-px rotate-[28deg] bg-white/85 opacity-85 shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
                       <div className="pointer-events-none absolute left-10 top-[8%] h-px w-[78%] rotate-[28deg] bg-white/70 opacity-75 shadow-[0_0_8px_rgba(255,255,255,0.45)]" />
 
-                      <div className="relative z-10 w-12 h-12 rounded-xl border border-slate-300 bg-[#FEFEFE] flex items-center justify-center mb-5 shadow-[0_8px_18px_rgba(148,163,184,0.12)]">
-                        <Icon name={cat.icon as any} size={22} className="text-slate-700" />
+                      <div className="relative z-10 mb-4 flex items-start justify-between gap-4">
+                        <h3 className="font-heading font-700 text-xl sm:text-heading-xl text-slate-900">
+                          {cat.category}
+                        </h3>
+                        <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-slate-300 bg-[#FEFEFE] shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)]">
+                          <Icon name={cat.icon as any} size={22} className="text-slate-700" />
+                        </div>
                       </div>
-                      <h3 className="relative z-10 font-heading font-700 text-xl sm:text-heading-xl text-slate-900 mb-2">{cat.category}</h3>
                       <p className="relative z-10 font-body text-sm sm:text-body-sm text-slate-700 mb-4 leading-relaxed">
                         Our {cat.category.toLowerCase()} stack combines proven tools and modern frameworks.
                       </p>
@@ -116,7 +120,7 @@ export default function TechStackSection() {
                         {cat.techs.map((tech) => (
                           <span
                             key={tech}
-                            className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FEFEFE] border border-slate-300 rounded-lg font-mono text-xs sm:text-sm text-slate-700"
+                            className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#FEFEFE] font-mono border border-slate-300 rounded-lg font-body text-xs sm:text-sm text-slate-700"
                           >
                             {resolveBrandName(tech) ? <BrandIcon name={resolveBrandName(tech)!} size={16} /> : null}
                             {tech}
@@ -145,3 +149,4 @@ export default function TechStackSection() {
     </section>
   );
 }
+

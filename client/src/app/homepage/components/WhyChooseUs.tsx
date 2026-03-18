@@ -13,6 +13,7 @@ const reasons = [
   description: 'Agile sprints with 2-week delivery cycles. MVP to production in 6–8 weeks.',
   metric: '6–8 weeks',
   metricLabel: 'avg. MVP delivery',
+  note: 'T&C apply',
   color: 'text-accent',
   bg: 'bg-accent/10'
 },
@@ -22,6 +23,7 @@ const reasons = [
   description: 'ISO 27001 certified processes. Every project ships with security audits built in.',
   metric: 'ISO 27001',
   metricLabel: 'certified',
+  note: 'T&C apply',
   color: 'text-secondary',
   bg: 'bg-secondary/10'
 },
@@ -31,6 +33,7 @@ const reasons = [
   description: 'Your own pod of engineers, designers, and a project manager — no shared resources.',
   metric: '100%',
   metricLabel: 'dedicated team',
+  note: 'T&C apply',
   color: 'text-primary',
   bg: 'bg-primary/10'
 },
@@ -40,6 +43,7 @@ const reasons = [
   description: 'Real-time dashboards, weekly sprint reviews, and complete code ownership.',
   metric: 'Weekly',
   metricLabel: 'progress reports',
+  note: 'T&C apply',
   color: 'text-accent',
   bg: 'bg-accent/10'
 }];
@@ -85,17 +89,17 @@ export default function WhyChooseUs() {
             </span>
           </h2>
 
-          <p className="font-body text-body-lg text-foreground-secondary leading-relaxed">
+          {/* <p className="font-body text-body-lg text-foreground-secondary leading-relaxed">
             With over 11 years of engineering excellence, our team of 50+ specialists has helped 
             200+ companies across India and Southeast Asia transform their technology.
-          </p>
+          </p> */}
         </div>
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start lg:items-stretch">
           {/* Left: Image + Floating Cards */}
           <div className="relative lg:h-full">
             <div
-              className={`relative h-[400px] sm:h-[400px] lg:h-full rounded-3xl overflow-hidden shadow-xl-card ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}>
+              className={`relative h-[400px] sm:h-[400px] lg:h-full rounded-3xl overflow-hidden shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}>
 
                 <AppImage
                   src="https://img.rocket.new/generatedImages/rocket_gen_img_1539c59d0-1771170881858.png"
@@ -115,10 +119,9 @@ export default function WhyChooseUs() {
               {reasons.map((reason, i) =>
               <div
                 key={reason.title}
-                className="group relative p-5 rounded-[1.35rem] border border-slate-200 bg-white/92 shadow-[0_12px_26px_rgba(15,23,42,0.10),inset_0_1px_0_rgba(255,255,255,0.85)] hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(15,23,42,0.14),inset_0_1px_0_rgba(255,255,255,0.9)] transition-all duration-300 overflow-hidden"
+                className="group relative overflow-hidden rounded-[1.35rem] border border-slate-200 bg-white/92 p-5 shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[1px_2px_4px_rgba(15,23,42,0.08),3px_4px_6px_rgba(15,23,42,0.06)]"
                 style={{ animationDelay: `${i * 0.1}s` }}>
                   <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-accent" />
-                  <div className="absolute -bottom-10 -left-10 w-24 h-24 rounded-full bg-secondary/10 blur-2xl pointer-events-none" />
 
                   <div className="relative z-10 flex items-start justify-between gap-3 mb-4">
                     <div className="w-10 h-10 bg-white border border-slate-200 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
@@ -136,6 +139,9 @@ export default function WhyChooseUs() {
                   </div>
                   <p className="relative z-10 font-body text-body-sm text-foreground-secondary leading-relaxed mb-4 lg:min-h-[4.5rem]">
                     {reason.description}
+                  </p>
+                  <p className="relative z-10 -mt-1 mb-4 font-body text-[11px] uppercase tracking-[0.12em] text-slate-500">
+                    {reason.note}
                   </p>
                   <div className="relative z-10 inline-flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary" />
@@ -202,3 +208,4 @@ export default function WhyChooseUs() {
     </section>);
 
 }
+

@@ -27,7 +27,7 @@ export const servicePages: Record<ServiceSlug, ServicePageData> = {
     slug: 'website-development',
     navLabel: 'Website Development',
     title: 'Website Development Services',
-    subtitle: 'Build fast, scalable web products that convert and grow.',
+    subtitle: 'Designing high-performance platforms that turn visitors into leads and scale with your business.',
     description:
       'From business websites to enterprise-grade web applications, we design and build high-performance platforms with clear architecture, security-first practices, and long-term maintainability.',
     heroStats: [

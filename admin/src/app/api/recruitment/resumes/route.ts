@@ -2,6 +2,10 @@ import { NextRequest } from 'next/server';
 import { requireApiRole } from '@/lib/auth';
 import { createServiceClient } from '@/lib/supabase';
 import { fail, ok } from '@/lib/http';
+import {
+  RECRUITMENT_ATTACHMENTS_BUCKET,
+  LEGACY_ATTACHMENTS_BUCKET,
+} from '@/lib/storage';
 
 export async function GET(req: NextRequest) {
   const guard = requireApiRole(req, ['super_admin', 'admin', 'recruiter', 'viewer']);
@@ -17,27 +21,29 @@ export async function GET(req: NextRequest) {
   if (error) return fail(error.message, 500);
 
   const rows = data || [];
-  const paths = rows
-    .map((r: any) => r.attachment_path)
-    .filter((p: unknown): p is string => typeof p === 'string' && p.length > 0);
+  const enriched = await Promise.all(
+    rows.map(async (r: any) => {
+      let attachmentUrl: string | null = null;
+      if (r.attachment_path) {
+        const bucketCandidates = [r.attachment_bucket, RECRUITMENT_ATTACHMENTS_BUCKET, LEGACY_ATTACHMENTS_BUCKET].filter(Boolean);
+        for (const bucket of bucketCandidates) {
+          const { data: signed, error: signedErr } = await supabase.storage
+            .from(bucket)
+            .createSignedUrl(r.attachment_path, 60 * 30);
 
-  const urlMap = new Map<string, string>();
-  if (paths.length > 0) {
-    const { data: signed, error: signedErr } = await supabase.storage
-      .from('contact-attachments')
-      .createSignedUrls(paths, 60 * 30);
+          if (!signedErr && signed?.signedUrl) {
+            attachmentUrl = signed.signedUrl;
+            break;
+          }
+        }
+      }
 
-    if (!signedErr && signed) {
-      signed.forEach((item, idx) => {
-        if (item.signedUrl) urlMap.set(paths[idx], item.signedUrl);
-      });
-    }
-  }
-
-  const enriched = rows.map((r: any) => ({
-    ...r,
-    attachment_url: r.attachment_path ? urlMap.get(r.attachment_path) || null : null,
-  }));
+      return {
+        ...r,
+        attachment_url: attachmentUrl,
+      };
+    })
+  );
 
   return ok({ rows: enriched });
 }

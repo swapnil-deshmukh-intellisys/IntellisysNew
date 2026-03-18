@@ -13,8 +13,12 @@ export const metadata: Metadata = {
     'Intellisys IT Solutions Pvt. Ltd. delivers custom software development, cloud solutions, mobile apps, cybersecurity, UI/UX design, and enterprise technology services in India.',
   icons: {
     icon: [
-      { url: '/assets/images/LogoDark.png', type: 'image/png' }
+      { url: '/assets/images/LogoSmall.png', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
     ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
 };
 

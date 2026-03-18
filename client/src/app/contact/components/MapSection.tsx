@@ -73,9 +73,9 @@ export default function MapSection() {
   }, [googleMapsApiKey, hasOfficialDarkMap]);
 
   return (
-    <section className="section-padding bg-[#FEFEFE] relative">
+    <section className="py-10 sm:py-12 bg-[#FEFEFE] relative">
       <div className="container-custom">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="font-heading font-800 text-display-md text-foreground mb-3">
             Find Us in{' '}
             <span
@@ -136,12 +136,12 @@ export default function MapSection() {
 
           {!hasOfficialDarkMap && (
             <div className="absolute left-3 bottom-3 z-10 rounded-lg bg-black/75 text-white text-[11px] font-body px-3 py-2">
-              Add <code className="font-mono">NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> to enable official Google dark mode.
+              Add <code className="font-body">NEXT_PUBLIC_GOOGLE_MAPS_API_KEY</code> to enable official Google dark mode.
             </div>
           )}
         </div>
 
-        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
             { icon: 'BuildingOffice2Icon', label: 'Rajiv Gandhi Infotech Park, Hinjawadi', distance: 'Approx. 3 km' },
             { icon: 'AirplaneIcon', label: 'Pune International Airport (PNQ)', distance: 'Approx. 26 km' },

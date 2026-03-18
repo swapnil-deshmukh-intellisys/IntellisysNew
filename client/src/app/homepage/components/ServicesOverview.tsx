@@ -135,8 +135,8 @@ export default function ServicesOverview() {
             </span>
           </h2>
           <p className="font-body text-sm sm:text-body-lg text-foreground-secondary px-2 sm:px-0">
-            <span className="sm:hidden">9 focused services for product, cloud, and talent growth.</span>
-            <span className="hidden sm:inline">Our service portfolio includes 9 focused offerings for product, platform, cloud, and talent growth.</span>
+            <span className="sm:hidden">Focused services for product, cloud, and talent growth.</span>
+            <span className="hidden sm:inline">Our service portfolio includes all offerings for product, platform, cloud, and talent growth.</span>
           </p>
         </div>
 
@@ -163,14 +163,16 @@ export default function ServicesOverview() {
                         <div className="pointer-events-none absolute right-7 top-[-20%] h-[138%] w-px rotate-[28deg] bg-white/85 opacity-85 shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
                         <div className="pointer-events-none absolute left-10 top-[8%] h-px w-[78%] rotate-[28deg] bg-white/70 opacity-75 shadow-[0_0_8px_rgba(255,255,255,0.45)]" />
 
-                        <div className="relative z-10 w-12 h-12 rounded-xl border border-slate-300 bg-[#FEFEFE] flex items-center justify-center mb-5 shadow-[0_8px_18px_rgba(148,163,184,0.12)]">
-                          <Icon name={service.icon as any} size={22} className="text-slate-700" />
+                        <div className="relative z-10 mb-4 flex items-start justify-between gap-4">
+                          <h3 className="font-heading font-700 text-xl sm:text-heading-xl text-slate-900">
+                            {service.title}
+                          </h3>
+                          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-slate-300 bg-[#FEFEFE] shadow-[0_8px_18px_rgba(148,163,184,0.12)]">
+                            <Icon name={service.icon as any} size={22} className="text-slate-700" />
+                          </div>
                         </div>
 
                         <div className="relative z-10">
-                          <h3 className="font-heading font-700 text-xl sm:text-heading-xl mb-2 lg:min-h-[3.5rem] text-slate-900">
-                            {service.title}
-                          </h3>
                           <p className="font-body text-sm sm:text-body-sm mb-2.5 leading-relaxed lg:min-h-[4.25rem] text-slate-700">
                             {service.description}
                           </p>

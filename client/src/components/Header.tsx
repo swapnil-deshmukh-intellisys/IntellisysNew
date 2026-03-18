@@ -167,7 +167,7 @@ export default function Header() {
                 height={135}
                 priority
                 unoptimized={useLightLogo ? false : !useDarkLogo}
-                className={`${useLightLogo ? 'h-[2.7rem] md:h-[5rem]' : 'h-[3.25rem] md:h-[6.5rem]'} w-auto`}
+                className={`${useLightLogo ? 'h-[3.4rem] md:h-[5.8rem]' : 'h-[4rem] md:h-[7.2rem]'} w-auto`}
               />
             </Link>
 
@@ -260,10 +260,10 @@ export default function Header() {
             {/* CTA */}
             <div className="hidden lg:flex items-center gap-3">
               <Link
-                href="/contact"
-                className="px-5 py-2.5 bg-gradient-primary text-white font-heading font-600 text-body-sm rounded-xl shadow-blue-sm hover:shadow-blue transition-all duration-300 hover:scale-105 active:scale-95"
+                href="/contact#contact-form"
+                className="px-5 py-2.5 bg-gradient-primary text-white font-heading font-600 text-body-sm rounded-xl shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] transition-all duration-300 hover:scale-105 active:scale-95"
               >
-                Get a Free Quote
+                For Business Inquiries
               </Link>
             </div>
 
@@ -377,11 +377,11 @@ export default function Header() {
 
             <div className="p-6 border-t border-border">
               <Link
-                href="/contact"
+                href="/contact#contact-form"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-primary text-white font-heading font-600 text-body-base rounded-xl shadow-blue-sm"
+                className="flex items-center justify-center gap-2 w-full py-3 bg-gradient-primary text-white font-heading font-600 text-body-base rounded-xl shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)]"
               >
-                Get a Free Quote
+                For Business Inquiries
                 <Icon name="ArrowRightIcon" size={16} />
               </Link>
             </div>
@@ -391,3 +391,4 @@ export default function Header() {
     </>
   );
 }
+
