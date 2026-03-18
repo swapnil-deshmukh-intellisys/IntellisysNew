@@ -1,125 +1,297 @@
 'use client';
 
-import React from 'react';
-import AppImage from '@/components/ui/AppImage';
+import React, { useRef } from 'react';
+import Icon from '@/components/ui/AppIcon';
 
 const testimonials = [
   {
     id: 1,
     quote:
-      "Intellisys IT delivered our entire e-commerce platform in 8 weeks - ahead of schedule and under budget. The code quality was exceptional and their team felt like an extension of our own.",
-    author: 'Priya Mehta',
-    role: 'CTO',
-    company: 'ShopKart India Pvt. Ltd.',
-    location: 'Bengaluru',
-    avatar: 'https://img.rocket.new/generatedImages/rocket_gen_img_1cd12b7c4-1770812045708.png',
-    metric: '8 weeks',
-    metricLabel: 'delivery',
+      'Intellisys built a seamless booking platform that increased our online bookings by 35% in the first two months. Performance is smooth, and user experience is significantly improved.',
+    author: 'Narendra G.',
+    role: 'Camping Project',
+    company: 'Ethereal Hills',
+    location: 'India',
+    rating: '4.9',
   },
   {
     id: 2,
     quote:
-      "We moved our entire infrastructure to AWS with Intellisys's help. Zero downtime migration, 40% cost reduction, and our platform now handles 10x the traffic. Outstanding work.",
-    author: 'Arjun Sharma',
-    role: 'VP Engineering',
-    company: 'FinBridge Technologies',
-    location: 'Pune',
-    avatar: 'https://img.rocket.new/generatedImages/rocket_gen_img_1e1073bc1-1767880718853.png',
-    metric: '40%',
-    metricLabel: 'cost reduction',
+      'They quickly understood our agro workflow and delivered a scalable system that improved operational efficiency by 30%. The platform is stable and easy for our team to manage daily.',
+    author: 'Yash U.',
+    role: 'Agro Project',
+    company: 'Client Review',
+    location: 'India',
+    rating: '4.8',
   },
   {
     id: 3,
     quote:
-      'The mobile app they built for us has a 4.8 star rating on both app stores with 50,000+ downloads. Their UI/UX team really understands what users want. Highly recommended.',
-    author: 'Sneha Krishnan',
-    role: 'Product Manager',
-    company: 'HealthPulse Solutions',
-    location: 'Chennai',
-    avatar: 'https://img.rocket.new/generatedImages/rocket_gen_img_102b90abe-1770960125698.png',
-    metric: '4.8',
-    metricLabel: 'app store rating',
+      'Good execution and support throughout. Our manual work reduced by around 25%, though a few iterations were needed to fine-tune the system for our exact processes.',
+    author: 'R. Jadhav',
+    role: 'Agro Project',
+    company: 'Client Review',
+    location: 'India',
+    rating: '4.8',
+  },
+  {
+    id: 4,
+    quote:
+      'Fast and reliable platform handling high-volume transactions with zero downtime. We saw a 40% improvement in execution speed and overall system responsiveness.',
+    author: 'Vishal A.',
+    role: 'Trading Project',
+    company: 'Client Review',
+    location: 'India',
+    rating: '5.0',
+  },
+  {
+    id: 5,
+    quote:
+      'Our website now attracts 2x more qualified leads. The professional presentation of our land portfolio significantly improved trust and conversion from serious buyers.',
+    author: 'Gajanan S.',
+    role: 'Real Estate Project',
+    company: 'Client Review',
+    location: 'India',
+    rating: '5.0',
+  },
+  {
+    id: 6,
+    quote:
+      'The HRMS system reduced manual HR workload by 50% and improved employee tracking efficiency. Clean UI and smooth adoption across all departments.',
+    author: 'Kunal V.',
+    role: 'HRMS Application',
+    company: 'Client Review',
+    location: 'India',
+    rating: '4.9',
+  },
+  {
+    id: 7,
+    quote:
+      'They helped us increase client acquisition by 45% within a quarter. Practical strategy, strong execution, and clear focus on results.',
+    author: 'Rohit V.',
+    role: 'Business Development',
+    company: 'Client Review',
+    location: 'India',
+    rating: '5.0',
+  },
+  {
+    id: 8,
+    quote:
+      'Lead flow improved by around 30% with better positioning and targeting. Results were consistent, though it took some time to fully optimize campaigns.',
+    author: 'Abhishek S.',
+    role: 'Marketing / Business Development',
+    company: 'Client Review',
+    location: 'India',
+    rating: '4.8',
+  },
+  {
+    id: 9,
+    quote:
+      'Delivered a secure fintech platform and helped scale our business by 2x in under 6 months. Strong technical and strategic execution.',
+    author: 'Surekha B.',
+    role: 'Fintech + Business Development',
+    company: 'Client Review',
+    location: 'India',
+    rating: '5.0',
+  },
+  {
+    id: 10,
+    quote:
+      'Our billing errors dropped to zero, and processing time improved by 60%. The system is accurate, secure, and handles transactions flawlessly.',
+    author: 'Suraj B.',
+    role: 'Fintech / Billing System',
+    company: 'Client Review',
+    location: 'India',
+    rating: '5.0',
+  },
+  {
+    id: 11,
+    quote:
+      'Digitized our operations and increased outreach by 35%. Strong understanding of both business and tech, though timelines had minor delays.',
+    author: 'Madhav K.',
+    role: 'Agro + Business Development',
+    company: 'Client Review',
+    location: 'India',
+    rating: '4.8',
+  },
+  {
+    id: 12,
+    quote:
+      'Their business development support helped us improve conversion rates by 38% and close deals faster. Clear strategy, consistent follow-ups, and strong execution throughout.',
+    author: 'Rameshwar B.',
+    role: 'Business Development',
+    company: 'Client Review',
+    location: 'India',
+    rating: '4.9',
   },
 ];
 
-const movingCards = [...testimonials, ...testimonials];
-
 export default function TestimonialsSection() {
-  return (
-    <section className="section-padding bg-background-dark relative overflow-hidden">
-      <div className="absolute inset-0 hero-grid-pattern opacity-20 pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-radial-blue opacity-30 pointer-events-none" />
+  const trackRef = useRef<HTMLDivElement | null>(null);
 
-      <div className="container-custom relative">
-        <div className="text-center mb-8 sm:mb-9">
-          <h2 className="font-heading font-800 text-4xl md:text-5xl text-white leading-tight">
-            Trusted by{' '}
-            <span
-              style={{
-                background: 'var(--gradient-primary)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Industry Leaders
-            </span>
-          </h2>
+  const renderRatingStars = (rating: string) => {
+    const numericRating = Number(rating);
+    const fillWidth = `${Math.max(0, Math.min(100, (numericRating / 5) * 100))}%`;
+
+    return (
+      <div className="relative inline-flex">
+        <div className="flex items-center gap-0.5 text-white/20">
+          {Array.from({ length: 5 }).map((_, starIndex) => (
+            <Icon key={`outline-${starIndex}`} name="StarIcon" size={12} />
+          ))}
         </div>
-
-        <div className="relative overflow-hidden">
-          <div className="reviews-track flex gap-5 w-max py-0.5">
-            {movingCards.map((item, idx) => (
-              <article
-                key={`${item.id}-${idx}`}
-                className="w-[340px] md:w-[380px] bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm"
-              >
-                <p className="font-body text-body-sm text-white/80 leading-relaxed mb-5">"{item.quote}"</p>
-
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-12 h-12 rounded-xl overflow-hidden border border-white/20 flex-shrink-0">
-                      <AppImage
-                        src={item.avatar}
-                        alt={`${item.author}, ${item.role}`}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="font-heading font-700 text-white text-sm truncate">{item.author}</p>
-                      <p className="font-body text-xs text-white/60 truncate">
-                        {item.role}, {item.company}
-                      </p>
-                      <p className="font-body text-xs text-white/40">{item.location}</p>
-                    </div>
-                  </div>
-
-                  <div className="text-right flex-shrink-0">
-                    <div className="font-heading font-800 text-xl text-white">{item.metric}</div>
-                    <div className="font-body text-[10px] uppercase tracking-wide text-white/45">{item.metricLabel}</div>
-                  </div>
-                </div>
-              </article>
+        <div className="absolute inset-y-0 left-0 overflow-hidden" style={{ width: fillWidth }}>
+          <div className="flex items-center gap-0.5 text-[#ffb347]">
+            {Array.from({ length: 5 }).map((_, starIndex) => (
+              <Icon key={`filled-${starIndex}`} name="StarIcon" size={12} variant="solid" />
             ))}
           </div>
         </div>
       </div>
+    );
+  };
 
-      <style jsx>{`
-        .reviews-track {
-          animation: reviews-rtl 34s linear infinite;
-        }
+  const getInitials = (name: string) =>
+    name
+      .split(' ')
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part[0]?.toUpperCase() ?? '')
+      .join('');
 
-        @keyframes reviews-rtl {
-          0% {
-            transform: translateX(0%);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-      `}</style>
+  const scrollCards = (direction: 'left' | 'right') => {
+    const node = trackRef.current;
+    if (!node) return;
+
+    const card = node.querySelector<HTMLElement>('[data-testimonial-card]');
+    const cardWidth = card?.offsetWidth ?? 360;
+    const gap = 20;
+    const amount = cardWidth + gap;
+
+    node.scrollBy({
+      left: direction === 'right' ? amount : -amount,
+      behavior: 'smooth',
+    });
+  };
+
+  return (
+    <section className="section-padding bg-background-dark relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent)]" />
+      <div className="pointer-events-none absolute -left-8 top-[-10%] h-[145%] w-24 rotate-[28deg] bg-[linear-gradient(180deg,rgba(255,255,255,0.16)_0%,rgba(255,255,255,0.05)_45%,rgba(255,255,255,0.01)_100%)] opacity-60" />
+      <div className="pointer-events-none absolute right-12 top-[-20%] h-[138%] w-px rotate-[28deg] bg-white/20 opacity-70 shadow-[0_0_8px_rgba(255,255,255,0.08)]" />
+      <div className="pointer-events-none absolute left-16 top-[8%] h-px w-[72%] rotate-[28deg] bg-white/12 opacity-70 shadow-[0_0_8px_rgba(255,255,255,0.06)]" />
+
+      <div className="container-custom relative">
+        <div className="mb-8 flex items-end justify-between gap-4 sm:mb-9">
+          <div className="text-center sm:text-left">
+            <h2 className="font-heading font-800 text-4xl md:text-5xl text-white leading-tight">
+              Trusted by{' '}
+              <span
+                style={{
+                  background: 'var(--gradient-primary)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                Industry Leaders
+              </span>
+            </h2>
+          </div>
+
+          <div className="hidden sm:flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => scrollCards('left')}
+              aria-label="Previous testimonials"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/70 bg-white text-slate-900 transition-colors hover:bg-white/90"
+            >
+              <Icon name="ChevronLeftIcon" size={18} />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollCards('right')}
+              aria-label="Next testimonials"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/70 bg-white text-slate-900 transition-colors hover:bg-white/90"
+            >
+              <Icon name="ChevronRightIcon" size={18} />
+            </button>
+          </div>
+        </div>
+
+        <div
+          ref={trackRef}
+          className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          aria-label="Client testimonials"
+        >
+          {testimonials.map((item) => (
+            <article
+              key={item.id}
+              data-testimonial-card
+              className="w-[calc(100vw-3rem)] max-w-[340px] shrink-0 snap-start md:w-[380px] rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+            >
+              <div className="mb-4 flex h-12 w-16 items-center justify-center rounded-2xl border border-white/15 bg-white/8">
+                <svg
+                  width="26"
+                  height="26"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  className="text-[#ff8a2b]"
+                >
+                  <path
+                    d="M9.2 6.5C6.9 7.8 5.6 10 5.4 13h2.8c0 2.7-1.5 4.3-4.2 4.7V15c1.1-.3 1.7-1 1.8-2.1H4.2c0-3.3 1.8-5.8 5-7.2V6.5Zm10 0c-2.3 1.3-3.6 3.5-3.8 6.5h2.8c0 2.7-1.5 4.3-4.2 4.7V15c1.1-.3 1.7-1 1.8-2.1h-1.6c0-3.3 1.8-5.8 5-7.2V6.5Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+              <p className="mb-5 min-h-[6.5rem] font-body text-body-sm leading-relaxed text-white/80 md:min-h-[7rem]">
+                "{item.quote}"
+              </p>
+
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-white/20 bg-white/10 font-heading text-sm font-800 text-white">
+                    {getInitials(item.author)}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-heading font-700 text-white text-sm truncate">{item.author}</p>
+                    <p className="font-body text-xs text-white/60 truncate">
+                      {item.role}, {item.company}
+                    </p>
+                    <p className="font-body text-xs text-white/40">{item.location}</p>
+                  </div>
+                </div>
+
+                <div className="text-right flex-shrink-0">
+                  <div className="mb-1 font-heading font-800 text-base text-white">{item.rating}/5</div>
+                  <div className="flex items-center justify-end">{renderRatingStars(item.rating)}</div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-5 flex items-center justify-center gap-2 sm:hidden">
+          <button
+            type="button"
+            onClick={() => scrollCards('left')}
+            aria-label="Previous testimonials"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/70 bg-white text-slate-900 transition-colors hover:bg-white/90"
+          >
+            <Icon name="ChevronLeftIcon" size={16} />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollCards('right')}
+            aria-label="Next testimonials"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/70 bg-white text-slate-900 transition-colors hover:bg-white/90"
+          >
+            <Icon name="ChevronRightIcon" size={16} />
+          </button>
+        </div>
+      </div>
     </section>
   );
 }
-

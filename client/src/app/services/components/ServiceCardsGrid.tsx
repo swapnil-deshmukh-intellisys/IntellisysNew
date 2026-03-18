@@ -248,6 +248,13 @@ const serviceOverlayTints: Record<string, string> = {
   'internship-programs': 'rgba(79, 70, 229, 0.65)',
 };
 
+const serviceDetailLinks: Record<string, string> = {
+  'custom-software-development': '/services/website-development',
+  'cloud-solutions': '/services/cloud-solutions',
+  'mobile-app-development': '/services/mobile-app-development',
+  'ui-ux-design': '/services/ui-ux-design',
+};
+
 export default function ServiceCardsGrid() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [visibleItems, setVisibleItems] = useState<Set<string>>(new Set());
@@ -283,8 +290,8 @@ export default function ServiceCardsGrid() {
         }}
         className={`group relative rounded-3xl border transition-all duration-400 overflow-hidden ${
           isExpanded
-            ? 'border-white/45 shadow-[0_26px_50px_rgba(2,6,23,0.45)] -translate-y-1'
-            : 'border-white/25 shadow-[0_14px_30px_rgba(2,6,23,0.33)] hover:-translate-y-1.5 hover:border-white/40 hover:shadow-[0_24px_44px_rgba(2,6,23,0.42)]'
+            ? 'border-white/45 shadow-[1px_2px_4px_rgba(2,6,23,0.28),3px_4px_6px_rgba(2,6,23,0.2)] -translate-y-1'
+            : 'border-white/25 shadow-[1px_1px_3px_rgba(2,6,23,0.24),2px_3px_5px_rgba(2,6,23,0.18)] hover:-translate-y-1.5 hover:border-white/40 hover:shadow-[1px_2px_4px_rgba(2,6,23,0.28),3px_4px_6px_rgba(2,6,23,0.2)]'
         } ${visibleItems.has(service.id) ? 'animate-fade-up' : 'opacity-0'}`}
         style={{ animationDelay: `${index * 0.08}s` }}
       >
@@ -310,10 +317,6 @@ export default function ServiceCardsGrid() {
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="w-14 h-14 rounded-2xl border border-white/45 bg-white/20 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]">
                   <Icon name={service.icon as any} size={26} className="text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]" />
-                </div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/25 bg-white/10 flex-shrink-0">
-                  <Icon name="SparklesIcon" size={12} className="text-white/80" />
-                  <span className="font-mono text-caption text-white/80 uppercase tracking-wider">Service</span>
                 </div>
               </div>
               <h3 className="font-heading font-800 text-display-sm text-white mb-2 leading-tight [text-shadow:0_1px_2px_rgba(0,0,0,0.55)]">
@@ -386,10 +389,10 @@ export default function ServiceCardsGrid() {
             </div>
 
             <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-primary text-white font-heading font-600 text-body-sm rounded-xl shadow-blue-sm hover:shadow-blue transition-all duration-300 hover:scale-105"
+              href={serviceDetailLinks[service.id] || '/services'}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-primary text-white font-heading font-600 text-body-sm rounded-xl shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] transition-all duration-300 hover:scale-105"
             >
-              Get a Quote for {service.title}
+              View Details
               <Icon name="ArrowRightIcon" size={14} />
             </Link>
           </div>
@@ -399,12 +402,12 @@ export default function ServiceCardsGrid() {
   };
 
   return (
-    <section id="services-grid" className="section-padding bg-[#FEFEFE] relative overflow-hidden">
+    <section id="services-grid" className="py-10 sm:py-12 bg-[#FEFEFE] relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern opacity-[0.04] pointer-events-none" />
 
       <div className="container-custom relative">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <p className="font-mono text-caption text-primary uppercase tracking-[0.18em] mb-2">Explore Expertise</p>
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+          <p className="font-body text-md text-primary uppercase  mb-2">Explore Expertise</p>
           <h2 className="font-heading font-900 text-display-md text-foreground mb-4 leading-tight">
             Our{' '}
             <span
@@ -419,7 +422,7 @@ export default function ServiceCardsGrid() {
             </span>
           </h2>
           <p className="font-body text-body-lg text-foreground-secondary">
-            Explore all 9 services with clear scope, capabilities, deliverables, and execution timelines.
+            Explore our services with clear scope, capabilities, deliverables, and execution timelines.
           </p>
         </div>
 

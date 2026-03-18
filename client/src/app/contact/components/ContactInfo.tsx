@@ -9,7 +9,7 @@ const contactCards = [
     icon: 'PhoneIcon',
     title: 'Call Us',
     lines: [
-      '+91 84211 74213',
+      '+91 84211 74213/ 91128 17771',
     ],
     action: { label: 'Call Now', href: 'tel:+918421174213' },
     color: 'text-secondary',
@@ -69,7 +69,7 @@ export default function ContactInfo() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Contact Cards */}
       {contactCards.map((card) => {
         const isCallCard = card.title === 'Call Us';
@@ -86,7 +86,7 @@ export default function ContactInfo() {
                 <div className="pointer-events-none absolute right-7 top-[-20%] h-[138%] w-px rotate-[28deg] bg-white/85 opacity-85 shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
                 <div className="pointer-events-none absolute left-10 top-[8%] h-px w-[78%] rotate-[28deg] bg-white/70 opacity-75 shadow-[0_0_8px_rgba(255,255,255,0.45)]" />
                 <div className="relative z-10 flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-2xl border border-slate-300 bg-[#FEFEFE] flex items-center justify-center flex-shrink-0 shadow-[0_8px_18px_rgba(148,163,184,0.12)]">
+                  <div className="w-12 h-12 rounded-2xl border border-slate-300 bg-[#FEFEFE] flex items-center justify-center flex-shrink-0 shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)]">
                     <Icon name={card.icon as any} size={22} className="text-slate-700" />
                   </div>
                   <div className="flex-1">
@@ -242,10 +242,10 @@ export default function ContactInfo() {
             <div className="pointer-events-none absolute right-6 top-[-20%] h-[138%] w-px rotate-[28deg] bg-white/85 opacity-85 shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
             <div className="pointer-events-none absolute left-8 top-[10%] h-px w-[72%] rotate-[28deg] bg-white/70 opacity-75 shadow-[0_0_8px_rgba(255,255,255,0.45)]" />
             <div className="relative z-10 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl border border-slate-300 bg-[#FEFEFE] flex items-center justify-center shadow-[0_8px_18px_rgba(148,163,184,0.12)]">
+              <div className="w-10 h-10 rounded-xl border border-slate-300 bg-[#FEFEFE] flex items-center justify-center shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)]">
                 <Icon name="EnvelopeIcon" size={16} className="text-slate-700" />
               </div>
-              <span className="font-mono text-body-sm text-slate-700 break-all">info@intellisysitsolutions.com</span>
+              <span className="font-body text-body-sm text-slate-700 break-all">info@intellisysitsolutions.com</span>
             </div>
             <button
               onClick={handleCopyEmail}
@@ -270,10 +270,10 @@ export default function ContactInfo() {
             <div className="pointer-events-none absolute right-6 top-[-20%] h-[138%] w-px rotate-[28deg] bg-white/85 opacity-85 shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
             <div className="pointer-events-none absolute left-8 top-[10%] h-px w-[72%] rotate-[28deg] bg-white/70 opacity-75 shadow-[0_0_8px_rgba(255,255,255,0.45)]" />
             <div className="relative z-10 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl border border-slate-300 bg-[#FEFEFE] flex items-center justify-center shadow-[0_8px_18px_rgba(148,163,184,0.12)]">
+              <div className="w-10 h-10 rounded-xl border border-slate-300 bg-[#FEFEFE] flex items-center justify-center shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)]">
                 <Icon name="PhoneIcon" size={16} className="text-slate-700" />
               </div>
-              <span className="font-mono text-body-sm text-slate-700">+91 84211 74213</span>
+              <span className="font-body text-body-sm text-slate-700">+91 84211 74213</span>
             </div>
             <button
               onClick={handleCopyPhone}

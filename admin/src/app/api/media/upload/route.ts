@@ -3,6 +3,7 @@ import { requireApiRole } from '@/lib/auth';
 import { createServiceClient } from '@/lib/supabase';
 import { fail, ok } from '@/lib/http';
 import { logAudit } from '@/lib/audit';
+import { CONTACT_ATTACHMENTS_BUCKET } from '@/lib/storage';
 
 export async function POST(req: NextRequest) {
   const guard = requireApiRole(req, ['super_admin', 'admin', 'editor', 'recruiter']);
@@ -10,7 +11,7 @@ export async function POST(req: NextRequest) {
 
   const form = await req.formData();
   const file = form.get('file');
-  const bucket = String(form.get('bucket') || 'contact-attachments');
+  const bucket = String(form.get('bucket') || CONTACT_ATTACHMENTS_BUCKET);
   const folder = String(form.get('folder') || 'uploads');
 
   if (!(file instanceof File)) return fail('File is required', 400);

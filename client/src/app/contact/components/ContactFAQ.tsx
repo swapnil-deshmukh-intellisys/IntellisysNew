@@ -30,11 +30,11 @@ export default function ContactFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="section-padding bg-[#FEFEFE] relative overflow-hidden">
+    <section className="py-10 sm:py-12 bg-[#FEFEFE] relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20 pointer-events-none" />
       <div className="container-custom relative">
-        <div className="mb-10 text-center">
-          <p className="font-body text-caption uppercase tracking-[0.18em] text-foreground-muted mb-2">
+        <div className="mb-8 text-center">
+          <p className="font-body text-caption uppercase  text-foreground-muted mb-2">
             Help Center
           </p>
           <h2 className="font-heading font-800 text-display-sm text-foreground">
@@ -58,7 +58,7 @@ export default function ContactFAQ() {
                   aria-expanded={isOpen}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 font-mono text-caption text-primary">
+                    <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10 font-body text-caption text-primary">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <div className="min-w-0 flex-1">

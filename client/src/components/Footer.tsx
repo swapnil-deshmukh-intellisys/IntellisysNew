@@ -53,33 +53,31 @@ export default function Footer() {
   const currentYear = 2026;
 
   return (
-    <footer className="bg-background-dark relative overflow-hidden">
-      {/* Decorative Background */}
-      <div className="absolute top-0 left-0 w-[420px] h-[420px] bg-gradient-radial-blue opacity-18 pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[320px] h-[320px] bg-gradient-radial-teal opacity-12 pointer-events-none" />
-      <div className="absolute inset-0 bg-black/45 pointer-events-none" />
+    <footer className="relative overflow-hidden bg-background-dark">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent)]" />
+      <div className="pointer-events-none absolute -left-8 top-[-10%] h-[145%] w-24 rotate-[28deg] bg-[linear-gradient(180deg,rgba(255,255,255,0.16)_0%,rgba(255,255,255,0.05)_45%,rgba(255,255,255,0.01)_100%)] opacity-60" />
+      <div className="pointer-events-none absolute right-12 top-[-20%] h-[138%] w-px rotate-[28deg] bg-white/20 opacity-70 shadow-[0_0_8px_rgba(255,255,255,0.08)]" />
+      <div className="pointer-events-none absolute left-16 top-[8%] h-px w-[72%] rotate-[28deg] bg-white/12 opacity-70 shadow-[0_0_8px_rgba(255,255,255,0.06)]" />
 
-      <div className="relative container-custom pt-7 pb-7">
+      <div className="relative z-10 container-custom py-7 sm:py-8">
         <div className="mb-4 flex justify-center">
           <Link href="/homepage" className="inline-flex items-center group">
             <Image
-              src="/assets/images/logo.gif"
+              src="/assets/images/LogoLight.png"
               alt="Intellisys IT Solutions"
-              width={660}
-              height={156}
-              unoptimized
-              className="h-20 sm:h-24 w-auto"
+              width={572}
+              height={135}
+              className="h-14 sm:h-16 w-auto"
             />
           </Link>
         </div>
 
         <div className="border-t border-white/10 pt-7">
           <div className="mb-9 flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
-            {/* Left Section */}
             <div className="w-full lg:max-w-md">
               <p className="font-body text-body-sm text-white/55 leading-relaxed mb-4">
-                Delivering enterprise-grade IT solutions to startups, SMEs, and global enterprises
-                since 2015. Your trusted technology partner in India.
+                Custom software, cloud platforms, and enterprise delivery teams based in Pune,
+                serving startups, SMEs, and global businesses.
               </p>
               <div className="space-y-2.5 mb-4">
                 {contactInfo.map((item) => (
@@ -87,7 +85,7 @@ export default function Footer() {
                     <Icon
                       name={item.icon as any}
                       size={16}
-                      className="text-primary-light mt-0.5 flex-shrink-0"
+                      className="text-white/80 mt-0.5 flex-shrink-0"
                     />
                     <span className="font-body text-body-sm text-white/55">{item.text}</span>
                   </div>
@@ -113,13 +111,26 @@ export default function Footer() {
                   </a>
                 ))}
               </div>
+              <div className="mt-6 pt-4 border-t border-white/10">
+                <h4 className="font-heading font-700 text-body-sm text-white mb-3 uppercase tracking-wider">
+                  Certifications
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {['ISO 9001', 'AWS Partner', 'CMMI L3', 'SOC 2'].map((cert) => (
+                    <span
+                      key={cert}
+                      className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-lg font-body text-caption text-white/50"
+                    >
+                      {cert}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            {/* Right Section */}
             <div className="w-full lg:w-auto lg:ml-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-6">
-                {/* Services Column */}
-                <div className="order-3">
+                <div className="order-1">
                   <h4 className="font-heading font-700 text-body-base text-white mb-4 uppercase tracking-wider">
                     Services
                   </h4>
@@ -128,9 +139,8 @@ export default function Footer() {
                       <li key={link.label}>
                         <Link
                           href={link.href}
-                          className="font-body text-body-sm text-white/50 hover:text-primary-light transition-colors duration-200 flex items-center gap-2 group"
+                          className="font-body text-body-sm text-white/50 hover:text-primary-light transition-colors duration-200"
                         >
-                          <span className="w-1 h-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                           {link.label}
                         </Link>
                       </li>
@@ -138,8 +148,7 @@ export default function Footer() {
                   </ul>
                 </div>
 
-                {/* Company Column */}
-                <div className="order-1">
+                <div className="order-2">
                   <h4 className="font-heading font-700 text-body-base text-white mb-4 uppercase tracking-wider">
                     Company
                   </h4>
@@ -148,9 +157,8 @@ export default function Footer() {
                       <li key={link.label}>
                         <Link
                           href={link.href}
-                          className="font-body text-body-sm text-white/50 hover:text-primary-light transition-colors duration-200 flex items-center gap-2 group"
+                          className="font-body text-body-sm text-white/50 hover:text-primary-light transition-colors duration-200"
                         >
-                          <span className="w-1 h-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                           {link.label}
                         </Link>
                       </li>
@@ -158,8 +166,7 @@ export default function Footer() {
                   </ul>
                 </div>
 
-                {/* Legal Column */}
-                <div className="order-2">
+                <div className="order-3">
                   <h4 className="font-heading font-700 text-body-base text-white mb-4 uppercase tracking-wider">
                     Legal
                   </h4>
@@ -168,52 +175,25 @@ export default function Footer() {
                       <li key={link.label}>
                         <Link
                           href={link.href}
-                          className="font-body text-body-sm text-white/50 hover:text-primary-light transition-colors duration-200 flex items-center gap-2 group"
+                          className="font-body text-body-sm text-white/50 hover:text-primary-light transition-colors duration-200"
                         >
-                          <span className="w-1 h-1 rounded-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                           {link.label}
                         </Link>
                       </li>
                     ))}
                   </ul>
-
-                  {/* Certifications */}
-                  <div className="mt-6 pt-4 border-t border-white/10">
-                    <h4 className="font-heading font-700 text-body-sm text-white mb-3 uppercase tracking-wider">
-                      Certifications
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {['ISO 9001', 'AWS Partner', 'CMMI L3', 'SOC 2'].map((cert) => (
-                        <span
-                          key={cert}
-                          className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-lg font-mono text-caption text-white/50"
-                        >
-                          {cert}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-body text-caption text-white/30">
             (c) {currentYear} Intellisys IT Solutions Pvt. Ltd. All rights reserved. CIN:
             U72200MH2015PTC123456
           </p>
-          <div className="flex items-center gap-5">
-            <span className="font-body text-caption text-white/30">
-              Made with care in Pune, India
-            </span>
-            <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-              <span className="font-body text-caption text-white/30">All systems operational</span>
-            </div>
-          </div>
+          <span className="font-body text-caption text-white/30">Made with care in Pune, India</span>
         </div>
       </div>
     </footer>

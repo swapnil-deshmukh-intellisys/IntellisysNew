@@ -4,6 +4,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
 import { supabase } from '@/lib/supabaseClient';
 
+const RECRUITMENT_ATTACHMENTS_BUCKET = 'recruitment-attachments';
+
 type Category = 'All' | 'Engineering' | 'Design' | 'Project Management' | 'Sales & BD';
 
 interface Job {
@@ -86,11 +88,12 @@ const categories: Category[] = ['All', 'Engineering', 'Design', 'Project Managem
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
 interface JobApplicationFormProps {
+  jobId?: string | null;
   jobTitle: string;
   onClose: () => void;
 }
 
-function JobApplicationForm({ jobTitle, onClose }: JobApplicationFormProps) {
+function JobApplicationForm({ jobId, jobTitle, onClose }: JobApplicationFormProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -113,7 +116,7 @@ function JobApplicationForm({ jobTitle, onClose }: JobApplicationFormProps) {
       if (resumeFile) {
         const path = `job-applications/${Date.now()}-${resumeFile.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
         const { error: uploadError } = await supabase.storage
-          .from('contact-attachments')
+          .from(RECRUITMENT_ATTACHMENTS_BUCKET)
           .upload(path, resumeFile);
         if (uploadError) throw uploadError;
         attachmentPath = path;
@@ -124,7 +127,9 @@ function JobApplicationForm({ jobTitle, onClose }: JobApplicationFormProps) {
         email: email.trim(),
         phone: phone.trim(),
         message: message.trim() || null,
+        job_id: jobId || null,
         job_title: jobTitle,
+        attachment_bucket: attachmentPath ? RECRUITMENT_ATTACHMENTS_BUCKET : null,
         attachment_path: attachmentPath,
       });
       if (insertError) throw insertError;
@@ -271,7 +276,7 @@ function SendResumeForm() {
       if (resumeFile) {
         const path = `resumes/${Date.now()}-${resumeFile.name.replace(/[^a-zA-Z0-9.]/g, '_')}`;
         const { error: uploadError } = await supabase.storage
-          .from('contact-attachments')
+          .from(RECRUITMENT_ATTACHMENTS_BUCKET)
           .upload(path, resumeFile);
         if (uploadError) throw uploadError;
         attachmentPath = path;
@@ -283,6 +288,7 @@ function SendResumeForm() {
         phone: phone.trim(),
         preferred_role: preferredRole.trim() || null,
         message: message.trim() || null,
+        attachment_bucket: attachmentPath ? RECRUITMENT_ATTACHMENTS_BUCKET : null,
         attachment_path: attachmentPath,
       });
       if (insertError) throw insertError;
@@ -420,9 +426,14 @@ export default function OpenPositionsSection() {
     };
   }, []);
 
+  const selectedJobId =
+    selectedJob && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(selectedJob.id)
+      ? selectedJob.id
+      : null;
+
   const locations = useMemo(
     () => ['All Locations', ...Array.from(new Set(jobs.map((job) => job.location)))],
-    []
+    [jobs]
   );
 
   const filteredJobs = useMemo(() => {
@@ -456,12 +467,11 @@ export default function OpenPositionsSection() {
 
   return (
     <section
-      className="pt-0 pb-16 md:pb-24 bg-[#FEFEFE] relative z-30 overflow-visible"
+      className="pt-6 pb-16 md:pt-8 md:pb-24 bg-[#FEFEFE] relative z-30 overflow-visible"
       id="open-positions"
     >
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.02] pointer-events-none" />
       <div className="container-custom relative">
-        <div className="hidden md:block absolute z-40 left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl rounded-xl border border-border bg-background-card p-5 md:p-6 shadow-lg">
+        <div className="hidden md:block mb-8 rounded-xl border border-border bg-background-card p-5 md:p-6 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <p className="font-heading text-body-base font-700 text-foreground">Job Search</p>
             <span className="font-body text-[11px] text-foreground-muted underline underline-offset-2">
@@ -472,7 +482,7 @@ export default function OpenPositionsSection() {
           <div className="grid grid-cols-1 md:grid-cols-[1.35fr_1fr_1fr_160px] gap-4">
             <div>
               <label className="block font-body text-[11px] text-foreground-muted mb-1">
-                keyword
+                Keyword
               </label>
               <input
                 type="text"
@@ -484,7 +494,7 @@ export default function OpenPositionsSection() {
             </div>
             <div>
               <label className="block font-body text-[11px] text-foreground-muted mb-1">
-                category
+                Category
               </label>
               <div className="relative">
                 <select
@@ -507,7 +517,7 @@ export default function OpenPositionsSection() {
             </div>
             <div>
               <label className="block font-body text-[11px] text-foreground-muted mb-1">
-                location
+                Location
               </label>
               <div className="relative">
                 <select
@@ -533,7 +543,7 @@ export default function OpenPositionsSection() {
               onClick={applyFilters}
               className="h-11 self-end border border-foreground/30 rounded-md font-body text-body-sm font-600 text-foreground hover:bg-background-muted transition-colors"
             >
-              Submit
+              Search
             </button>
           </div>
         </div>
@@ -561,7 +571,7 @@ export default function OpenPositionsSection() {
               className="mt-3 rounded-xl border border-border bg-background-card p-4 shadow-sm space-y-4"
             >
               <div>
-                <label className="block font-body text-[11px] text-foreground-muted mb-1">keyword</label>
+                <label className="block font-body text-[11px] text-foreground-muted mb-1">Keyword</label>
                 <input
                   type="text"
                   value={draftSearchTerm}
@@ -571,7 +581,7 @@ export default function OpenPositionsSection() {
                 />
               </div>
               <div>
-                <label className="block font-body text-[11px] text-foreground-muted mb-1">category</label>
+                <label className="block font-body text-[11px] text-foreground-muted mb-1">Category</label>
                 <div className="relative">
                   <select
                     value={draftCategory}
@@ -592,7 +602,7 @@ export default function OpenPositionsSection() {
                 </div>
               </div>
               <div>
-                <label className="block font-body text-[11px] text-foreground-muted mb-1">location</label>
+                <label className="block font-body text-[11px] text-foreground-muted mb-1">Location</label>
                 <div className="relative">
                   <select
                     value={draftLocation}
@@ -617,13 +627,13 @@ export default function OpenPositionsSection() {
                 onClick={applyFilters}
                 className="w-full h-11 border border-foreground/30 rounded-md font-body text-body-sm font-600 text-foreground hover:bg-background-muted transition-colors"
               >
-                Apply Filters
+                Search
               </button>
             </div>
           )}
         </div>
 
-        <div className="pt-2 md:pt-32 grid lg:grid-cols-[minmax(0,1fr)_360px] gap-8 items-start">
+        <div className="pt-2 md:pt-4 grid lg:grid-cols-[minmax(0,1fr)_360px] gap-8 items-start">
           <div>
             {filteredJobs.length === 0 ? (
               <div className="bg-background-card border border-dashed border-border rounded-2xl p-12 text-center">
@@ -711,22 +721,22 @@ export default function OpenPositionsSection() {
             )}
           </div>
 
-          <aside className="lg:sticky lg:top-28 space-y-4">
-            <div className="rounded-2xl bg-gradient-dark p-5 border border-border-card shadow-dark-card">
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/10 border border-white/15 text-white/80 text-[10px] font-body mb-4">
+          <aside className="lg:sticky lg:top-24 space-y-4">
+            <div className="rounded-2xl border border-slate-200 bg-slate-950 p-5 shadow-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-body text-white/70 mb-4">
                 <Icon name="DocumentArrowUpIcon" size={12} />
                 Quick Apply
               </div>
               <h3 className="font-heading font-700 text-heading-sm text-white mb-2">
                 Send your resume
               </h3>
-              <p className="font-body text-body-sm text-white/70 mb-4">
+              <p className="font-body text-body-sm text-white/65 mb-4">
                 Share your profile and we will map it to current or upcoming roles.
               </p>
               <SendResumeForm />
             </div>
 
-            <div className="rounded-2xl bg-background-card border border-border p-5">
+            <div className="rounded-2xl border border-border bg-background-card p-5 shadow-sm">
               <h4 className="font-heading font-700 text-heading-sm text-foreground mb-4">
                 Career Contact
               </h4>
@@ -746,7 +756,7 @@ export default function OpenPositionsSection() {
                   </span>
                 </a>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+918421174213"
                   className="flex items-start gap-3 rounded-lg p-2.5 hover:bg-background-muted transition-colors"
                 >
                   <span className="mt-0.5 inline-flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10">
@@ -811,6 +821,7 @@ export default function OpenPositionsSection() {
               </div>
               <div className="p-6">
                 <JobApplicationForm
+                  jobId={selectedJobId}
                   jobTitle={selectedJob.title}
                   onClose={() => setSelectedJob(null)}
                 />

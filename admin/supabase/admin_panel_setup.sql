@@ -81,6 +81,7 @@ create table if not exists public.contact_inquiries (
   company text,
   service text,
   message text,
+  attachment_bucket text,
   attachment_path text,
   status public.lead_status not null default 'new',
   assigned_to uuid,
@@ -96,6 +97,7 @@ alter table if exists public.contact_inquiries
   add column if not exists company text,
   add column if not exists service text,
   add column if not exists message text,
+  add column if not exists attachment_bucket text,
   add column if not exists attachment_path text,
   add column if not exists status public.lead_status not null default 'new',
   add column if not exists assigned_to uuid,
@@ -111,7 +113,9 @@ create table if not exists public.job_applications (
   email text not null,
   phone text not null,
   message text,
+  job_id uuid references public.jobs(id) on delete set null,
   job_title text,
+  attachment_bucket text,
   attachment_path text,
   status public.application_status not null default 'new',
   assigned_to uuid,
@@ -124,7 +128,9 @@ create table if not exists public.job_applications (
 -- Backfill columns if job_applications already existed before this migration
 alter table if exists public.job_applications
   add column if not exists message text,
+  add column if not exists job_id uuid references public.jobs(id) on delete set null,
   add column if not exists job_title text,
+  add column if not exists attachment_bucket text,
   add column if not exists attachment_path text,
   add column if not exists status public.application_status not null default 'new',
   add column if not exists assigned_to uuid,
@@ -137,6 +143,7 @@ alter table public.resumes
   add column if not exists status public.application_status not null default 'new',
   add column if not exists assigned_to uuid,
   add column if not exists tags text[] not null default '{}',
+  add column if not exists attachment_bucket text,
   add column if not exists updated_at timestamptz not null default now();
 
 create table if not exists public.lead_notes (
@@ -204,6 +211,81 @@ create table if not exists public.activity_timeline (
   created_by uuid,
   created_at timestamptz not null default now()
 );
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conname = 'contact_inquiries_priority_check'
+  ) THEN
+    ALTER TABLE public.contact_inquiries
+      ADD CONSTRAINT contact_inquiries_priority_check
+      CHECK (priority IN ('low', 'medium', 'high', 'urgent'));
+  END IF;
+
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conname = 'contact_inquiries_source_check'
+  ) THEN
+    ALTER TABLE public.contact_inquiries
+      ADD CONSTRAINT contact_inquiries_source_check
+      CHECK (source IN ('website', 'email', 'phone', 'referral', 'campaign', 'manual'));
+  END IF;
+
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conname = 'job_applications_rating_check'
+  ) THEN
+    ALTER TABLE public.job_applications
+      ADD CONSTRAINT job_applications_rating_check
+      CHECK (rating IS NULL OR rating BETWEEN 1 AND 5);
+  END IF;
+END $$;
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conname = 'contact_inquiries_assigned_to_fkey'
+  ) THEN
+    ALTER TABLE public.contact_inquiries
+      ADD CONSTRAINT contact_inquiries_assigned_to_fkey
+      FOREIGN KEY (assigned_to) REFERENCES public.admin_profiles(user_id) ON DELETE SET NULL;
+  END IF;
+
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conname = 'job_applications_assigned_to_fkey'
+  ) THEN
+    ALTER TABLE public.job_applications
+      ADD CONSTRAINT job_applications_assigned_to_fkey
+      FOREIGN KEY (assigned_to) REFERENCES public.admin_profiles(user_id) ON DELETE SET NULL;
+  END IF;
+END $$;
+
+create or replace function public.set_updated_at()
+returns trigger
+language plpgsql
+as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
+DO $$
+DECLARE t text;
+BEGIN
+  FOREACH t IN ARRAY ARRAY['admin_profiles', 'jobs', 'contact_inquiries', 'job_applications', 'resumes', 'cms_pages', 'cms_sections']
+  LOOP
+    EXECUTE format('DROP TRIGGER IF EXISTS %I_set_updated_at ON public.%I', t, t);
+    EXECUTE format(
+      'CREATE TRIGGER %I_set_updated_at BEFORE UPDATE ON public.%I FOR EACH ROW EXECUTE FUNCTION public.set_updated_at()',
+      t,
+      t
+    );
+  END LOOP;
+END $$;
 
 -- Indexes
 create index if not exists contact_inquiries_status_idx on public.contact_inquiries(status, created_at desc);

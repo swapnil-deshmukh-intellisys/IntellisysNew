@@ -50,7 +50,7 @@ export default function SitemapPage() {
       <main className="bg-[#FEFEFE]">
         <section className="border-b border-slate-200/80 bg-[#FEFEFE] pt-28 pb-12 sm:pt-32 sm:pb-14">
           <div className="container-custom">
-            <span className="font-mono text-caption uppercase tracking-[0.28em] text-slate-500">
+            <span className="font-body text-caption uppercase tracking-[0.28em] text-slate-500">
               Sitemap
             </span>
             <h1 className="mt-4 font-heading text-[2.5rem] font-700 leading-[0.95] text-slate-900 sm:text-6xl">
@@ -69,7 +69,7 @@ export default function SitemapPage() {
               {pageGroups.map((group) => (
                 <section
                   key={group.title}
-                  className="rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-[0_16px_50px_rgba(15,23,42,0.06)] sm:px-8 sm:py-8"
+                  className="rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] sm:px-8 sm:py-8"
                 >
                   <h2 className="font-heading text-2xl font-700 text-slate-900">{group.title}</h2>
                   <ul className="mt-5 space-y-3">
@@ -94,3 +94,4 @@ export default function SitemapPage() {
     </>
   );
 }
+

@@ -3,10 +3,10 @@ import Link from 'next/link';
 import Icon from '@/components/ui/AppIcon';
 
 const consultationPoints = [
-  'Free 45-minute technical consultation',
+  'Upto 45-minutes free technical consultation',
   'Response within 24 hours',
   'Architecture and delivery guidance',
-  'NDA available before discussion',
+  'Long term contracts available',
 ];
 
 export default function ServicesCTA() {
@@ -24,17 +24,11 @@ export default function ServicesCTA() {
       description: 'Consultation, scoping discussion, and delivery guidance without upfront cost.',
       metric: 'Rs 0',
       metricLabel: 'consultation fee',
-    },
-    {
-      icon: 'UserGroupIcon',
-      title: 'Dedicated Ownership',
-      description: 'A technical lead and project contact stay aligned with your scope from the start.',
-      metric: '1 team',
-      metricLabel: 'aligned for delivery',
+      note: 'T&C apply',
     },
     {
       icon: 'ShieldCheckIcon',
-      title: 'NDA-Ready',
+      title: 'Transparent Communication',
       description: 'Sensitive product, platform, and business information can be discussed securely.',
       metric: 'Secure',
       metricLabel: 'discussion flow',
@@ -42,15 +36,14 @@ export default function ServicesCTA() {
   ];
 
   return (
-    <section className="section-padding bg-[#FEFEFE] relative overflow-hidden">
+    <section className="py-10 sm:py-12 bg-[#FEFEFE] relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20 pointer-events-none" />
       <div className="container-custom relative">
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:items-stretch lg:gap-16">
-          <div className="relative h-full overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white/92 p-6 shadow-[0_12px_26px_rgba(15,23,42,0.10),inset_0_1px_0_rgba(255,255,255,0.85)] sm:p-8 lg:p-9">
+          <div className="relative h-full overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white/92 p-6 shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] sm:p-8 lg:p-9">
             <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-accent" />
-            <div className="absolute -bottom-12 -left-10 h-28 w-28 rounded-full bg-secondary/10 blur-2xl pointer-events-none" />
             <div className="relative z-10 flex h-full flex-col">
-              <p className="mb-3 font-mono text-caption uppercase tracking-[0.18em] text-primary">Free Technical Consultation</p>
+              <p className="mb-3 font-body text-caption uppercase  text-primary">Free Technical Consultation</p>
               <h2 className="font-heading font-800 text-3xl leading-tight text-foreground sm:text-4xl lg:text-display-md mb-4 sm:mb-5">
                 Let's Discuss Your
                 <br />
@@ -62,12 +55,12 @@ export default function ServicesCTA() {
                     backgroundClip: 'text',
                   }}
                 >
-                  Next Project
+                  Dream Project
                 </span>
               </h2>
               <p className="mb-6 max-w-2xl font-body text-sm leading-relaxed text-foreground-secondary sm:mb-7 sm:text-body-lg">
                 Book a focused session with a senior engineer to clarify scope, architecture, timelines, and the
-                most practical path to delivery. No sales pitch, just direct technical guidance.
+                most practical path to delivery. No sales pitch, just direct technical and business (Revenue generation) guidance.
               </p>
 
               <ul className="mb-7 grid gap-3 sm:mb-8 sm:grid-cols-2">
@@ -83,24 +76,22 @@ export default function ServicesCTA() {
 
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:[&>*]:flex-1">
                 <Link
-                  href="/contact"
-                  className="flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-gradient-primary px-7 py-3.5 font-heading text-sm font-700 text-white shadow-blue transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-lg sm:px-8 sm:text-body-base"
+                  href="/contact#contact-form"
+                  className="flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-gradient-primary px-7 py-3.5 font-heading text-sm font-700 text-white shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] transition-all duration-300 hover:scale-[1.02] sm:px-8 sm:text-body-base"
                 >
                   Book Free Consultation
                   <Icon name="ArrowRightIcon" size={18} />
                 </Link>
                 <a
-                  href="tel:+919112817771"
+                  href="tel:+91 84211 74213"
                   className="flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white/75 px-6 py-3.5 font-heading text-sm font-600 text-foreground transition-all duration-300 hover:border-primary/30 hover:bg-white sm:px-7 sm:text-body-base"
                 >
                   <Icon name="PhoneIcon" size={18} className="text-primary" />
-                  +91 91128 17771
+                  +91 84211 74213
                 </a>
               </div>
 
-              <p className="mt-4 font-body text-sm text-foreground-muted">
-                No obligation. NDA available before sharing product details.
-              </p>
+              
             </div>
           </div>
 
@@ -109,11 +100,12 @@ export default function ServicesCTA() {
               {engagementCards.map((card, index) => (
                 <div
                   key={card.title}
-                  className="group relative overflow-hidden rounded-[1.35rem] border border-slate-200 bg-white/92 p-5 shadow-[0_12px_26px_rgba(15,23,42,0.10),inset_0_1px_0_rgba(255,255,255,0.85)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(15,23,42,0.14),inset_0_1px_0_rgba(255,255,255,0.9)]"
+                  className={`group relative overflow-hidden rounded-[1.35rem] border border-slate-200 bg-white/92 p-5 shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[1px_2px_4px_rgba(15,23,42,0.08),3px_4px_6px_rgba(15,23,42,0.06)] ${
+                    index === 2 ? 'sm:col-span-2 sm:mx-auto sm:w-[calc(50%-0.625rem)]' : ''
+                  }`}
                   style={{ animationDelay: `${index * 0.08}s` }}
                 >
                   <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-accent" />
-                  <div className="absolute -bottom-10 -left-10 h-24 w-24 rounded-full bg-secondary/10 blur-2xl pointer-events-none" />
 
                   <div className="relative z-10 mb-4 flex items-start justify-between gap-3">
                     <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white transition-transform group-hover:scale-110">
@@ -133,6 +125,11 @@ export default function ServicesCTA() {
                   <p className="relative z-10 mb-4 font-body text-body-sm leading-relaxed text-foreground-secondary lg:min-h-[4.5rem]">
                     {card.description}
                   </p>
+                  {'note' in card && card.note ? (
+                    <p className="relative z-10 -mt-1 mb-4 font-body text-[11px] uppercase tracking-[0.12em] text-slate-500">
+                      {card.note}
+                    </p>
+                  ) : null}
                   <div className="relative z-10 inline-flex items-center gap-2">
                     <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                     <span className="font-body text-body-sm leading-relaxed text-slate-700">Practical engagement support</span>

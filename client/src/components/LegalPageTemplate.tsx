@@ -27,7 +27,7 @@ export default function LegalPageTemplate({
         <section className="relative overflow-hidden border-b border-slate-200/80 bg-[#FEFEFE] pt-28 pb-12 sm:pt-32 sm:pb-14">
           <div className="container-custom">
             <div className="max-w-4xl">
-              <span className="font-mono text-caption uppercase tracking-[0.28em] text-slate-500">
+              <span className="font-body text-caption uppercase tracking-[0.28em] text-slate-500">
                 {eyebrow}
               </span>
               <h1 className="mt-4 font-heading text-[2.5rem] font-700 leading-[0.95] text-slate-900 sm:text-6xl">
@@ -43,8 +43,8 @@ export default function LegalPageTemplate({
         <section className="section-padding bg-[#FEFEFE]">
           <div className="container-custom">
             <div className="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-10">
-              <aside className="rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-[0_16px_50px_rgba(15,23,42,0.06)]">
-                <p className="font-mono text-caption uppercase tracking-[0.24em] text-slate-500">
+              <aside className="rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)]">
+                <p className="font-body text-caption uppercase tracking-[0.24em] text-slate-500">
                   On this page
                 </p>
                 <nav className="mt-5 space-y-3">
@@ -77,7 +77,7 @@ export default function LegalPageTemplate({
                     <section
                       key={section.title}
                       id={id}
-                      className="rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-[0_16px_50px_rgba(15,23,42,0.06)] sm:px-8 sm:py-8"
+                      className="rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] sm:px-8 sm:py-8"
                     >
                       <h2 className="font-heading text-2xl font-700 text-slate-900">
                         {section.title}
@@ -104,3 +104,4 @@ export default function LegalPageTemplate({
     </>
   );
 }
+

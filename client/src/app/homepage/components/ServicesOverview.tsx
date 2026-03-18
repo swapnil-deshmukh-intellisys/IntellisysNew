@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Icon from '@/components/ui/AppIcon';
 import BrandIcon, { resolveBrandName } from '@/components/ui/BrandIcon';
@@ -99,24 +97,6 @@ const services = [
 ];
 
 export default function ServicesOverview() {
-  const [visibleItems, setVisibleItems] = useState<Set<string>>(new Set());
-  const refs = useRef<Map<string, HTMLDivElement>>(new Map());
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleItems((prev) => new Set([...prev, entry.target.id]));
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    refs.current.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section className="section-padding bg-[#FEFEFE] relative">
       <div className="container-custom">
@@ -135,8 +115,8 @@ export default function ServicesOverview() {
             </span>
           </h2>
           <p className="font-body text-sm sm:text-body-lg text-foreground-secondary px-2 sm:px-0">
-            <span className="sm:hidden">9 focused services for product, cloud, and talent growth.</span>
-            <span className="hidden sm:inline">Our service portfolio includes 9 focused offerings for product, platform, cloud, and talent growth.</span>
+            <span className="sm:hidden">Focused services for product, cloud, and talent growth.</span>
+            <span className="hidden sm:inline">Our service portfolio includes all offerings for product, platform, cloud, and talent growth.</span>
           </p>
         </div>
 
@@ -147,11 +127,8 @@ export default function ServicesOverview() {
                   <div
                     key={service.id}
                     id={service.id}
-                    ref={(el) => {
-                      if (el) refs.current.set(service.id, el);
-                    }}
-                    className={`group relative h-full ${visibleItems.has(service.id) ? 'animate-fade-up' : 'opacity-0'}`}
-                    style={{ animationDelay: `${index * 0.07}s` }}
+                    className="group relative h-full animate-fade-up"
+                    style={{ animationDelay: `${index * 0.07}s`, animationFillMode: 'both' }}
                   >
                     <div className="relative h-full translate-x-0 translate-y-0 transition-transform duration-400 group-hover:-translate-y-1">
                       <div className="pointer-events-none absolute inset-0 translate-x-[6px] translate-y-[6px] rounded-2xl bg-[linear-gradient(145deg,rgba(186,194,205,0.96)_0%,rgba(205,213,223,0.94)_45%,rgba(221,227,235,0.92)_100%)] border border-slate-300/70" />
@@ -163,14 +140,16 @@ export default function ServicesOverview() {
                         <div className="pointer-events-none absolute right-7 top-[-20%] h-[138%] w-px rotate-[28deg] bg-white/85 opacity-85 shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
                         <div className="pointer-events-none absolute left-10 top-[8%] h-px w-[78%] rotate-[28deg] bg-white/70 opacity-75 shadow-[0_0_8px_rgba(255,255,255,0.45)]" />
 
-                        <div className="relative z-10 w-12 h-12 rounded-xl border border-slate-300 bg-[#FEFEFE] flex items-center justify-center mb-5 shadow-[0_8px_18px_rgba(148,163,184,0.12)]">
-                          <Icon name={service.icon as any} size={22} className="text-slate-700" />
+                        <div className="relative z-10 mb-4 flex items-start justify-between gap-4">
+                          <h3 className="font-heading font-700 text-xl sm:text-heading-xl text-slate-900">
+                            {service.title}
+                          </h3>
+                          <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border border-slate-300 bg-[#FEFEFE] shadow-[0_8px_18px_rgba(148,163,184,0.12)]">
+                            <Icon name={service.icon as any} size={22} className="text-slate-700" />
+                          </div>
                         </div>
 
                         <div className="relative z-10">
-                          <h3 className="font-heading font-700 text-xl sm:text-heading-xl mb-2 lg:min-h-[3.5rem] text-slate-900">
-                            {service.title}
-                          </h3>
                           <p className="font-body text-sm sm:text-body-sm mb-2.5 leading-relaxed lg:min-h-[4.25rem] text-slate-700">
                             {service.description}
                           </p>
@@ -191,8 +170,9 @@ export default function ServicesOverview() {
                         <Link
                           href="/services"
                           className="relative z-10 inline-flex items-center gap-1.5 font-heading font-700 text-body-sm uppercase tracking-wide text-slate-500 hover:text-slate-700 hover:gap-2.5 transition-all duration-200"
+                          aria-label={`Learn more about ${service.title}`}
                         >
-                          Learn More <Icon name="ArrowRightIcon" size={12} />
+                          {`Explore ${service.title}`} <Icon name="ArrowRightIcon" size={12} />
                         </Link>
                       </div>
                     </div>

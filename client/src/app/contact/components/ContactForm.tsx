@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
 import { supabase } from '@/lib/supabaseClient';
 
+const CONTACT_ATTACHMENTS_BUCKET = 'contact-inquiries';
+
 interface FormData {
   name: string;
   email: string;
@@ -82,7 +84,28 @@ export default function ContactForm() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? null;
+    const allowedExtensions = ['pdf', 'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'txt'];
+
+    if (!file) {
+      setRequirementFile(null);
+      setErrors((prev) => ({ ...prev, requirementFile: '' }));
+      return;
+    }
+
+    const extension = file.name.split('.').pop()?.toLowerCase() ?? '';
+    if (!allowedExtensions.includes(extension)) {
+      setErrors((prev) => ({
+        ...prev,
+        requirementFile:
+          'Please upload a PDF, DOC, DOCX, PPT, PPTX, XLS, XLSX, or TXT file.',
+      }));
+      e.target.value = '';
+      setRequirementFile(null);
+      return;
+    }
+
     setRequirementFile(file);
+    setErrors((prev) => ({ ...prev, requirementFile: '' }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -99,7 +122,7 @@ export default function ContactForm() {
         const path = `inquiries/${Date.now()}-${safeName}`;
 
         const { error: uploadError } = await supabase.storage
-          .from('contact-attachments')
+          .from(CONTACT_ATTACHMENTS_BUCKET)
           .upload(path, requirementFile);
 
         if (uploadError) throw uploadError;
@@ -113,6 +136,7 @@ export default function ContactForm() {
         company: formData.company.trim() || null,
         service: formData.service,
         message: formData.message.trim(),
+        attachment_bucket: attachmentPath ? CONTACT_ATTACHMENTS_BUCKET : null,
         attachment_path: attachmentPath,
       });
 
@@ -131,7 +155,7 @@ export default function ContactForm() {
   };
 
   const inputClass = (field: string) =>
-    `w-full px-4 py-3.5 bg-background-muted border rounded-xl font-body text-body-base text-foreground placeholder:text-foreground-muted transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary ${
+    `w-full px-4 py-3.5 bg-background-muted border rounded-xl font-body text-body-base text-foreground placeholder:text-foreground-muted focus:placeholder-transparent transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary ${
       errors[field] ? 'border-error bg-red-50' : 'border-border hover:border-primary/30'
     }`;
 
@@ -172,37 +196,37 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="relative">
+    <div id="contact-form" className="relative scroll-mt-28">
       <div className="pointer-events-none absolute inset-0 translate-x-[6px] translate-y-[6px] rounded-3xl border border-slate-300/70 bg-[linear-gradient(145deg,rgba(186,194,205,0.96)_0%,rgba(205,213,223,0.94)_45%,rgba(221,227,235,0.92)_100%)]" />
       {/* Form Header */}
-      <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/55 bg-[linear-gradient(145deg,rgba(255,255,255,0.88)_0%,rgba(242,246,250,0.82)_38%,rgba(226,233,242,0.84)_100%)] backdrop-blur-xl shadow-[0_22px_55px_rgba(15,23,42,0.08),inset_0_1px_0_rgba(255,255,255,1),inset_0_-1px_0_rgba(255,255,255,0.28)]">
+      <div className="absolute inset-0 overflow-hidden rounded-3xl border border-white/55 bg-[linear-gradient(145deg,rgba(255,255,255,0.88)_0%,rgba(242,246,250,0.82)_38%,rgba(226,233,242,0.84)_100%)] backdrop-blur-xl shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05),inset_0_1px_0_rgba(255,255,255,1),inset_0_-1px_0_rgba(255,255,255,0.28)]">
         <div className="pointer-events-none absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_18%_16%,rgba(255,255,255,0.42),transparent_30%),radial-gradient(circle_at_84%_22%,rgba(255,255,255,0.18),transparent_28%)]" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,rgba(255,255,255,0.46),transparent)]" />
         <div className="pointer-events-none absolute -left-6 top-[-12%] h-[150%] w-24 rotate-[28deg] bg-[linear-gradient(180deg,rgba(255,255,255,0.72)_0%,rgba(255,255,255,0.18)_45%,rgba(255,255,255,0.03)_100%)] opacity-90" />
         <div className="pointer-events-none absolute right-7 top-[-20%] h-[138%] w-[2px] rotate-[28deg] bg-white/95 opacity-95 shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
         <div className="pointer-events-none absolute left-10 top-[8%] h-[2px] w-[78%] rotate-[28deg] bg-white/85 opacity-85 shadow-[0_0_10px_rgba(255,255,255,0.65)]" />
       </div>
-      <div className="relative p-5 sm:p-7">
+      <div className="relative p-5 sm:p-6">
         <div className="relative z-10">
-        <p className="font-mono text-caption text-primary uppercase tracking-[0.18em] mb-2">
-          Project Inquiry
+        <p className="font-body text-caption text-primary uppercase  mb-2">
+          Business Inquiry
         </p>
         <h2 className="font-heading font-800 text-display-sm text-foreground mb-2">
-          Tell Us About Your Project
+          Tell Us About Your Business Requirement
         </h2>
         <p className="font-body text-body-base text-foreground-secondary leading-relaxed">
-          Fill out the form below and we&apos;ll prepare a practical response with the right next step for your project.
+          Fill out the form below and we&apos;ll prepare a practical response with the right next step for your business requirement.
         </p>
         </div>
       </div>
 
       <form
         onSubmit={handleSubmit}
-        className="relative z-10 -mt-2 sm:-mt-3 mx-0 p-5 sm:p-7 space-y-5 rounded-3xl border border-border bg-white shadow-lg-card"
+        className="relative z-10 -mt-2 sm:-mt-3 mx-0 p-5 sm:p-6 space-y-4 rounded-3xl border border-border bg-white shadow-lg-card"
         noValidate
       >
         {/* Row 1: Name + Email */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label htmlFor="name" className="block font-heading font-700 text-body-sm text-foreground mb-2">
               Full Name <span className="text-error">*</span>
@@ -212,7 +236,7 @@ export default function ContactForm() {
               name="name"
               type="text"
               autoComplete="name"
-              placeholder="Arjun Mehta"
+              placeholder="Enter your full name"
               value={formData.name}
               onChange={handleChange}
               className={inputClass('name')}
@@ -236,7 +260,7 @@ export default function ContactForm() {
               name="email"
               type="email"
               autoComplete="email"
-              placeholder="arjun@company.com"
+              placeholder="Enter your email address"
               value={formData.email}
               onChange={handleChange}
               className={inputClass('email')}
@@ -253,7 +277,7 @@ export default function ContactForm() {
         </div>
 
         {/* Row 2: Phone + Company */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label htmlFor="phone" className="block font-heading font-700 text-body-sm text-foreground mb-2">
               Phone Number <span className="text-error">*</span>
@@ -266,7 +290,7 @@ export default function ContactForm() {
               inputMode="numeric"
               pattern="[0-9]{10}"
               maxLength={10}
-              placeholder="9112817771"
+              placeholder="Enter your phone number"
               value={formData.phone}
               onChange={handleChange}
               className={inputClass('phone')}
@@ -290,7 +314,7 @@ export default function ContactForm() {
               name="company"
               type="text"
               autoComplete="organization"
-              placeholder="Acme Technologies Pvt. Ltd."
+              placeholder="Enter your company name"
               value={formData.company}
               onChange={handleChange}
               className={inputClass('company')}
@@ -299,7 +323,7 @@ export default function ContactForm() {
         </div>
 
         {/* Row 3: Service + Requirement Document */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label htmlFor="service" className="block font-heading font-700 text-body-sm text-foreground mb-2">
               Service Needed <span className="text-error">*</span>
@@ -335,19 +359,25 @@ export default function ContactForm() {
 
           <div>
             <label htmlFor="requirementFile" className="block font-heading font-700 text-body-sm text-foreground mb-2">
-              Attach Requirement Document (PDF, Optional)
+              Attach Requirement Document (Optional)
             </label>
             <input
               id="requirementFile"
               name="requirementFile"
               type="file"
-              accept="application/pdf,.pdf"
+              accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/plain"
               onChange={handleFileChange}
-              className="block w-full text-body-sm text-foreground file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-body-sm file:font-heading file:font-600 file:bg-gradient-primary file:text-white cursor-pointer"
+              className="block w-full font-body text-body-sm font-400 text-foreground file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:font-heading file:text-body-sm file:font-600 file:bg-gradient-primary file:text-white cursor-pointer"
             />
-            <p className="mt-1.5 font-body text-caption text-foreground-muted leading-relaxed">
-              Optional: upload a detailed requirements PDF (max 1 file).
+            <p className="mt-1.5 font-body text-body-sm text-foreground-muted leading-relaxed">
+              Upload format PDF, DOC, DOCX, PPT, PPTX, XLS, XLSX, or TXT format.
             </p>
+            {errors.requirementFile && (
+              <p className="mt-1.5 font-body text-caption text-error flex items-center gap-1">
+                <Icon name="ExclamationCircleIcon" size={12} />
+                {errors.requirementFile}
+              </p>
+            )}
           </div>
         </div>
 
@@ -360,7 +390,7 @@ export default function ContactForm() {
             id="message"
             name="message"
             rows={5}
-            placeholder="Describe your project, goals, current challenges, and any specific requirements. The more detail you provide, the more accurate our proposal will be."
+            placeholder="Describe your project goals, current challenges, and requirements."
             value={formData.message}
             onChange={handleChange}
             className={`${inputClass('message')} resize-none`}
@@ -376,16 +406,16 @@ export default function ContactForm() {
             ) : (
               <span />
             )}
-            <span className="font-mono text-caption text-foreground-muted">
+            <span className="font-body text-caption text-foreground-muted">
               {formData.message.length} chars
             </span>
           </div>
         </div>
 
         {/* Privacy Note */}
-        <p className="font-body text-caption text-foreground-muted leading-relaxed">
+        <p className="font-body text-body-base text-foreground-muted leading-relaxed">
           By submitting this form, you agree to our{' '}
-          <a href="#" className="text-primary hover:underline">Privacy Policy</a>. 
+          <a href="/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>. 
           Your information is never shared with third parties. We'll sign an NDA on request.
         </p>
 
@@ -399,7 +429,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={status === 'submitting'}
-          className="w-full flex items-center justify-center gap-3 py-4 bg-gradient-primary text-white font-heading font-700 text-body-base rounded-2xl shadow-blue hover:shadow-blue-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="w-full flex items-center justify-center gap-3 py-4 bg-gradient-primary text-white font-heading font-700 text-body-base rounded-2xl shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
         >
           {status === 'submitting' ? (
             <>
@@ -420,3 +450,4 @@ export default function ContactForm() {
     </div>
   );
 }
+

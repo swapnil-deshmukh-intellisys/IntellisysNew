@@ -93,8 +93,10 @@ Implemented routes:
 - `POST /api/auth/logout`
 - `GET /api/dashboard/metrics`
 - `GET /api/leads/contact`
+- `GET /api/leads/contact/:id`
 - `PATCH /api/leads/contact/:id`
 - `GET /api/recruitment/applications`
+- `GET /api/recruitment/applications/:id`
 - `PATCH /api/recruitment/applications/:id`
 - `GET /api/recruitment/resumes`
 - `GET /api/jobs`

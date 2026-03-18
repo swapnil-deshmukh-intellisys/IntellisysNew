@@ -18,10 +18,10 @@ export default function RecruitmentJobsPage() {
   return (
     <div>
       <PageHeader
-        title="Recruitment Jobs"
+        title="Open Roles"
         subtitle="Publish, pause, and close roles"
         actions={<>
-          <Link href="/jobs/new" className="btn-primary">New Job</Link>
+          <Link href="/jobs/new" className="btn-primary">New Role</Link>
           <button className="btn-secondary" onClick={load}>Refresh</button>
         </>}
       />
@@ -32,15 +32,14 @@ export default function RecruitmentJobsPage() {
           { key: 'type', label: 'Type' },
           { key: 'status', label: 'Status', render: (v) => <StatusBadge value={String(v)} /> },
           { key: 'updated_at', label: 'Updated', render: (v) => new Date(String(v)).toLocaleString() },
-          { key: 'id', label: 'Actions', render: (v) => <Link href={`/jobs/${String(v)}/edit`} className="btn-secondary">Edit</Link> },
         ]}
         rows={rows}
         rowKey={(r) => r.id}
+        rowHref={(r) => `/jobs/${r.id}/edit`}
         mobileCard={(r) => (
           <div>
             <p className="font-semibold">{r.title}</p>
             <div className="mt-2"><StatusBadge value={r.status} /></div>
-            <Link href={`/jobs/${r.id}/edit`} className="btn-secondary mt-3">Edit</Link>
           </div>
         )}
       />

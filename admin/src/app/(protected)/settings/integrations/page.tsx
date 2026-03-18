@@ -14,7 +14,9 @@ export default function IntegrationsPage() {
           <li>Database: configured via NEXT_PUBLIC_SUPABASE_URL</li>
           <li>Anon key: required for auth sign-in</li>
           <li>Service role key: server-only API access</li>
-          <li>Storage bucket: contact-attachments</li>
+          <li>Sales attachments bucket: contact-inquiries</li>
+          <li>Recruitment attachments bucket: recruitment-attachments</li>
+          <li>Legacy shared bucket fallback: contact-attachments</li>
         </ul>
         <div className="mt-4 flex gap-2">
           <button className="btn-secondary" onClick={() => pushToast('success', 'Health check completed successfully.')}>Run Health Check</button>

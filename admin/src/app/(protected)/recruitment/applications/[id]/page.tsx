@@ -9,17 +9,19 @@ export default function ApplicationDetailPage() {
   const { pushToast } = useToast();
   const params = useParams<{ id: string }>();
   const [row, setRow] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState('new');
   const [rating, setRating] = useState(3);
 
   useEffect(() => {
     (async () => {
-      const res = await fetch('/api/recruitment/applications');
-      const data = await res.json();
-      const current = (data.rows || []).find((x: any) => x.id === params.id);
+      const res = await fetch(`/api/recruitment/applications/${params.id}`, { cache: 'no-store' });
+      const data = await res.json().catch(() => ({}));
+      const current = data.row || null;
       setRow(current);
       setStatus(current?.status || 'new');
       setRating(current?.rating || 3);
+      setLoading(false);
     })();
   }, [params.id]);
 
@@ -28,6 +30,8 @@ export default function ApplicationDetailPage() {
       method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status, rating })
     });
     if (res.ok) {
+      const data = await res.json().catch(() => ({}));
+      if (data.row) setRow((prev: any) => ({ ...prev, ...data.row, attachment_url: prev?.attachment_url || null }));
       pushToast('success', 'Application stage updated.');
     } else {
       const data = await res.json().catch(() => ({}));
@@ -35,7 +39,8 @@ export default function ApplicationDetailPage() {
     }
   };
 
-  if (!row) return <div className="card p-4">Loading...</div>;
+  if (loading) return <div className="card p-4">Loading...</div>;
+  if (!row) return <div className="card p-4">Application not found.</div>;
 
   return (
     <div>
@@ -46,7 +51,7 @@ export default function ApplicationDetailPage() {
           <dl className="mt-3 grid sm:grid-cols-2 gap-3 text-sm">
             <div><dt className="text-slate-500">Name</dt><dd>{row.name}</dd></div>
             <div><dt className="text-slate-500">Phone</dt><dd>{row.phone}</dd></div>
-            <div><dt className="text-slate-500">Role</dt><dd>{row.job_title}</dd></div>
+            <div><dt className="text-slate-500">Role</dt><dd>{row.linked_job_title || row.job_title || '-'}</dd></div>
             <div><dt className="text-slate-500">Applied</dt><dd>{new Date(row.created_at).toLocaleString()}</dd></div>
           </dl>
           <div className="mt-4">
@@ -68,7 +73,7 @@ export default function ApplicationDetailPage() {
                 rel="noopener noreferrer"
                 className="btn-secondary"
               >
-                View Resume
+                Resume
               </a>
             ) : (
               <p className="text-xs text-slate-500">Attachment: {row.attachment_path || 'None'}</p>
