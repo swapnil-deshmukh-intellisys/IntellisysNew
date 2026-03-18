@@ -25,6 +25,12 @@ Thumbs.db
 # Optional: if using TypeScript
 *.tsbuildinfo
 
+# Environment files
+.env
+.env.*
+!.env.example
+!.env*.example
+
 # Optional: if using testing tools
 coverage/
 jest-test-results.json
