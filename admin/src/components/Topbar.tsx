@@ -1,4 +1,5 @@
 import { getServerSession } from '@/lib/auth';
+import { LogoutButton } from '@/components/LogoutButton';
 
 export async function Topbar() {
   const session = await getServerSession();
@@ -10,9 +11,7 @@ export async function Topbar() {
           <p className="text-[12px] font-medium text-slate-500">Welcome</p>
           <h2 className="truncate text-base font-semibold text-slate-900 sm:text-lg">{session?.displayName || session?.email || 'Admin User'}</h2>
         </div>
-        <form action="/api/auth/logout" method="post">
-          <button className="btn-secondary w-full sm:w-auto" type="submit">Logout</button>
-        </form>
+        <LogoutButton />
       </div>
     </header>
   );
