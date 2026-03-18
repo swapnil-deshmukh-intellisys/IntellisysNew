@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -7,15 +5,16 @@ import Icon from '@/components/ui/AppIcon';
 
 export default function HeroSection() {
   return (
-    <section
-      className="relative overflow-hidden pt-16 md:pt-20 lg:pt-22"
-      style={{
-        backgroundImage: 'url(/assets/images/hero2.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
+    <section className="relative overflow-hidden pt-16 md:pt-20 lg:pt-22 bg-[#fff7ef]">
+      <Image
+        src="/assets/images/hero2.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        quality={82}
+        className="object-cover object-center"
+      />
       <div className="container-custom relative z-10 py-7 md:py-8 lg:py-10">
         <div className="grid lg:grid-cols-[0.58fr_0.42fr] gap-8 lg:gap-10 items-center">
           <div className="w-full max-w-4xl">
@@ -66,22 +65,6 @@ export default function HeroSection() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .hero-symbol-wrap {
-          animation: heroSymbolFloat 6s ease-in-out infinite;
-        }
-
-        @keyframes heroSymbolFloat {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-12px);
-          }
-        }
-      `}</style>
     </section>
   );
 }

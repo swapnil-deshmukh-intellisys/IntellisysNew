@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Icon from '@/components/ui/AppIcon';
 import BrandIcon, { resolveBrandName } from '@/components/ui/BrandIcon';
@@ -99,24 +97,6 @@ const services = [
 ];
 
 export default function ServicesOverview() {
-  const [visibleItems, setVisibleItems] = useState<Set<string>>(new Set());
-  const refs = useRef<Map<string, HTMLDivElement>>(new Map());
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleItems((prev) => new Set([...prev, entry.target.id]));
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    refs.current.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section className="section-padding bg-[#FEFEFE] relative">
       <div className="container-custom">
@@ -147,11 +127,8 @@ export default function ServicesOverview() {
                   <div
                     key={service.id}
                     id={service.id}
-                    ref={(el) => {
-                      if (el) refs.current.set(service.id, el);
-                    }}
-                    className={`group relative h-full ${visibleItems.has(service.id) ? 'animate-fade-up' : 'opacity-0'}`}
-                    style={{ animationDelay: `${index * 0.07}s` }}
+                    className="group relative h-full animate-fade-up"
+                    style={{ animationDelay: `${index * 0.07}s`, animationFillMode: 'both' }}
                   >
                     <div className="relative h-full translate-x-0 translate-y-0 transition-transform duration-400 group-hover:-translate-y-1">
                       <div className="pointer-events-none absolute inset-0 translate-x-[6px] translate-y-[6px] rounded-2xl bg-[linear-gradient(145deg,rgba(186,194,205,0.96)_0%,rgba(205,213,223,0.94)_45%,rgba(221,227,235,0.92)_100%)] border border-slate-300/70" />
@@ -193,8 +170,9 @@ export default function ServicesOverview() {
                         <Link
                           href="/services"
                           className="relative z-10 inline-flex items-center gap-1.5 font-heading font-700 text-body-sm uppercase tracking-wide text-slate-500 hover:text-slate-700 hover:gap-2.5 transition-all duration-200"
+                          aria-label={`Learn more about ${service.title}`}
                         >
-                          Learn More <Icon name="ArrowRightIcon" size={12} />
+                          {`Explore ${service.title}`} <Icon name="ArrowRightIcon" size={12} />
                         </Link>
                       </div>
                     </div>

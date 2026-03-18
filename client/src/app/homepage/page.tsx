@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from './components/HeroSection';
-import ServicesOverview from './components/ServicesOverview';
-import WhyChooseUs from './components/WhyChooseUs';
-import TestimonialsSection from './components/TestimonialsSection';
-import CTASection from './components/CTASection';
+
+const ServicesOverview = dynamic(() => import('./components/ServicesOverview'));
+const WhyChooseUs = dynamic(() => import('./components/WhyChooseUs'));
+const TestimonialsSection = dynamic(() => import('./components/TestimonialsSection'));
+const CTASection = dynamic(() => import('./components/CTASection'));
 
 export const metadata: Metadata = {
   title: 'Intellisys IT Solutions Pvt. Ltd. | Enterprise IT Services & Software Development',

@@ -63,12 +63,11 @@ export default function Footer() {
         <div className="mb-4 flex justify-center">
           <Link href="/homepage" className="inline-flex items-center group">
             <Image
-              src="/assets/images/logo.gif"
+              src="/assets/images/LogoLight.png"
               alt="Intellisys IT Solutions"
-              width={660}
-              height={156}
-              unoptimized
-              className="h-16 sm:h-20 w-auto"
+              width={572}
+              height={135}
+              className="h-14 sm:h-16 w-auto"
             />
           </Link>
         </div>

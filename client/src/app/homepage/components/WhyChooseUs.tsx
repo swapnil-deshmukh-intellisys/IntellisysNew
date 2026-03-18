@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import Icon from '@/components/ui/AppIcon';
 import AppImage from '@/components/ui/AppImage';
 import BrandIcon from '@/components/ui/BrandIcon';
@@ -59,22 +57,10 @@ const techPartners: Array<{ name: string; icon: BrandName }> = [
 
 
 export default function WhyChooseUs() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {if (entry.isIntersecting) setIsVisible(true);},
-      { threshold: 0.2 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section className="section-padding pt-2 sm:pt-3 lg:pt-4 bg-[#FEFEFE] relative overflow-hidden" ref={sectionRef}>
+    <section className="section-padding pt-2 sm:pt-3 lg:pt-4 bg-[#FEFEFE] relative overflow-hidden">
       <div className="container-custom">
-        <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} text-center max-w-4xl mx-auto mb-9 sm:mb-10`}>
+        <div className="animate-slide-in-right text-center max-w-4xl mx-auto mb-9 sm:mb-10">
           <h2 className="font-heading font-800 text-display-md text-foreground mb-6">
             We Don't Just Build Software.{' '}
             <span
@@ -99,7 +85,7 @@ export default function WhyChooseUs() {
           {/* Left: Image + Floating Cards */}
           <div className="relative lg:h-full">
             <div
-              className={`relative h-[400px] sm:h-[400px] lg:h-full rounded-3xl overflow-hidden shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] ${isVisible ? 'animate-slide-in-left' : 'opacity-0'}`}>
+              className="relative h-[400px] sm:h-[400px] lg:h-full rounded-3xl overflow-hidden shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] animate-slide-in-left">
 
                 <AppImage
                   src="https://img.rocket.new/generatedImages/rocket_gen_img_1539c59d0-1771170881858.png"
@@ -113,7 +99,7 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Right: Content */}
-          <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} lg:h-full`}>
+          <div className="animate-slide-in-right lg:h-full">
             {/* Reasons Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {reasons.map((reason, i) =>
@@ -157,14 +143,21 @@ export default function WhyChooseUs() {
         </div>
 
         {/* Full-width Tech Partners */}
-        <div className={`${isVisible ? 'animate-slide-in-right' : 'opacity-0'} mt-9 sm:mt-10`}>
+        <div className="animate-slide-in-right mt-9 sm:mt-10">
           <p className="font-heading font-700 text-sm sm:text-base md:text-lg text-foreground-muted uppercase tracking-[0.14em] text-center mb-5">
             Technology Partners
           </p>
           <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden px-6 sm:px-8 lg:px-10">
-            <div className="tech-partners-track">
+            <div
+              className="flex items-center w-max"
+              style={{ animation: 'tech-partners-rtl 22s linear infinite' }}
+            >
               {[0, 1, 2].map((copy) =>
-              <div key={copy} className="tech-partners-group" aria-hidden={copy > 0}>
+              <div
+                key={copy}
+                className="flex items-center gap-3 pr-3 flex-shrink-0"
+                aria-hidden={copy > 0}
+              >
                   {techPartners.map((partner) =>
                   <div
                     key={`${copy}-${partner.name}`}
@@ -180,31 +173,6 @@ export default function WhyChooseUs() {
           </div>
         </div>
       </div>
-      <style jsx>{`
-        .tech-partners-track {
-          display: flex;
-          align-items: center;
-          width: max-content;
-          animation: tech-partners-rtl 22s linear infinite;
-        }
-
-        .tech-partners-group {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          padding-right: 0.75rem;
-          flex-shrink: 0;
-        }
-
-        @keyframes tech-partners-rtl {
-          0% {
-            transform: translateX(0%);
-          }
-          100% {
-            transform: translateX(-33.333333%);
-            }
-            }
-      `}</style>
     </section>);
 
 }

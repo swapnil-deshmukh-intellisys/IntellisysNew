@@ -3,3 +3,28 @@
 @tailwind utilities;
 
 @import './tailwind.css';
+
+@keyframes tech-partners-rtl {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-33.333333%);
+  }
+}
+
+.hero-symbol-wrap {
+  animation: hero-symbol-float 6s ease-in-out infinite;
+}
+
+@keyframes hero-symbol-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}

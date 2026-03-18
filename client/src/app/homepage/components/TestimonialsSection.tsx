@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import Icon from '@/components/ui/AppIcon';
 
 const testimonials = [
@@ -128,8 +128,6 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const isPausedRef = useRef(false);
-  const isManualRef = useRef(false);
 
   const renderRatingStars = (rating: string) => {
     const numericRating = Number(rating);
@@ -164,8 +162,6 @@ export default function TestimonialsSection() {
   const scrollCards = (direction: 'left' | 'right') => {
     const node = trackRef.current;
     if (!node) return;
-    isPausedRef.current = true;
-    isManualRef.current = true;
 
     const card = node.querySelector<HTMLElement>('[data-testimonial-card]');
     const cardWidth = card?.offsetWidth ?? 360;
@@ -177,37 +173,6 @@ export default function TestimonialsSection() {
       behavior: 'smooth',
     });
   };
-
-  useEffect(() => {
-    const node = trackRef.current;
-    if (!node) return;
-
-    let frame = 0;
-    let lastTime = 0;
-    const speed = 0.03;
-    const resetPoint = node.scrollWidth / 2;
-    node.scrollLeft = resetPoint;
-
-    const tick = (time: number) => {
-      if (!lastTime) lastTime = time;
-      const delta = time - lastTime;
-      lastTime = time;
-
-      if (!isPausedRef.current) {
-        node.scrollLeft -= delta * speed;
-
-        if (node.scrollLeft <= 0) {
-          node.scrollLeft += resetPoint;
-        }
-      }
-
-      frame = window.requestAnimationFrame(tick);
-    };
-
-    frame = window.requestAnimationFrame(tick);
-
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
 
   return (
     <section className="section-padding bg-background-dark relative overflow-hidden">
@@ -256,39 +221,14 @@ export default function TestimonialsSection() {
 
         <div
           ref={trackRef}
-          onMouseEnter={() => {
-            isPausedRef.current = true;
-          }}
-          onMouseLeave={() => {
-            if (!isManualRef.current) {
-              isPausedRef.current = false;
-            }
-          }}
-          onTouchStart={() => {
-            isPausedRef.current = true;
-          }}
-          onTouchEnd={() => {
-            if (!isManualRef.current) {
-              isPausedRef.current = false;
-            }
-          }}
-          onFocusCapture={() => {
-            isPausedRef.current = true;
-          }}
-          onBlurCapture={() => {
-            if (!isManualRef.current) {
-              isPausedRef.current = false;
-            }
-          }}
           className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           aria-label="Client testimonials"
         >
-          {[...testimonials, ...testimonials].map((item, index) => (
+          {testimonials.map((item) => (
             <article
-              key={`${item.id}-${index}`}
+              key={item.id}
               data-testimonial-card
               className="w-[calc(100vw-3rem)] max-w-[340px] shrink-0 snap-start md:w-[380px] rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
-              aria-hidden={index >= testimonials.length}
             >
               <div className="mb-4 flex h-12 w-16 items-center justify-center rounded-2xl border border-white/15 bg-white/8">
                 <svg
