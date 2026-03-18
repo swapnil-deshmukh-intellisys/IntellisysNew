@@ -32,7 +32,7 @@ export default function ContactPage() {
         <ContactHero />
 
         {/* Main Contact Section */}
-        <section className="py-10 sm:py-12 bg-[#FEFEFE] relative">
+        <section className="pt-16 pb-10 sm:pt-20 sm:pb-12 bg-[#FEFEFE] relative">
           <div className="container-custom">
             <div className="grid lg:grid-cols-3 gap-8 lg:gap-9">
               {/* Form — takes 2 columns */}

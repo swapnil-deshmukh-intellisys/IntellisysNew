@@ -248,6 +248,13 @@ const serviceOverlayTints: Record<string, string> = {
   'internship-programs': 'rgba(79, 70, 229, 0.65)',
 };
 
+const serviceDetailLinks: Record<string, string> = {
+  'custom-software-development': '/services/website-development',
+  'cloud-solutions': '/services/cloud-solutions',
+  'mobile-app-development': '/services/mobile-app-development',
+  'ui-ux-design': '/services/ui-ux-design',
+};
+
 export default function ServiceCardsGrid() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [visibleItems, setVisibleItems] = useState<Set<string>>(new Set());
@@ -310,10 +317,6 @@ export default function ServiceCardsGrid() {
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div className="w-14 h-14 rounded-2xl border border-white/45 bg-white/20 backdrop-blur-md flex items-center justify-center flex-shrink-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]">
                   <Icon name={service.icon as any} size={26} className="text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]" />
-                </div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/25 bg-white/10 flex-shrink-0">
-                  <Icon name="SparklesIcon" size={12} className="text-white/80" />
-                  <span className="font-body text-caption text-white/80 uppercase tracking-wider">Service</span>
                 </div>
               </div>
               <h3 className="font-heading font-800 text-display-sm text-white mb-2 leading-tight [text-shadow:0_1px_2px_rgba(0,0,0,0.55)]">
@@ -386,10 +389,10 @@ export default function ServiceCardsGrid() {
             </div>
 
             <Link
-              href="/contact#contact-form"
+              href={serviceDetailLinks[service.id] || '/services'}
               className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-primary text-white font-heading font-600 text-body-sm rounded-xl shadow-[1px_1px_3px_rgba(15,23,42,0.07),2px_3px_5px_rgba(15,23,42,0.05)] transition-all duration-300 hover:scale-105"
             >
-              Get a Quote for {service.title}
+              View Details
               <Icon name="ArrowRightIcon" size={14} />
             </Link>
           </div>

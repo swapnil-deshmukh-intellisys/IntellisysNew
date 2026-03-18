@@ -66,6 +66,15 @@ const navLinks = [
   { label: 'Contact', href: '/contact' },
 ];
 
+const transparentHeaderMatchers = [
+  '/homepage',
+  '/about',
+  '/services',
+  '/contact',
+  '/careers',
+  '/technologies',
+];
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
@@ -128,11 +137,14 @@ export default function Header() {
   }, [mobileOpen]);
 
   const currentPath = pathname ?? '';
-  const useServicesHeroHeader = currentPath === '/services' && !scrolled;
-  const forceLightSurfaceHeader = currentPath === '/technologies' && !scrolled;
-  const useLightLogo = useServicesHeroHeader;
-  const useDarkLogo = (!scrolled && !useServicesHeroHeader) || forceLightSurfaceHeader;
-  const useDarkNav = (!scrolled && !useServicesHeroHeader) || forceLightSurfaceHeader;
+  const allowTransparentHeader =
+    transparentHeaderMatchers.includes(currentPath) ||
+    currentPath.startsWith('/services/');
+  const transparentAtTop = allowTransparentHeader && !scrolled;
+  const forceLightSurfaceHeader = transparentAtTop && (currentPath === '/services' || currentPath === '/technologies');
+  const useLightLogo = !transparentAtTop && !forceLightSurfaceHeader;
+  const useDarkLogo = transparentAtTop || forceLightSurfaceHeader;
+  const useDarkNav = transparentAtTop || forceLightSurfaceHeader;
   const isActive = (href: string) =>
     currentPath === href || (href !== '/homepage' && currentPath.startsWith(href));
 
@@ -140,10 +152,12 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-          scrolled || useServicesHeroHeader
+          transparentAtTop
+            ? 'bg-transparent'
+            : scrolled
             ? 'bg-black/95 backdrop-blur-xl shadow-md-card border-b border-white/10'
-            : 'bg-transparent'
-        } ${showHeader ? 'translate-y-0' : '-translate-y-full'}${scrolled || useServicesHeroHeader ? '' : ' border-b-0 border-none shadow-none'}`}
+            : 'bg-black/95 backdrop-blur-xl shadow-md-card border-b border-white/10'
+        } ${showHeader ? 'translate-y-0' : '-translate-y-full'}${transparentAtTop ? ' border-b-0 border-none shadow-none' : ''}`}
         style={{ willChange: 'transform' }}
       >
         <div className="container-custom">
@@ -166,8 +180,12 @@ export default function Header() {
                 width={572}
                 height={135}
                 priority
-                unoptimized={useLightLogo ? false : !useDarkLogo}
-                className={`${useLightLogo ? 'h-[3.4rem] md:h-[5.8rem]' : 'h-[4rem] md:h-[7.2rem]'} w-auto`}
+                unoptimized={false}
+                className={`h-auto ${
+                  transparentAtTop
+                    ? 'w-[8.6rem] md:w-auto md:h-[7.2rem]'
+                    : 'w-[9.46rem] md:w-auto md:h-[3.96rem]'
+                }`}
               />
             </Link>
 
@@ -358,6 +376,14 @@ export default function Header() {
                   )}
                   {link.hasDropdown && (
                     <div className={`mt-1 ml-4 space-y-1 overflow-hidden transition-all duration-200 ${mobileServicesOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                      <Link
+                        href="/services"
+                        onClick={() => setMobileOpen(false)}
+                        className="flex items-center gap-2 px-3 py-2 rounded-lg text-primary hover:bg-primary-50 transition-colors text-body-sm font-body font-600"
+                      >
+                        <Icon name="Squares2X2Icon" size={14} />
+                        View All Services
+                      </Link>
                       {serviceItems.map((item) => (
                         <Link
                           key={item.label}

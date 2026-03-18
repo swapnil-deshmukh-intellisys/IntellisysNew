@@ -4,7 +4,7 @@ import Icon from '@/components/ui/AppIcon';
 
 export default function ContactHero() {
   return (
-    <section className="relative overflow-hidden border-b border-slate-200/70 bg-[#FEFEFE] pt-18 pb-10 sm:pt-22 sm:pb-12">
+    <section className="relative overflow-hidden bg-[#FEFEFE] pt-18 pb-10 sm:pt-22 sm:pb-12">
       <div className="absolute inset-0 hero-grid-pattern opacity-[0.04] pointer-events-none" />
 
       <div className="container-custom relative z-10 text-center">
