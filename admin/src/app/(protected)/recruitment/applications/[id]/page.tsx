@@ -65,7 +65,20 @@ export default function ApplicationDetailPage() {
             <select className="input" value={status} onChange={(e) => setStatus(e.target.value)}>
               {['new','screening','interview','shortlisted','hired','rejected','archived'].map((s)=><option key={s}>{s}</option>)}
             </select>
-            <input className="input" type="number" min={1} max={5} value={rating} onChange={(e) => setRating(Number(e.target.value))} />
+            <div>
+              <label className="mb-1 block text-sm font-medium text-slate-700">Candidate Rating</label>
+              <div className="flex items-center gap-2">
+                <input
+                  className="input"
+                  type="number"
+                  min={1}
+                  max={5}
+                  value={rating}
+                  onChange={(e) => setRating(Number(e.target.value))}
+                />
+                <span className="shrink-0 text-sm text-slate-500">/ 5</span>
+              </div>
+            </div>
             {row.attachment_url ? (
               <a
                 href={String(row.attachment_url)}
