@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Icon from '@/components/ui/AppIcon';
 import AppImage from '@/components/ui/AppImage';
@@ -257,27 +257,10 @@ const serviceDetailLinks: Record<string, string> = {
 
 export default function ServiceCardsGrid() {
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [visibleItems, setVisibleItems] = useState<Set<string>>(new Set());
-  const refs = useRef<Map<string, HTMLDivElement>>(new Map());
   const leftColumnServices = allServices.filter((_, index) => index % 2 === 0);
   const rightColumnServices = allServices.filter((_, index) => index % 2 !== 0);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleItems((prev) => new Set([...prev, entry.target.id]));
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    refs.current.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  const renderServiceCard = (service: (typeof allServices)[number], index: number) => {
+  const renderServiceCard = (service: (typeof allServices)[number]) => {
     const isExpanded = expandedId === service.id;
     const tint = serviceOverlayTints[service.id] ?? 'rgba(37, 99, 235, 0.65)';
 
@@ -285,15 +268,11 @@ export default function ServiceCardsGrid() {
       <div
         key={service.id}
         id={service.id}
-        ref={(el) => {
-          if (el) refs.current.set(service.id, el);
-        }}
         className={`group relative rounded-3xl border transition-all duration-400 overflow-hidden ${
           isExpanded
             ? 'border-white/45 shadow-[1px_2px_4px_rgba(2,6,23,0.28),3px_4px_6px_rgba(2,6,23,0.2)] -translate-y-1'
             : 'border-white/25 shadow-[1px_1px_3px_rgba(2,6,23,0.24),2px_3px_5px_rgba(2,6,23,0.18)] hover:-translate-y-1.5 hover:border-white/40 hover:shadow-[1px_2px_4px_rgba(2,6,23,0.28),3px_4px_6px_rgba(2,6,23,0.2)]'
-        } ${visibleItems.has(service.id) ? 'animate-fade-up' : 'opacity-0'}`}
-        style={{ animationDelay: `${index * 0.08}s` }}
+        }`}
       >
         <div className="absolute inset-0">
           <AppImage
@@ -428,10 +407,10 @@ export default function ServiceCardsGrid() {
 
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
           <div className="space-y-6">
-            {leftColumnServices.map((service, index) => renderServiceCard(service, index))}
+            {leftColumnServices.map((service) => renderServiceCard(service))}
           </div>
           <div className="space-y-6">
-            {rightColumnServices.map((service, index) => renderServiceCard(service, index + leftColumnServices.length))}
+            {rightColumnServices.map((service) => renderServiceCard(service))}
           </div>
         </div>
       </div>
