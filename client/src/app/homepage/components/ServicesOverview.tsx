@@ -172,7 +172,7 @@ export default function ServicesOverview() {
                           className="relative z-10 inline-flex items-center gap-1.5 font-heading font-700 text-body-sm uppercase tracking-wide text-slate-500 hover:text-slate-700 hover:gap-2.5 transition-all duration-200"
                           aria-label={`Learn more about ${service.title}`}
                         >
-                          {`Explore ${service.title}`} <Icon name="ArrowRightIcon" size={12} />
+                          Explore <Icon name="ArrowRightIcon" size={12} />
                         </Link>
                       </div>
                     </div>

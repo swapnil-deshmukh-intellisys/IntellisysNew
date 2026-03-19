@@ -42,6 +42,7 @@ function AppImage({
 
     const isDataUrl = imageSrc.startsWith('data:');
     const isSvg = imageSrc.toLowerCase().endsWith('.svg');
+    const isRemoteUrl = imageSrc.startsWith('http://') || imageSrc.startsWith('https://');
 
     const handleError = () => {
         if (!hasError && imageSrc !== fallbackSrc) {
@@ -57,6 +58,47 @@ function AppImage({
     };
 
     const commonClassName = `${className} ${isLoading ? 'bg-gray-200' : ''} ${onClick ? 'cursor-pointer hover:opacity-90 transition-opacity' : ''}`;
+
+    if (isRemoteUrl) {
+        const imgStyle: React.CSSProperties = {};
+
+        if (width) imgStyle.width = width;
+        if (height) imgStyle.height = height;
+
+        if (fill) {
+            return (
+                <div className={`relative ${className}`} style={{ width: width || '100%', height: height || '100%' }}>
+                    <img
+                        src={imageSrc}
+                        alt={alt}
+                        className={`${commonClassName} absolute inset-0 h-full w-full object-cover`}
+                        onError={handleError}
+                        onLoad={handleLoad}
+                        onClick={onClick}
+                        loading={priority ? 'eager' : 'lazy'}
+                        decoding="async"
+                        style={imgStyle}
+                        {...props}
+                    />
+                </div>
+            );
+        }
+
+        return (
+            <img
+                src={imageSrc}
+                alt={alt}
+                className={commonClassName}
+                onError={handleError}
+                onLoad={handleLoad}
+                onClick={onClick}
+                loading={priority ? 'eager' : 'lazy'}
+                decoding="async"
+                style={imgStyle}
+                {...props}
+            />
+        );
+    }
 
     const imageProps = {
         src: imageSrc,

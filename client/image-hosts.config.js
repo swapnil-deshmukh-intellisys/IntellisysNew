@@ -19,5 +19,9 @@ module.exports = {
       protocol: 'https',
       hostname: 'img.rocket.new',
     },
+    {
+      protocol: 'https',
+      hostname: 'www.flexsin.com',
+    },
   ],
 };
